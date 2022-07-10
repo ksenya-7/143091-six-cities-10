@@ -1,7 +1,7 @@
 # Личный проект «Шесть городов»
 
 * Студент: [Ксения Кужель](https://up.htmlacademy.ru/react/10/user/143091).
-* Наставник: `Неизвестно`.
+* Наставник: [Rail Sakhaviev](https://htmlacademy.ru/profile/id1331891).
 
 ---
 
