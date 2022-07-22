@@ -1,7 +1,3 @@
-// type MainScreenProps = {
-//   errorsCount: number;
-// }
-
 function Card(): JSX.Element {
   return (
     <article className="cities__card place-card">
