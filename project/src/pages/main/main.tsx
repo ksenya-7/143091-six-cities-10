@@ -1,11 +1,14 @@
 import React from 'react';
 import Logo from '../../components/logo/logo';
 import Card from '../../components/card/card';
+import {OfferCards} from '../../types/offer';
+
 type MainScreenProps = {
   offersCount: number;
+  offers: OfferCards;
 }
 
-function MainScreen({offersCount}: MainScreenProps): JSX.Element {
+function MainScreen({offersCount, offers}: MainScreenProps): JSX.Element {
   return (
     <React.Fragment>
       <div style={{ display: 'none' }}>
@@ -98,11 +101,12 @@ function MainScreen({offersCount}: MainScreenProps): JSX.Element {
                   </ul>
                 </form>
                 <div className="cities__places-list places__list tabs__content">
-                  <Card />
-                  <Card />
-                  <Card />
-                  <Card />
-                  <Card />
+                  {offers.map((offer, id) => {
+                    const keyValue = `${id}-${offer}`;
+                    return (
+                      <Card offer={offer} key={keyValue} />
+                    );
+                  })}
                 </div>
               </section>
               <div className="cities__right-section">

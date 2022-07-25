@@ -9,6 +9,7 @@ type OfferCardScreenProps = {
 function RoomScreen(props: OfferCardScreenProps): JSX.Element {
   const {offer} = props;
   const {images, isMark, mark, title, isActiveButton, rating, features, price, insideList, host, descriptions} = offer;
+
   return (
     <React.Fragment>
       <div style={{ display: 'none' }}>
