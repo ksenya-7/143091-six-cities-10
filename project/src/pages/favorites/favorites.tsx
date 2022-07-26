@@ -8,7 +8,7 @@ type FavoritesScreenProps = {
 };
 
 function FavoritesScreen({offers}: FavoritesScreenProps): JSX.Element {
-  const sortByMark = (item: OfferCard) => item.isMark ? 1 : 0;
+  const sortByMark = (item: OfferCard) => item.isPremium ? 1 : 0;
 
   return (
     <React.Fragment>
@@ -29,7 +29,7 @@ function FavoritesScreen({offers}: FavoritesScreenProps): JSX.Element {
                       <div className="header__avatar-wrapper user__avatar-wrapper">
                       </div>
                       <span className="header__user-name user__name">Oliver.conner@gmail.com</span>
-                      <span className="header__favorite-count">{offers.filter((offer) => offer.isActiveButton).length}</span>
+                      <span className="header__favorite-count">{offers.filter((offer) => offer.isFavorite).length}</span>
                     </a>
                   </li>
                   <li className="header__nav-item">
@@ -57,7 +57,7 @@ function FavoritesScreen({offers}: FavoritesScreenProps): JSX.Element {
                     </div>
                   </div>
                   <div className="favorites__places">
-                    {offers.filter((offer) => offer.isActiveButton).sort(sortByMark).map((offer) => {
+                    {offers.filter((offer) => offer.isFavorite).sort(sortByMark).map((offer) => {
                       const keyValue = `${offer.id}`;
                       if (offer.location === 'Amsterdam') {
                         return (
@@ -78,7 +78,7 @@ function FavoritesScreen({offers}: FavoritesScreenProps): JSX.Element {
                     </div>
                   </div>
                   <div className="favorites__places">
-                    {offers.filter((offer) => offer.isActiveButton).sort(sortByMark).map((offer) => {
+                    {offers.filter((offer) => offer.isFavorite).sort(sortByMark).map((offer) => {
                       const keyValue = `${offer.id}`;
                       if (offer.location === 'Cologne') {
                         return (

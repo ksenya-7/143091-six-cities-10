@@ -8,7 +8,7 @@ type ListOffersScreenProps = {
 }
 
 function ListOffers({offersCount, offers}: ListOffersScreenProps): JSX.Element {
-  const [, setActiveCard] = useState<string | undefined>(undefined);
+  const [, setActiveCard] = useState<number | undefined>(undefined);
 
   return (
     <section className="cities__places places">

@@ -6,14 +6,14 @@ type OfferFavoriteCardScreenProps = {
 
 function FavoriteCard(props: OfferFavoriteCardScreenProps): JSX.Element {
   const {offer} = props;
-  const {isMark, mark, imageSmall, rating, title, price, entire} = offer;
+  const {isPremium, mark, previewImage, rating, title, price, entire} = offer;
 
   return (
     <article className="favorites__card place-card">
-      {isMark ? <div className="place-card__mark"><span>{mark}</span></div> : null}
+      {isPremium ? <div className="place-card__mark"><span>{mark}</span></div> : null}
       <div className="favorites__image-wrapper place-card__image-wrapper">
         <a href={'/'}>
-          <img className="place-card__image" src={imageSmall.src} width="150" height="110" alt={imageSmall.alt}/>
+          <img className="place-card__image" src={previewImage.src} width="150" height="110" alt={previewImage.alt}/>
         </a>
       </div>
       <div className="favorites__card-info place-card__info">

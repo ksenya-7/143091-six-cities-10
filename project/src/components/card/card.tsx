@@ -8,11 +8,11 @@ type OfferCardScreenProps = {
 
 function Card(props: OfferCardScreenProps): JSX.Element {
   const {offer, onMouseEnter} = props;
-  const {id, isMark, mark, images, rating, title, isActiveButton, price, entire} = offer;
+  const {id, isPremium, mark, images, rating, title, isFavorite, price, entire} = offer;
 
   return (
     <article className="cities__card place-card" onMouseEnter={onMouseEnter}>
-      {isMark ? <div className="place-card__mark"><span>{mark}</span></div> : null}
+      {isPremium ? <div className="place-card__mark"><span>{mark}</span></div> : null}
       <div className="cities__image-wrapper place-card__image-wrapper">
         <a href={'/'}>
           <img className="place-card__image" src={images[1].src} width="260" height="200" alt={images[1].alt} />
@@ -24,7 +24,7 @@ function Card(props: OfferCardScreenProps): JSX.Element {
             <b className="place-card__price-value">&euro;{price}</b>
             <span className="place-card__price-text">&#47;&nbsp;night</span>
           </div>
-          <button className={isActiveButton ? 'place-card__bookmark-button place-card__bookmark-button--active button' : 'property__bookmark-button button'} type="button">
+          <button className={isFavorite ? 'place-card__bookmark-button place-card__bookmark-button--active button' : 'property__bookmark-button button'} type="button">
             <svg className="place-card__bookmark-icon" width="18" height="19">
               <use xlinkHref="#icon-bookmark"></use>
             </svg>

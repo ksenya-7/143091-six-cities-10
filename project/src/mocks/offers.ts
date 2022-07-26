@@ -2,9 +2,9 @@ import {OfferCard} from '../types/offer';
 
 export const offers: OfferCard[] = [
   {
-    id: '001',
+    id: 1,
     location: 'Amsterdam',
-    imageSmall: {
+    previewImage: {
       src: 'img/room-small.jpg',
       alt: 'Place image',
     },
@@ -33,18 +33,18 @@ export const offers: OfferCard[] = [
       alt: 'Photo studio',
     }],
     mark: 'Premium',
-    isMark: true,
+    isPremium: true,
     title: 'Beautiful & luxurious studio at great location',
-    isActiveButton: false,
+    isFavorite: false,
     rating: {
       width: '80%',
       value: 4.8,
     },
     entire: 'Apartment',
-    bedroomsAmount: '3 Bedrooms',
-    adultsAmount: 'Max 4 adults',
+    bedrooms: 3,
+    maxAdults: 4,
     price: 120,
-    insideList: [
+    goods: [
       'Wi-Fi',
       'Washing machine',
       'Towels',
@@ -57,9 +57,9 @@ export const offers: OfferCard[] = [
       'Fridge',
     ],
     host: {
-      avatar: 'img/avatar-angelina.jpg',
+      avatarUrl: 'img/avatar-angelina.jpg',
       name: 'Angelina',
-      status: 'Pro',
+      id: 1,
       isPro: true,
     },
     descriptions: [
@@ -68,9 +68,9 @@ export const offers: OfferCard[] = [
     ],
   },
   {
-    id: '002',
+    id: 2,
     location: 'Amsterdam',
-    imageSmall: {
+    previewImage: {
       src: 'img/room-small.jpg',
       alt: 'Place image',
     },
@@ -99,18 +99,18 @@ export const offers: OfferCard[] = [
       alt: 'Photo studio',
     }],
     mark: '',
-    isMark: false,
+    isPremium: false,
     title: 'Wood and stone place',
-    isActiveButton: true,
+    isFavorite: true,
     rating: {
       width: '80%',
       value: 4.8,
     },
     entire: 'Private room',
-    bedroomsAmount: '3 Bedrooms',
-    adultsAmount: 'Max 4 adults',
+    bedrooms: 3,
+    maxAdults: 4,
     price: 80,
-    insideList: [
+    goods: [
       'Wi-Fi',
       'Washing machine',
       'Towels',
@@ -123,9 +123,9 @@ export const offers: OfferCard[] = [
       'Fridge',
     ],
     host: {
-      avatar: 'img/avatar-angelina.jpg',
+      avatarUrl: 'img/avatar-angelina.jpg',
       name: 'Angelina',
-      status: 'Pro',
+      id: 1,
       isPro: true,
     },
     descriptions: [
@@ -134,9 +134,9 @@ export const offers: OfferCard[] = [
     ],
   },
   {
-    id: '003',
+    id: 3,
     location: 'Amsterdam',
-    imageSmall: {
+    previewImage: {
       src: 'img/room-small.jpg',
       alt: 'Place image',
     },
@@ -165,18 +165,18 @@ export const offers: OfferCard[] = [
       alt: 'Photo studio',
     }],
     mark: '',
-    isMark: false,
+    isPremium: false,
     title: 'Canal View Prinsengracht',
-    isActiveButton: false,
+    isFavorite: false,
     rating: {
       width: '60%',
       value: 3.2,
     },
     entire: 'Apartment',
-    bedroomsAmount: '3 Bedrooms',
-    adultsAmount: 'Max 4 adults',
+    bedrooms: 3,
+    maxAdults: 4,
     price: 132,
-    insideList: [
+    goods: [
       'Wi-Fi',
       'Washing machine',
       'Towels',
@@ -189,9 +189,9 @@ export const offers: OfferCard[] = [
       'Fridge',
     ],
     host: {
-      avatar: 'img/avatar-angelina.jpg',
+      avatarUrl: 'img/avatar-angelina.jpg',
       name: 'Angelina',
-      status: 'Pro',
+      id: 1,
       isPro: true,
     },
     descriptions: [
@@ -200,9 +200,9 @@ export const offers: OfferCard[] = [
     ],
   },
   {
-    id: '004',
+    id: 4,
     location: 'Amsterdam',
-    imageSmall: {
+    previewImage: {
       src: 'img/apartment-small-03.jpg',
       alt: 'Place image',
     },
@@ -231,18 +231,18 @@ export const offers: OfferCard[] = [
       alt: 'Photo studio',
     }],
     mark: 'Premium',
-    isMark: true,
+    isPremium: true,
     title: 'Nice, cozy, warm big bed apartment',
-    isActiveButton: true,
+    isFavorite: true,
     rating: {
       width: '80%',
       value: 4.8,
     },
     entire: 'Apartment',
-    bedroomsAmount: '3 Bedrooms',
-    adultsAmount: 'Max 4 adults',
+    bedrooms: 3,
+    maxAdults: 4,
     price: 180,
-    insideList: [
+    goods: [
       'Wi-Fi',
       'Washing machine',
       'Towels',
@@ -255,9 +255,9 @@ export const offers: OfferCard[] = [
       'Fridge',
     ],
     host: {
-      avatar: 'img/avatar-angelina.jpg',
+      avatarUrl: 'img/avatar-angelina.jpg',
       name: 'Angelina',
-      status: 'Pro',
+      id: 1,
       isPro: true,
     },
     descriptions: [
@@ -266,9 +266,9 @@ export const offers: OfferCard[] = [
     ],
   },
   {
-    id: '005',
+    id: 5,
     location: 'Cologne',
-    imageSmall: {
+    previewImage: {
       src: 'img/apartment-small-04.jpg',
       alt: 'Place image',
     },
@@ -297,18 +297,18 @@ export const offers: OfferCard[] = [
       alt: 'Photo studio',
     }],
     mark: '',
-    isMark: false,
+    isPremium: false,
     title: 'White castle',
-    isActiveButton: true,
+    isFavorite: true,
     rating: {
       width: '100%',
       value: 4.9,
     },
     entire: 'Apartment',
-    bedroomsAmount: '3 Bedrooms',
-    adultsAmount: 'Max 4 adults',
+    bedrooms: 3,
+    maxAdults: 4,
     price: 180,
-    insideList: [
+    goods: [
       'Wi-Fi',
       'Washing machine',
       'Towels',
@@ -321,9 +321,9 @@ export const offers: OfferCard[] = [
       'Fridge',
     ],
     host: {
-      avatar: 'img/avatar-angelina.jpg',
+      avatarUrl: 'img/avatar-angelina.jpg',
       name: 'Angelina',
-      status: 'Pro',
+      id: 1,
       isPro: true,
     },
     descriptions: [

@@ -11,7 +11,7 @@ type OfferCardScreenProps = {
 
 function RoomScreen(props: OfferCardScreenProps): JSX.Element {
   const {offer, reviews} = props;
-  const {images, isMark, mark, title, isActiveButton, rating, insideList, price, entire, bedroomsAmount, adultsAmount, host, descriptions} = offer;
+  const {images, isPremium, mark, title, isFavorite, rating, goods, price, entire, bedrooms, maxAdults, host, descriptions} = offer;
 
   return (
     <React.Fragment>
@@ -62,10 +62,10 @@ function RoomScreen(props: OfferCardScreenProps): JSX.Element {
             </div>
             <div className="property__container container">
               <div className="property__wrapper">
-                {isMark ? <div className="property__mark"><span>{mark}</span></div> : null}
+                {isPremium ? <div className="property__mark"><span>{mark}</span></div> : null}
                 <div className="property__name-wrapper">
                   <h1 className="property__name">{title}</h1>
-                  <button className={`property__bookmark-button {${isActiveButton} ? property__bookmark-button--active : null} button`} type="button">
+                  <button className={`property__bookmark-button {${isFavorite} ? property__bookmark-button--active : null} button`} type="button">
                     <svg className="property__bookmark-icon" width="31" height="33">
                       <use xlinkHref="#icon-bookmark"></use>
                     </svg>
@@ -84,10 +84,10 @@ function RoomScreen(props: OfferCardScreenProps): JSX.Element {
                     {entire}
                   </li>
                   <li className="property__feature property__feature--bedrooms">
-                    {bedroomsAmount}
+                    {bedrooms} Bedrooms
                   </li>
                   <li className="property__feature property__feature--adults">
-                    {adultsAmount}
+                    Max {maxAdults} adults
                   </li>
                 </ul>
                 <div className="property__price">
@@ -97,36 +97,27 @@ function RoomScreen(props: OfferCardScreenProps): JSX.Element {
                 <div className="property__inside">
                   <h2 className="property__inside-title">What&apos;s inside</h2>
                   <ul className="property__inside-list">
-                    {insideList.map((insideItem, id) => {
-                      const keyValue = `${id}-${insideItem}`;
+                    {goods.map((item, id) => {
+                      const keyValue = `${id}-${item}`;
                       return (
                         <li key={keyValue} className="property__inside-item">
-                          {insideItem}
+                          {item}
                         </li>
                       );
                     })}
-                    <li className="property__feature property__feature--entire">
-                      {entire}
-                    </li>
-                    <li className="property__feature property__feature--bedrooms">
-                      {bedroomsAmount}
-                    </li>
-                    <li className="property__feature property__feature--adults">
-                      {adultsAmount}
-                    </li>
                   </ul>
                 </div>
                 <div className="property__host">
                   <h2 className="property__host-title">Meet the host</h2>
                   <div className="property__host-user user">
-                    <div className={`property__avatar-wrapper {${host.isPro} ? property__avatar-wrapper--pro : null} user__avatar-wrapper`}>
-                      <img className="property__avatar user__avatar" src={host.avatar} width="74" height="74" alt="Host avatar"/>
+                    <div className={host.isPro ? 'property__avatar-wrapper property__avatar-wrapper--pro user__avatar-wrapper' : 'property__avatar-wrapper user__avatar-wrapper'}>
+                      <img className="property__avatar user__avatar" src={host.avatarUrl} width="74" height="74" alt="Host avatar"/>
                     </div>
                     <span className="property__user-name">
                       {host.name}
                     </span>
                     <span className="property__user-status">
-                      {host.status}
+                      {host.isPro ? 'Pro' : null}
                     </span>
                   </div>
                   <div className="property__description">

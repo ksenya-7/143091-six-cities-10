@@ -9,27 +9,27 @@ export type OfferRating = {
 };
 
 export type OfferHost = {
-  avatar: string;
+  avatarUrl: string;
   name: string;
-  status: string;
+  id: number;
   isPro: boolean;
 };
 
 export type OfferCard = {
-  id: string;
+  id: number;
   location: string;
-  imageSmall: OfferImages;
+  previewImage: OfferImages;
   images: OfferImages[];
   mark: string;
-  isMark: boolean;
+  isPremium: boolean;
   title: string;
-  isActiveButton: boolean;
+  isFavorite: boolean;
   rating: OfferRating;
   entire: string;
-  bedroomsAmount: string;
-  adultsAmount: string;
+  bedrooms: number;
+  maxAdults: number;
   price: number;
-  insideList: string[];
+  goods: string[];
   host: OfferHost;
   descriptions: string[];
 };
