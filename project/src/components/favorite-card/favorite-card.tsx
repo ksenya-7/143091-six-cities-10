@@ -6,7 +6,7 @@ type OfferFavoriteCardScreenProps = {
 
 function FavoriteCard(props: OfferFavoriteCardScreenProps): JSX.Element {
   const {offer} = props;
-  const {isMark, mark, imageSmall, rating, title, price, features} = offer;
+  const {isMark, mark, imageSmall, rating, title, price, entire} = offer;
 
   return (
     <article className="favorites__card place-card">
@@ -38,7 +38,7 @@ function FavoriteCard(props: OfferFavoriteCardScreenProps): JSX.Element {
         <h2 className="place-card__name">
           <a href={'/'}>{title}</a>
         </h2>
-        <p className="place-card__type">{features[0]}</p>
+        <p className="place-card__type">{entire}</p>
       </div>
     </article>
   );

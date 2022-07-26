@@ -1,14 +1,16 @@
 import React from 'react';
 import Logo from '../../components/logo/logo';
 import {OfferCard} from '../../types/offer';
+import {OfferCardReviews} from '../../types/review';
 
 type OfferCardScreenProps = {
   offer: OfferCard;
+  reviews: OfferCardReviews;
 };
 
 function RoomScreen(props: OfferCardScreenProps): JSX.Element {
-  const {offer} = props;
-  const {images, isMark, mark, title, isActiveButton, rating, features, price, insideList, host, descriptions} = offer;
+  const {offer, reviews} = props;
+  const {images, isMark, mark, title, isActiveButton, rating, insideList, price, entire, bedroomsAmount, adultsAmount, host, descriptions} = offer;
 
   return (
     <React.Fragment>
@@ -77,14 +79,15 @@ function RoomScreen(props: OfferCardScreenProps): JSX.Element {
                   <span className="property__rating-value rating__value">{rating.value}</span>
                 </div>
                 <ul className="property__features">
-                  {features.map((feature, id) => {
-                    const keyValue = `${id}-${feature}`;
-                    return (
-                      <li key={keyValue} className="property__feature property__feature--entire">
-                        {feature}
-                      </li>
-                    );
-                  })}
+                  <li className="property__feature property__feature--entire">
+                    {entire}
+                  </li>
+                  <li className="property__feature property__feature--bedrooms">
+                    {bedroomsAmount}
+                  </li>
+                  <li className="property__feature property__feature--adults">
+                    {adultsAmount}
+                  </li>
                 </ul>
                 <div className="property__price">
                   <b className="property__price-value">&euro;{price}</b>
@@ -101,6 +104,15 @@ function RoomScreen(props: OfferCardScreenProps): JSX.Element {
                         </li>
                       );
                     })}
+                    <li className="property__feature property__feature--entire">
+                      {entire}
+                    </li>
+                    <li className="property__feature property__feature--bedrooms">
+                      {bedroomsAmount}
+                    </li>
+                    <li className="property__feature property__feature--adults">
+                      {adultsAmount}
+                    </li>
                   </ul>
                 </div>
                 <div className="property__host">
@@ -130,28 +142,33 @@ function RoomScreen(props: OfferCardScreenProps): JSX.Element {
                 <section className="property__reviews reviews">
                   <h2 className="reviews__title">Reviews &middot; <span className="reviews__amount">1</span></h2>
                   <ul className="reviews__list">
-                    <li className="reviews__item">
-                      <div className="reviews__user user">
-                        <div className="reviews__avatar-wrapper user__avatar-wrapper">
-                          <img className="reviews__avatar user__avatar" src="img/avatar-max.jpg" width="54" height="54" alt="Reviews avatar" />
-                        </div>
-                        <span className="reviews__user-name">
-                          Max
-                        </span>
-                      </div>
-                      <div className="reviews__info">
-                        <div className="reviews__rating rating">
-                          <div className="reviews__stars rating__stars">
-                            <span style={{ width: '80%' }}></span>
-                            <span className="visually-hidden">Rating</span>
+                    {reviews.map((review, id) => {
+                      const keyValue = `${id}-${review}`;
+                      return (
+                        <li key={keyValue} className="reviews__item">
+                          <div className="reviews__user user">
+                            <div className="reviews__avatar-wrapper user__avatar-wrapper">
+                              <img className="reviews__avatar user__avatar" src={review.avatarReview.src} width="54" height="54" alt={review.avatarReview.alt} />
+                            </div>
+                            <span className="reviews__user-name">
+                              {review.nameUser}
+                            </span>
                           </div>
-                        </div>
-                        <p className="reviews__text">
-                          A quiet cozy and picturesque that hides behind a a river by the unique lightness of Amsterdam. The building is green and from 18th century.
-                        </p>
-                        <time className="reviews__time" dateTime="2019-04-24">April 2019</time>
-                      </div>
-                    </li>
+                          <div className="reviews__info">
+                            <div className="reviews__rating rating">
+                              <div className="reviews__stars rating__stars">
+                                <span style={{ width: `${review.rating}` }}></span>
+                                <span className="visually-hidden">Rating</span>
+                              </div>
+                            </div>
+                            <p className="reviews__text">
+                              {review.text}
+                            </p>
+                            <time className="reviews__time" dateTime={review.timeReview.datetime}>{review.timeReview.time}</time>
+                          </div>
+                        </li>
+                      );
+                    })}
                   </ul>
                   <form className="reviews__form form" action={'/'} method="post">
                     <label className="reviews__label form__label" htmlFor="review">Your review</label>

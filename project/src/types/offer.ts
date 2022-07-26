@@ -25,7 +25,9 @@ export type OfferCard = {
   title: string;
   isActiveButton: boolean;
   rating: OfferRating;
-  features: string[];
+  entire: string;
+  bedroomsAmount: string;
+  adultsAmount: string;
   price: number;
   insideList: string[];
   host: OfferHost;

@@ -40,9 +40,9 @@ export const offers: OfferCard[] = [
       width: '80%',
       value: 4.8,
     },
-    features: [
-      'Apartment', '3 Bedrooms', 'Max 4 adults',
-    ],
+    entire: 'Apartment',
+    bedroomsAmount: '3 Bedrooms',
+    adultsAmount: 'Max 4 adults',
     price: 120,
     insideList: [
       'Wi-Fi',
@@ -106,9 +106,9 @@ export const offers: OfferCard[] = [
       width: '80%',
       value: 4.8,
     },
-    features: [
-      'Private room', '3 Bedrooms', 'Max 4 adults',
-    ],
+    entire: 'Private room',
+    bedroomsAmount: '3 Bedrooms',
+    adultsAmount: 'Max 4 adults',
     price: 80,
     insideList: [
       'Wi-Fi',
@@ -172,9 +172,9 @@ export const offers: OfferCard[] = [
       width: '60%',
       value: 3.2,
     },
-    features: [
-      'Apartment', '3 Bedrooms', 'Max 4 adults',
-    ],
+    entire: 'Apartment',
+    bedroomsAmount: '3 Bedrooms',
+    adultsAmount: 'Max 4 adults',
     price: 132,
     insideList: [
       'Wi-Fi',
@@ -238,9 +238,9 @@ export const offers: OfferCard[] = [
       width: '80%',
       value: 4.8,
     },
-    features: [
-      'Apartment', '3 Bedrooms', 'Max 4 adults',
-    ],
+    entire: 'Apartment',
+    bedroomsAmount: '3 Bedrooms',
+    adultsAmount: 'Max 4 adults',
     price: 180,
     insideList: [
       'Wi-Fi',
@@ -304,9 +304,9 @@ export const offers: OfferCard[] = [
       width: '100%',
       value: 4.9,
     },
-    features: [
-      'Apartment', '3 Bedrooms', 'Max 4 adults',
-    ],
+    entire: 'Apartment',
+    bedroomsAmount: '3 Bedrooms',
+    adultsAmount: 'Max 4 adults',
     price: 180,
     insideList: [
       'Wi-Fi',
