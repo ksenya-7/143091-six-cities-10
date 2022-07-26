@@ -2,14 +2,15 @@ import {OfferCard} from '../../types/offer';
 
 type OfferCardScreenProps = {
   offer: OfferCard;
+  onMouseEnter: () => void;
 };
 
 function Card(props: OfferCardScreenProps): JSX.Element {
-  const {offer} = props;
+  const {offer, onMouseEnter} = props;
   const {isMark, mark, images, rating, title, isActiveButton, price, features} = offer;
 
   return (
-    <article className="cities__card place-card">
+    <article className="cities__card place-card" onMouseEnter={onMouseEnter}>
       {isMark ? <div className="place-card__mark"><span>{mark}</span></div> : null}
       <div className="cities__image-wrapper place-card__image-wrapper">
         <a href={'/'}>

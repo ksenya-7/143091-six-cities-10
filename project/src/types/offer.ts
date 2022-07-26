@@ -15,6 +15,7 @@ export type OfferHost = {
 };
 
 export type OfferCard = {
+  id: string;
   images: OfferImages[];
   mark: string;
   isMark: boolean;

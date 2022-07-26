@@ -1,3 +1,4 @@
+import {useState} from 'react';
 import Card from '../../components/card/card';
 import {OfferCards} from '../../types/offer';
 
@@ -7,6 +8,8 @@ type ListOffersScreenProps = {
 }
 
 function ListOffers({offersCount, offers}: ListOffersScreenProps): JSX.Element {
+  const [, setActiveCard] = useState<string | undefined>(undefined);
+
   return (
     <section className="cities__places places">
       <h2 className="visually-hidden">Places</h2>
@@ -27,10 +30,10 @@ function ListOffers({offersCount, offers}: ListOffersScreenProps): JSX.Element {
         </ul>
       </form>
       <div className="cities__places-list places__list tabs__content">
-        {offers.map((offer, id) => {
-          const keyValue = `${id}-${offer}`;
+        {offers.map((offer) => {
+          const keyValue = `${offer.id}`;
           return (
-            <Card offer={offer} key={keyValue} />
+            <Card offer={offer} key={keyValue} onMouseEnter = {() => setActiveCard(offer.id)}/>
           );
         })}
       </div>

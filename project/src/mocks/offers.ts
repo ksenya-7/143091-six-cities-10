@@ -2,6 +2,7 @@ import {OfferCard} from '../types/offer';
 
 export const offers: OfferCard[] = [
   {
+    id: '001',
     images: [{
       src: 'img/room.jpg',
       alt: 'Photo studio',
@@ -61,6 +62,7 @@ export const offers: OfferCard[] = [
     ],
   },
   {
+    id: '002',
     images: [{
       src: 'img/room.jpg',
       alt: 'Photo studio',
@@ -120,6 +122,7 @@ export const offers: OfferCard[] = [
     ],
   },
   {
+    id: '003',
     images: [{
       src: 'img/room.jpg',
       alt: 'Photo studio',
@@ -179,6 +182,7 @@ export const offers: OfferCard[] = [
     ],
   },
   {
+    id: '004',
     images: [{
       src: 'img/room.jpg',
       alt: 'Photo studio',
