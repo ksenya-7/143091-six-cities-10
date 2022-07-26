@@ -60,6 +60,7 @@ export const offers: OfferCard[] = [
       avatar: 'img/avatar-angelina.jpg',
       name: 'Angelina',
       status: 'Pro',
+      isPro: true,
     },
     descriptions: [
       'A quiet cozy and picturesque that hides behind a a river by the unique lightness of Amsterdam. The building is green and from 18th century.',
@@ -125,6 +126,7 @@ export const offers: OfferCard[] = [
       avatar: 'img/avatar-angelina.jpg',
       name: 'Angelina',
       status: 'Pro',
+      isPro: true,
     },
     descriptions: [
       'A quiet cozy and picturesque that hides behind a a river by the unique lightness of Amsterdam. The building is green and from 18th century.',
@@ -190,6 +192,7 @@ export const offers: OfferCard[] = [
       avatar: 'img/avatar-angelina.jpg',
       name: 'Angelina',
       status: 'Pro',
+      isPro: true,
     },
     descriptions: [
       'A quiet cozy and picturesque that hides behind a a river by the unique lightness of Amsterdam. The building is green and from 18th century.',
@@ -255,6 +258,7 @@ export const offers: OfferCard[] = [
       avatar: 'img/avatar-angelina.jpg',
       name: 'Angelina',
       status: 'Pro',
+      isPro: true,
     },
     descriptions: [
       'A quiet cozy and picturesque that hides behind a a river by the unique lightness of Amsterdam. The building is green and from 18th century.',
@@ -320,6 +324,7 @@ export const offers: OfferCard[] = [
       avatar: 'img/avatar-angelina.jpg',
       name: 'Angelina',
       status: 'Pro',
+      isPro: true,
     },
     descriptions: [
       'A quiet cozy and picturesque that hides behind a a river by the unique lightness of Amsterdam. The building is green and from 18th century.',

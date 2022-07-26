@@ -12,6 +12,7 @@ export type OfferHost = {
   avatar: string;
   name: string;
   status: string;
+  isPro: boolean;
 };
 
 export type OfferCard = {
