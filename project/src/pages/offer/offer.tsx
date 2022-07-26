@@ -20,7 +20,7 @@ function RoomScreen(props: OfferCardScreenProps): JSX.Element {
           <div className="container">
             <div className="header__wrapper">
               <div className="header__left">
-                <Logo />
+                <Logo width={'81'} height={'41'}/>
               </div>
               <nav className="header__nav">
                 <ul className="header__nav-list">

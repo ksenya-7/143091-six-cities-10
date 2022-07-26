@@ -32,9 +32,12 @@ function ListOffers({offersCount, offers}: ListOffersScreenProps): JSX.Element {
       <div className="cities__places-list places__list tabs__content">
         {offers.map((offer) => {
           const keyValue = `${offer.id}`;
-          return (
-            <Card offer={offer} key={keyValue} onMouseEnter = {() => setActiveCard(offer.id)}/>
-          );
+          if (offer.location === 'Amsterdam') {
+            return (
+              <Card offer={offer} key={keyValue} onMouseEnter = {() => setActiveCard(offer.id)}/>
+            );
+          }
+          return null;
         })}
       </div>
     </section>
