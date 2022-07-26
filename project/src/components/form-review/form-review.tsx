@@ -7,16 +7,16 @@ function FormReview(): JSX.Element {
     <form className="reviews__form form" action={'/'} method="post">
       <label className="reviews__label form__label" htmlFor="review">Your review</label>
       <div className="reviews__rating-form form__rating">
-        {[5, 4, 3, 2, 1].map((item, index) => {
+        {[5, 4, 3, 2, 1].map((item) => {
           const keyValue = `${item}`;
           return (
             <div key={keyValue}>
               <input className="form__rating-input visually-hidden" name="rating" value={item} id={`${item}-stars`} type="radio"
-                checked={formReview[index]}
+                checked={formReview[item - 1]}
                 onChange={({target}: ChangeEvent<HTMLInputElement>) => {
                   const value = target.checked;
-                  console.log(index);
-                  setFormReview([...formReview.slice(0, index), value, ...formReview.slice(index + 1)]);
+                  console.log(item - 1);
+                  setFormReview([...formReview.slice(0, item - 1), value, ...formReview.slice(item)]);
                   console.log(formReview);
                 }}
               />
