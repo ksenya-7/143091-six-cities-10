@@ -15,7 +15,9 @@ function FormReview(): JSX.Element {
                 checked={formReview[index]}
                 onChange={({target}: ChangeEvent<HTMLInputElement>) => {
                   const value = target.checked;
-                  setFormReview([...formReview.map((element) => element === true).slice(0, index), value, ...formReview.map((element) => element === false).slice(index + 1)]);
+                  console.log(index);
+                  setFormReview([...formReview.slice(0, index), value, ...formReview.slice(index + 1)]);
+                  console.log(formReview);
                 }}
               />
               <label htmlFor={`${item}-stars`} className="reviews__rating-label form__rating-label" title="perfect">
