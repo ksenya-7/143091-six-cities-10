@@ -1,10 +1,5 @@
 import {useState, ChangeEvent} from 'react';
 
-// type FormReviewProps = {
-//   onSubmit: () => void;
-// };
-// {onSubmit}: FormReviewProps
-
 function FormReview(): JSX.Element {
   const [formReview, setFormReview] = useState([false, false, false, false, false]);
 
