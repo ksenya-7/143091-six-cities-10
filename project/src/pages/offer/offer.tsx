@@ -1,16 +1,23 @@
 import React from 'react';
+import {useParams} from 'react-router-dom';
 import Logo from '../../components/logo/logo';
 import FormReview from '../../components/form-review/form-review';
-import {OfferCard} from '../../types/offer';
+import {OfferCards} from '../../types/offer';
 import {OfferCardReviews} from '../../types/review';
+import NotFoundScreen from '../../pages/error/error';
 
 type OfferCardScreenProps = {
-  offer: OfferCard;
+  offers: OfferCards;
   reviews: OfferCardReviews;
 };
 
 function RoomScreen(props: OfferCardScreenProps): JSX.Element {
-  const {offer, reviews} = props;
+  const {offers, reviews} = props;
+  const {id} = useParams();
+  const offer = offers.filter((item) => item.id === Number(id))[0];
+  if(!offer) {
+    return (<NotFoundScreen />);
+  }
   const {images, isPremium, mark, title, isFavorite, rating, goods, price, entire, bedrooms, maxAdults, host, descriptions} = offer;
 
   return (
@@ -50,8 +57,8 @@ function RoomScreen(props: OfferCardScreenProps): JSX.Element {
           <section className="property">
             <div className="property__gallery-container container">
               <div className="property__gallery">
-                {images.map((image, id) => {
-                  const keyValue = `${id}-${image.src}`;
+                {images.map((image, index) => {
+                  const keyValue = `${index}-${image.src}`;
                   return (
                     <div key={keyValue} className="property__image-wrapper">
                       <img className="property__image" src={image.src} alt={image.alt}/>
@@ -65,7 +72,7 @@ function RoomScreen(props: OfferCardScreenProps): JSX.Element {
                 {isPremium ? <div className="property__mark"><span>{mark}</span></div> : null}
                 <div className="property__name-wrapper">
                   <h1 className="property__name">{title}</h1>
-                  <button className={`property__bookmark-button {${isFavorite} ? property__bookmark-button--active : null} button`} type="button">
+                  <button className={isFavorite ? 'property__bookmark-button property__bookmark-button--active button' : 'property__bookmark-button button'} type="button">
                     <svg className="property__bookmark-icon" width="31" height="33">
                       <use xlinkHref="#icon-bookmark"></use>
                     </svg>
@@ -97,8 +104,8 @@ function RoomScreen(props: OfferCardScreenProps): JSX.Element {
                 <div className="property__inside">
                   <h2 className="property__inside-title">What&apos;s inside</h2>
                   <ul className="property__inside-list">
-                    {goods.map((item, id) => {
-                      const keyValue = `${id}-${item}`;
+                    {goods.map((item, index) => {
+                      const keyValue = `${index}-${item}`;
                       return (
                         <li key={keyValue} className="property__inside-item">
                           {item}
@@ -121,8 +128,8 @@ function RoomScreen(props: OfferCardScreenProps): JSX.Element {
                     </span>
                   </div>
                   <div className="property__description">
-                    {descriptions.map((description, id) => {
-                      const keyValue = `${id}-${description}`;
+                    {descriptions.map((description, index) => {
+                      const keyValue = `${index}-${description}`;
                       return (
                         <p key={keyValue} className="property__text">
                           {description}
@@ -134,8 +141,8 @@ function RoomScreen(props: OfferCardScreenProps): JSX.Element {
                 <section className="property__reviews reviews">
                   <h2 className="reviews__title">Reviews &middot; <span className="reviews__amount">1</span></h2>
                   <ul className="reviews__list">
-                    {reviews.map((review, id) => {
-                      const keyValue = `${id}-${review}`;
+                    {reviews.map((review, index) => {
+                      const keyValue = `${index}-${review}`;
                       return (
                         <li key={keyValue} className="reviews__item">
                           <div className="reviews__user user">
