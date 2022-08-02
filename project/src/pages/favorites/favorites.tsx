@@ -1,14 +1,14 @@
 import React from 'react';
 import Logo from '../../components/logo/logo';
 import FavoriteCard from '../../components/favorite-card/favorite-card';
-import {OfferCard, OfferCards} from '../../types/offer';
+import {Offer} from '../../types/offer';
 
 type FavoritesScreenProps = {
-  offers: OfferCards;
+  offers: Offer[];
 };
 
 function FavoritesScreen({offers}: FavoritesScreenProps): JSX.Element {
-  const sortByMark = (item: OfferCard) => item.isPremium ? 1 : 0;
+  const sortByMark = (item: Offer) => item.isPremium ? 1 : 0;
 
   return (
     <React.Fragment>
@@ -57,14 +57,13 @@ function FavoritesScreen({offers}: FavoritesScreenProps): JSX.Element {
                     </div>
                   </div>
                   <div className="favorites__places">
-                    {offers.filter((offer) => offer.isFavorite).sort(sortByMark).map((offer) => {
-                      const keyValue = `${offer.id}`;
-                      if (offer.location === 'Amsterdam') {
-                        return (
-                          <FavoriteCard offer={offer} key={keyValue}/>
-                        );
-                      }
-                      return null;
+                    {offers.filter((offer) => offer.location === 'Amsterdam').filter((offer) => offer.isFavorite).sort(sortByMark).map((offer) => {
+                      const keyValue = offer.id;
+                      // console.log(offers.filter((item) => item.location === 'Amsterdam').filter((item) => item.isFavorite).sort(sortByMark));
+
+                      return (
+                        <FavoriteCard offer={offer} key={keyValue}/>
+                      );
                     })}
                   </div>
                 </li>
@@ -78,14 +77,12 @@ function FavoritesScreen({offers}: FavoritesScreenProps): JSX.Element {
                     </div>
                   </div>
                   <div className="favorites__places">
-                    {offers.filter((offer) => offer.isFavorite).sort(sortByMark).map((offer) => {
-                      const keyValue = `${offer.id}`;
-                      if (offer.location === 'Cologne') {
-                        return (
-                          <FavoriteCard offer={offer} key={keyValue}/>
-                        );
-                      }
-                      return null;
+                    {offers.filter((offer) => offer.location === 'Cologne').filter((offer) => offer.isFavorite).sort(sortByMark).map((offer) => {
+                      const keyValue = offer.id;
+
+                      return (
+                        <FavoriteCard offer={offer} key={keyValue}/>
+                      );
                     })}
                   </div>
                 </li>

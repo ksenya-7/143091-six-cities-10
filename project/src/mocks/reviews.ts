@@ -1,6 +1,6 @@
-import {OfferCardReview} from '../types/review';
+import {Review} from '../types/review';
 
-export const reviews: OfferCardReview[] = [
+export const reviews: Review[] = [
   {
     id: '001',
     avatarReview: {

@@ -6,13 +6,13 @@ import LoginScreen from '../../pages/login/login';
 import RoomScreen from '../../pages/offer/offer';
 import NotFoundScreen from '../../pages/error/error';
 import PrivateRoute from '../private-route/private-route';
-import {OfferCards} from '../../types/offer';
-import {OfferCardReviews} from '../../types/review';
+import {Offer} from '../../types/offer';
+import {Review} from '../../types/review';
 
 type AppScreenProps = {
   offersCount: number;
-  offers: OfferCards;
-  reviews: OfferCardReviews;
+  offers: Offer[];
+  reviews: Review[];
 }
 
 function App({offersCount, offers, reviews}: AppScreenProps): JSX.Element {
@@ -31,7 +31,7 @@ function App({offersCount, offers, reviews}: AppScreenProps): JSX.Element {
           path={AppRoute.Favorites}
           element={
             <PrivateRoute
-              authorizationStatus={AuthorizationStatus.NoAuth}
+              authorizationStatus={AuthorizationStatus.Auth}
             >
               <FavoritesScreen offers={offers}/>
             </PrivateRoute>

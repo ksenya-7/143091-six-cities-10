@@ -2,19 +2,19 @@ import React from 'react';
 import {useParams} from 'react-router-dom';
 import Logo from '../../components/logo/logo';
 import FormReview from '../../components/form-review/form-review';
-import {OfferCards} from '../../types/offer';
-import {OfferCardReviews} from '../../types/review';
+import {Offer} from '../../types/offer';
+import {Review} from '../../types/review';
 import NotFoundScreen from '../../pages/error/error';
 
-type OfferCardScreenProps = {
-  offers: OfferCards;
-  reviews: OfferCardReviews;
+type OfferScreenProps = {
+  offers: Offer[];
+  reviews: Review[];
 };
 
-function RoomScreen(props: OfferCardScreenProps): JSX.Element {
+function RoomScreen(props: OfferScreenProps): JSX.Element {
   const {offers, reviews} = props;
   const {id} = useParams();
-  const offer = offers.filter((item) => item.id === Number(id))[0];
+  const offer = offers.find((item) => item.id === Number(id));
   if(!offer) {
     return (<NotFoundScreen />);
   }

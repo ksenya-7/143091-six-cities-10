@@ -1,17 +1,22 @@
 import {Link} from 'react-router-dom';
-import {OfferCard} from '../../types/offer';
+import {Offer} from '../../types/offer';
 
-type OfferCardScreenProps = {
-  offer: OfferCard;
-  onMouseEnter: () => void;
+type OfferScreenProps = {
+  offer: Offer;
+  onMouseEnter: (id:number) => void;
+  onMouseLeave: () => void;
 };
 
-function Card(props: OfferCardScreenProps): JSX.Element {
-  const {offer, onMouseEnter} = props;
+function Card(props: OfferScreenProps): JSX.Element {
+  const {offer, onMouseEnter, onMouseLeave} = props;
   const {id, isPremium, mark, images, rating, title, isFavorite, price, entire} = offer;
 
+  const handleMouseEnter = () => {
+    onMouseEnter(offer.id);
+  };
+
   return (
-    <article className="cities__card place-card" onMouseEnter={onMouseEnter}>
+    <article className="cities__card place-card" onMouseEnter={handleMouseEnter} onMouseLeave={onMouseLeave}>
       {isPremium ? <div className="place-card__mark"><span>{mark}</span></div> : null}
       <div className="cities__image-wrapper place-card__image-wrapper">
         <a href={'/'}>

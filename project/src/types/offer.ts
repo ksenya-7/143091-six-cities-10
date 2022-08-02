@@ -3,19 +3,7 @@ export type OfferImages = {
   alt: string;
 };
 
-export type OfferRating = {
-  width: string;
-  value: number;
-};
-
-export type OfferHost = {
-  avatarUrl: string;
-  name: string;
-  id: number;
-  isPro: boolean;
-};
-
-export type OfferCard = {
+export type Offer = {
   id: number;
   location: string;
   previewImage: OfferImages;
@@ -24,14 +12,20 @@ export type OfferCard = {
   isPremium: boolean;
   title: string;
   isFavorite: boolean;
-  rating: OfferRating;
+  rating: {
+    width: string;
+    value: number;
+  };
   entire: string;
   bedrooms: number;
   maxAdults: number;
   price: number;
   goods: string[];
-  host: OfferHost;
+  host: {
+    avatarUrl: string;
+    name: string;
+    id: number;
+    isPro: boolean;
+  };
   descriptions: string[];
 };
-
-export type OfferCards = OfferCard[];

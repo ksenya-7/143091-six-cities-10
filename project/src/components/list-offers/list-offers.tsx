@@ -1,14 +1,22 @@
 import {useState} from 'react';
 import Card from '../../components/card/card';
-import {OfferCards} from '../../types/offer';
+import {Offer} from '../../types/offer';
 
 type ListOffersScreenProps = {
   offersCount: number;
-  offers: OfferCards;
+  offers: Offer[];
 }
 
 function ListOffers({offersCount, offers}: ListOffersScreenProps): JSX.Element {
-  const [, setActiveCard] = useState<number | undefined>(undefined);
+  const [, setActiveCardId] = useState<number | undefined>(undefined);
+
+  const handleMouseEnter = (offerId:number) => {
+    setActiveCardId(offerId);
+  };
+
+  const handleMouseLeave = () => {
+    setActiveCardId(undefined);
+  };
 
   return (
     <section className="cities__places places">
@@ -31,10 +39,15 @@ function ListOffers({offersCount, offers}: ListOffersScreenProps): JSX.Element {
       </form>
       <div className="cities__places-list places__list tabs__content">
         {offers.map((offer) => {
-          const keyValue = `${offer.id}`;
+          const keyValue = offer.id;
           if (offer.location === 'Amsterdam') {
             return (
-              <Card offer={offer} key={keyValue} onMouseEnter = {() => setActiveCard(offer.id)}/>
+              <Card
+                offer={offer}
+                key={keyValue}
+                onMouseEnter = {handleMouseEnter}
+                onMouseLeave = {handleMouseLeave}
+              />
             );
           }
           return null;

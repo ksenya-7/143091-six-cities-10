@@ -1,6 +1,6 @@
-import {OfferCard} from '../types/offer';
+import {Offer} from '../types/offer';
 
-export const offers: OfferCard[] = [
+export const offers: Offer[] = [
   {
     id: 1,
     location: 'Amsterdam',

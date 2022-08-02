@@ -1,20 +1,14 @@
-export type ReviewImages = {
-  src: string;
-  alt: string;
-};
-
-export type ReviewTime = {
-  datetime: string;
-  time: string;
-};
-
-export type OfferCardReview = {
+export type Review = {
   id: string;
-  avatarReview: ReviewImages;
+  avatarReview: {
+    src: string;
+    alt: string;
+  };
   nameUser: string;
   rating: string;
   text: string;
-  timeReview: ReviewTime;
+  timeReview: {
+    datetime: string;
+    time: string;
+  };
 };
-
-export type OfferCardReviews = OfferCardReview[];

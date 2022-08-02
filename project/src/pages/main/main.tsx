@@ -1,11 +1,11 @@
 import React from 'react';
 import Logo from '../../components/logo/logo';
 import ListOffers from '../../components/list-offers/list-offers';
-import {OfferCards} from '../../types/offer';
+import {Offer} from '../../types/offer';
 
 type MainScreenProps = {
   offersCount: number;
-  offers: OfferCards;
+  offers: Offer[];
 }
 
 function MainScreen({offersCount, offers}: MainScreenProps): JSX.Element {
