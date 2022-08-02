@@ -38,19 +38,16 @@ function ListOffers({offersCount, offers}: ListOffersScreenProps): JSX.Element {
         </ul>
       </form>
       <div className="cities__places-list places__list tabs__content">
-        {offers.map((offer) => {
+        {offers.filter((offer) => offer.location === 'Amsterdam').map((offer) => {
           const keyValue = offer.id;
-          if (offer.location === 'Amsterdam') {
-            return (
-              <Card
-                offer={offer}
-                key={keyValue}
-                onMouseEnter = {handleMouseEnter}
-                onMouseLeave = {handleMouseLeave}
-              />
-            );
-          }
-          return null;
+          return (
+            <Card
+              offer={offer}
+              key={keyValue}
+              onMouseEnter = {handleMouseEnter}
+              onMouseLeave = {handleMouseLeave}
+            />
+          );
         })}
       </div>
     </section>
