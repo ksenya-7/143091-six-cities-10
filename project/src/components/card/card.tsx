@@ -5,10 +5,15 @@ type OfferScreenProps = {
   offer: Offer;
   onMouseEnter: (id:number) => void;
   onMouseLeave: () => void;
+  cardClassName?: string;
+  imageClassName?: string;
+  infoClassName?: string;
+  imageWidth: number;
+  imageHeight: number;
 };
 
 function Card(props: OfferScreenProps): JSX.Element {
-  const {offer, onMouseEnter, onMouseLeave} = props;
+  const {offer, cardClassName, imageClassName, infoClassName, imageWidth, imageHeight, onMouseEnter, onMouseLeave} = props;
   const {id, isPremium, mark, images, rating, title, isFavorite, price, entire} = offer;
 
   const handleMouseEnter = () => {
@@ -16,14 +21,14 @@ function Card(props: OfferScreenProps): JSX.Element {
   };
 
   return (
-    <article className="cities__card place-card" onMouseEnter={handleMouseEnter} onMouseLeave={onMouseLeave}>
+    <article className={`${cardClassName} place-card`} onMouseEnter={handleMouseEnter} onMouseLeave={onMouseLeave}>
       {isPremium ? <div className="place-card__mark"><span>{mark}</span></div> : null}
-      <div className="cities__image-wrapper place-card__image-wrapper">
+      <div className={`${imageClassName} place-card__image-wrapper`}>
         <a href={'/'}>
-          <img className="place-card__image" src={images[1].src} width="260" height="200" alt={images[1].alt} />
+          <img className="place-card__image" src={images[1].src} width={imageWidth} height={imageHeight} alt={images[1].alt} />
         </a>
       </div>
-      <div className="place-card__info">
+      <div className={`${infoClassName} place-card__info`}>
         <div className="place-card__price-wrapper">
           <div className="place-card__price">
             <b className="place-card__price-value">&euro;{price}</b>
@@ -31,7 +36,7 @@ function Card(props: OfferScreenProps): JSX.Element {
           </div>
           <button className={isFavorite ? 'place-card__bookmark-button place-card__bookmark-button--active button' : 'property__bookmark-button button'} type="button">
             <svg className="place-card__bookmark-icon" width="18" height="19">
-              <use xlinkHref="#icon-bookmark"></use>
+              <use xlinkHref="#icon-bookmark" />
             </svg>
             <span className="visually-hidden">To bookmarks</span>
           </button>

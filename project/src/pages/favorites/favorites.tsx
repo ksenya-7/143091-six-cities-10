@@ -1,14 +1,27 @@
 import React from 'react';
+import {useState} from 'react';
+import {Link} from 'react-router-dom';
 import Logo from '../../components/logo/logo';
-import FavoriteCard from '../../components/favorite-card/favorite-card';
+import Card from '../../components/card/card';
 import {Offer} from '../../types/offer';
 
 type FavoritesScreenProps = {
   offers: Offer[];
 };
 
+const sortByMark = (item: Offer) => item.isPremium ? -1 : 1;
+
 function FavoritesScreen({offers}: FavoritesScreenProps): JSX.Element {
-  const sortByMark = (item: Offer) => item.isPremium ? 1 : 0;
+  const [, setActiveCardId] = useState<number | undefined>(undefined);
+  const handleMouseEnter = (offerId:number) => {
+    setActiveCardId(offerId);
+  };
+  const handleMouseLeave = () => {
+    setActiveCardId(undefined);
+  };
+
+  const favoritesOfferAmsterdam = offers.filter((offer) => offer.location === 'Amsterdam' && offer.isFavorite);
+  const favoritesOfferCologne = offers.filter((offer) => offer.location === 'Cologne' && offer.isFavorite);
 
   return (
     <React.Fragment>
@@ -20,7 +33,7 @@ function FavoritesScreen({offers}: FavoritesScreenProps): JSX.Element {
           <div className="container">
             <div className="header__wrapper">
               <div className="header__left">
-                <Logo width={'81'} height={'41'}/>
+                <Logo />
               </div>
               <nav className="header__nav">
                 <ul className="header__nav-list">
@@ -57,14 +70,19 @@ function FavoritesScreen({offers}: FavoritesScreenProps): JSX.Element {
                     </div>
                   </div>
                   <div className="favorites__places">
-                    {offers.filter((offer) => offer.location === 'Amsterdam').filter((offer) => offer.isFavorite).sort(sortByMark).map((offer) => {
-                      const keyValue = offer.id;
-                      // console.log(offers.filter((item) => item.location === 'Amsterdam').filter((item) => item.isFavorite).sort(sortByMark));
-
-                      return (
-                        <FavoriteCard offer={offer} key={keyValue}/>
-                      );
-                    })}
+                    {favoritesOfferAmsterdam.sort(sortByMark).map((offer) => (
+                      <Card
+                        offer={offer}
+                        key={offer.id}
+                        onMouseEnter = {handleMouseEnter}
+                        onMouseLeave = {handleMouseLeave}
+                        cardClassName = {'favorites__card'}
+                        imageClassName = {'favorites__image-wrapper'}
+                        infoClassName = {'favorites__card-info'}
+                        imageWidth = {150}
+                        imageHeight = {110}
+                      />
+                    ))}
                   </div>
                 </li>
 
@@ -77,13 +95,19 @@ function FavoritesScreen({offers}: FavoritesScreenProps): JSX.Element {
                     </div>
                   </div>
                   <div className="favorites__places">
-                    {offers.filter((offer) => offer.location === 'Cologne').filter((offer) => offer.isFavorite).sort(sortByMark).map((offer) => {
-                      const keyValue = offer.id;
-
-                      return (
-                        <FavoriteCard offer={offer} key={keyValue}/>
-                      );
-                    })}
+                    {favoritesOfferCologne.sort(sortByMark).map((offer) => (
+                      <Card
+                        offer={offer}
+                        key={offer.id}
+                        onMouseEnter = {handleMouseEnter}
+                        onMouseLeave = {handleMouseLeave}
+                        cardClassName = {'favorites__card'}
+                        imageClassName = {'favorites__image-wrapper'}
+                        infoClassName = {'favorites__card-info'}
+                        imageWidth = {150}
+                        imageHeight = {110}
+                      />
+                    ))}
                   </div>
                 </li>
               </ul>
@@ -91,7 +115,9 @@ function FavoritesScreen({offers}: FavoritesScreenProps): JSX.Element {
           </div>
         </main>
         <footer className="footer container">
-          <Logo width={'64'} height={'33'}/>
+          <Link className="header__logo-link" to="/">
+            <img className="header__logo" src="img/logo.svg" alt="6 cities logo" width="64" height="33"/>
+          </Link>
         </footer>
       </div>
 

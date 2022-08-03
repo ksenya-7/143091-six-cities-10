@@ -30,7 +30,7 @@ function RoomScreen(props: OfferScreenProps): JSX.Element {
           <div className="container">
             <div className="header__wrapper">
               <div className="header__left">
-                <Logo width={'81'} height={'41'}/>
+                <Logo />
               </div>
               <nav className="header__nav">
                 <ul className="header__nav-list">
@@ -74,7 +74,7 @@ function RoomScreen(props: OfferScreenProps): JSX.Element {
                   <h1 className="property__name">{title}</h1>
                   <button className={isFavorite ? 'property__bookmark-button property__bookmark-button--active button' : 'property__bookmark-button button'} type="button">
                     <svg className="property__bookmark-icon" width="31" height="33">
-                      <use xlinkHref="#icon-bookmark"></use>
+                      <use xlinkHref="#icon-bookmark" />
                     </svg>
                     <span className="visually-hidden">To bookmarks</span>
                   </button>
@@ -193,7 +193,7 @@ function RoomScreen(props: OfferScreenProps): JSX.Element {
                       </div>
                       <button className="place-card__bookmark-button place-card__bookmark-button--active button" type="button">
                         <svg className="place-card__bookmark-icon" width="18" height="19">
-                          <use xlinkHref="#icon-bookmark"></use>
+                          <use xlinkHref="#icon-bookmark" />
                         </svg>
                         <span className="visually-hidden">In bookmarks</span>
                       </button>
@@ -225,7 +225,7 @@ function RoomScreen(props: OfferScreenProps): JSX.Element {
                       </div>
                       <button className="place-card__bookmark-button button" type="button">
                         <svg className="place-card__bookmark-icon" width="18" height="19">
-                          <use xlinkHref="#icon-bookmark"></use>
+                          <use xlinkHref="#icon-bookmark" />
                         </svg>
                         <span className="visually-hidden">To bookmarks</span>
                       </button>
@@ -260,7 +260,7 @@ function RoomScreen(props: OfferScreenProps): JSX.Element {
                       </div>
                       <button className="place-card__bookmark-button button" type="button">
                         <svg className="place-card__bookmark-icon" width="18" height="19">
-                          <use xlinkHref="#icon-bookmark"></use>
+                          <use xlinkHref="#icon-bookmark" />
                         </svg>
                         <span className="visually-hidden">To bookmarks</span>
                       </button>

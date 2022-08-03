@@ -18,6 +18,8 @@ function ListOffers({offersCount, offers}: ListOffersScreenProps): JSX.Element {
     setActiveCardId(undefined);
   };
 
+  const filteredByCityOffers = offers.filter((offer) => offer.location === 'Amsterdam');
+
   return (
     <section className="cities__places places">
       <h2 className="visually-hidden">Places</h2>
@@ -27,7 +29,7 @@ function ListOffers({offersCount, offers}: ListOffersScreenProps): JSX.Element {
         <span className="places__sorting-type" tabIndex={0}>
           Popular
           <svg className="places__sorting-arrow" width="7" height="4">
-            <use xlinkHref="#icon-arrow-select"></use>
+            <use xlinkHref="#icon-arrow-select" />
           </svg>
         </span>
         <ul className="places__options places__options--custom places__options--opened">
@@ -38,17 +40,18 @@ function ListOffers({offersCount, offers}: ListOffersScreenProps): JSX.Element {
         </ul>
       </form>
       <div className="cities__places-list places__list tabs__content">
-        {offers.filter((offer) => offer.location === 'Amsterdam').map((offer) => {
-          const keyValue = offer.id;
-          return (
-            <Card
-              offer={offer}
-              key={keyValue}
-              onMouseEnter = {handleMouseEnter}
-              onMouseLeave = {handleMouseLeave}
-            />
-          );
-        })}
+        {filteredByCityOffers.map((offer) => (
+          <Card
+            offer={offer}
+            key={offer.id}
+            onMouseEnter = {handleMouseEnter}
+            onMouseLeave = {handleMouseLeave}
+            cardClassName = {'cities__card'}
+            imageClassName = {'cities__image-wrapper'}
+            imageWidth = {260}
+            imageHeight = {200}
+          />
+        ))}
       </div>
     </section>
   );
