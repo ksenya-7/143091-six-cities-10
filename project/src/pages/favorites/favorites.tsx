@@ -14,8 +14,8 @@ function FavoritesScreen({offers}: FavoritesScreenProps): JSX.Element {
   const handleMouseEnter = () => null;
   const handleMouseLeave = () => null;
 
-  const favoritesOfferAmsterdam = offers.filter((offer) => offer.location === 'Amsterdam' && offer.isFavorite);
-  const favoritesOfferCologne = offers.filter((offer) => offer.location === 'Cologne' && offer.isFavorite);
+  const favoritesOfferAmsterdam = offers.filter((offer) => offer.city.name === 'Amsterdam' && offer.isFavorite);
+  const favoritesOfferCologne = offers.filter((offer) => offer.city.name === 'Cologne' && offer.isFavorite);
 
   return (
     <React.Fragment>

@@ -18,7 +18,7 @@ function ListOffers({offersCount, offers}: ListOffersScreenProps): JSX.Element {
     setActiveCardId(undefined);
   };
 
-  const filteredByCityOffers = offers.filter((offer) => offer.location === 'Amsterdam');
+  const filteredByCityOffers = offers.filter((offer) => offer.city.name === 'Amsterdam');
 
   return (
     <section className="cities__places places">

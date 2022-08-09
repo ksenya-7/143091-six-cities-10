@@ -1,6 +1,8 @@
 import React from 'react';
 import Logo from '../../components/logo/logo';
 import ListOffers from '../../components/list-offers/list-offers';
+// import {city} from '../../mocks/city';
+import Map from '../../components/map/map';
 import {Offer} from '../../types/offer';
 
 type MainScreenProps = {
@@ -84,7 +86,10 @@ function MainScreen({offersCount, offers}: MainScreenProps): JSX.Element {
             <div className="cities__places-container container">
               <ListOffers offersCount={offersCount} offers={offers} />
               <div className="cities__right-section">
-                <section className="cities__map map"></section>
+                <section className="cities__map map">
+                  <Map />
+                  {/* <Map city={CITY} /> */}
+                </section>
               </div>
             </div>
           </div>
