@@ -7,7 +7,6 @@ import RoomScreen from '../../pages/offer/offer';
 import NotFoundScreen from '../../pages/error/error';
 import PrivateRoute from '../private-route/private-route';
 import {Offer, City} from '../../types/offer';
-// import {Offer} from '../../types/offer';
 import {Review} from '../../types/review';
 
 
@@ -16,7 +15,6 @@ type AppScreenProps = {
   offers: Offer[];
   reviews: Review[];
   city: City;
-  // points: Offer[];
 }
 
 function App({offersCount, offers, reviews, city}: AppScreenProps): JSX.Element {
