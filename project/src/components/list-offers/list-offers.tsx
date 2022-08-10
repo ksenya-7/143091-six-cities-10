@@ -1,23 +1,14 @@
-import {useState} from 'react';
 import Card from '../../components/card/card';
 import {Offer} from '../../types/offer';
 
 type ListScreenProps = {
   offersCount: number;
   offers: Offer[];
+  onMouseEnter: (id: number) => void;
+  onMouseLeave: () => void;
 }
 
-function List({offersCount, offers}: ListScreenProps): JSX.Element {
-  const [, setActiveCardId] = useState<number | undefined>(undefined);
-
-  const handleMouseEnter = (offerId:number) => {
-    setActiveCardId(offerId);
-  };
-
-  const handleMouseLeave = () => {
-    setActiveCardId(undefined);
-  };
-
+function List({offersCount, offers, onMouseEnter, onMouseLeave}: ListScreenProps): JSX.Element {
   const filteredByCityOffers = offers.filter((offer) => offer.city.name === 'Amsterdam');
 
   return (
@@ -44,8 +35,8 @@ function List({offersCount, offers}: ListScreenProps): JSX.Element {
           <Card
             offer={offer}
             key={offer.id}
-            onMouseEnter = {handleMouseEnter}
-            onMouseLeave = {handleMouseLeave}
+            onMouseEnter = {onMouseEnter}
+            onMouseLeave = {onMouseLeave}
             cardClassName = {'cities__card'}
             imageClassName = {'cities__image-wrapper'}
             imageWidth = {260}

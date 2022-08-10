@@ -1,10 +1,8 @@
-import React from 'react';
-// import React, {useState} from 'react';
+import React, {useState} from 'react';
 import Logo from '../../components/logo/logo';
 import List from '../../components/list-offers/list-offers';
 import Map from '../../components/map/map';
 import {Offer, City} from '../../types/offer';
-// import {Offer} from '../../types/offer';
 
 type MainScreenProps = {
   offersCount: number;
@@ -14,17 +12,19 @@ type MainScreenProps = {
 
 function MainScreen(props: MainScreenProps): JSX.Element {
   const {offersCount, offers, city} = props;
+  const [selectedOffer, setSelectedOffer] = useState<Offer | undefined>(
+    undefined
+  );
 
-  // const [selectedOffer, setSelectedOffer] = useState<Offer | undefined>(
-  //   undefined
-  // );
+  const handleMouseEnter = (id: number) => {
+    const currentOffer = offers.find((offer) => offer.id === id);
 
-  // const onListItemHover = (id: number) => {
-  //   const currentOffer = offers.find((offer) => offer.id === id);
+    setSelectedOffer(currentOffer);
+  };
 
-  //   setSelectedOffer(currentOffer);
-  // };
-  //  onMouseEnter={onListItemHover}
+  const handleMouseLeave = () => {
+    setSelectedOffer(undefined);
+  };
 
   return (
     <React.Fragment>
@@ -99,9 +99,14 @@ function MainScreen(props: MainScreenProps): JSX.Element {
           </div>
           <div className="cities">
             <div className="cities__places-container container">
-              <List offersCount={offersCount} offers={offers} />
+              <List
+                offersCount={offersCount}
+                offers={offers}
+                onMouseEnter = {handleMouseEnter}
+                onMouseLeave = {handleMouseLeave}
+              />
               <div className="cities__right-section">
-                <Map city={city} offers={offers} selectedOffer={offers[1]} />
+                <Map city={city} offers={offers} selectedOffer={selectedOffer} />
               </div>
             </div>
           </div>
