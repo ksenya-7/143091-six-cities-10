@@ -2,12 +2,12 @@ import {useState} from 'react';
 import Card from '../../components/card/card';
 import {Offer} from '../../types/offer';
 
-type ListOffersScreenProps = {
+type ListScreenProps = {
   offersCount: number;
   offers: Offer[];
 }
 
-function ListOffers({offersCount, offers}: ListOffersScreenProps): JSX.Element {
+function List({offersCount, offers}: ListScreenProps): JSX.Element {
   const [, setActiveCardId] = useState<number | undefined>(undefined);
 
   const handleMouseEnter = (offerId:number) => {
@@ -57,4 +57,4 @@ function ListOffers({offersCount, offers}: ListOffersScreenProps): JSX.Element {
   );
 }
 
-export default ListOffers;
+export default List;

@@ -1,16 +1,31 @@
 import React from 'react';
+// import React, {useState} from 'react';
 import Logo from '../../components/logo/logo';
-import ListOffers from '../../components/list-offers/list-offers';
-// import {city} from '../../mocks/city';
+import List from '../../components/list-offers/list-offers';
 import Map from '../../components/map/map';
-import {Offer} from '../../types/offer';
+import {Offer, City} from '../../types/offer';
+// import {Offer} from '../../types/offer';
 
 type MainScreenProps = {
   offersCount: number;
   offers: Offer[];
+  city: City;
 }
 
-function MainScreen({offersCount, offers}: MainScreenProps): JSX.Element {
+function MainScreen(props: MainScreenProps): JSX.Element {
+  const {offersCount, offers, city} = props;
+
+  // const [selectedOffer, setSelectedOffer] = useState<Offer | undefined>(
+  //   undefined
+  // );
+
+  // const onListItemHover = (id: number) => {
+  //   const currentOffer = offers.find((offer) => offer.id === id);
+
+  //   setSelectedOffer(currentOffer);
+  // };
+  //  onMouseEnter={onListItemHover}
+
   return (
     <React.Fragment>
       <div style={{ display: 'none' }}>
@@ -84,12 +99,9 @@ function MainScreen({offersCount, offers}: MainScreenProps): JSX.Element {
           </div>
           <div className="cities">
             <div className="cities__places-container container">
-              <ListOffers offersCount={offersCount} offers={offers} />
+              <List offersCount={offersCount} offers={offers} />
               <div className="cities__right-section">
-                <section className="cities__map map">
-                  <Map />
-                  {/* <Map city={CITY} /> */}
-                </section>
+                <Map city={city} offers={offers} selectedOffer={offers[1]} />
               </div>
             </div>
           </div>
