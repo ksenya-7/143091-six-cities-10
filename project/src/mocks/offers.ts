@@ -297,8 +297,8 @@ export const offers: Offer[] = [
     id: 5,
     city: {
       location: {
-        latitude: 52.370216,
-        longitude: 4.895168,
+        latitude: 50.930779,
+        longitude: 6.938384,
         zoom: 10,
       },
       name: 'Cologne',
