@@ -72,7 +72,7 @@ function RoomScreen(props: OfferScreenProps): JSX.Element {
                 {isPremium ? <div className="property__mark"><span>{mark}</span></div> : null}
                 <div className="property__name-wrapper">
                   <h1 className="property__name">{title}</h1>
-                  <button className={isFavorite ? 'property__bookmark-button property__bookmark-button--active button' : 'property__bookmark-button button'} type="button">
+                  <button className={`property__bookmark-button ${isFavorite ? 'property__bookmark-button--active' : ''} button`} type="button">
                     <svg className="property__bookmark-icon" width="31" height="33">
                       <use xlinkHref="#icon-bookmark" />
                     </svg>
@@ -117,7 +117,7 @@ function RoomScreen(props: OfferScreenProps): JSX.Element {
                 <div className="property__host">
                   <h2 className="property__host-title">Meet the host</h2>
                   <div className="property__host-user user">
-                    <div className={host.isPro ? 'property__avatar-wrapper property__avatar-wrapper--pro user__avatar-wrapper' : 'property__avatar-wrapper user__avatar-wrapper'}>
+                    <div className={`property__avatar-wrapper ${host.isPro ? 'property__avatar-wrapper--pro' : ''} user__avatar-wrapper`}>
                       <img className="property__avatar user__avatar" src={host.avatarUrl} width="74" height="74" alt="Host avatar"/>
                     </div>
                     <span className="property__user-name">
