@@ -8,6 +8,10 @@ function Comment({review}: CommentProps): JSX.Element {
   const {date, comment, rating, user} = review;
 
   const ratingAsPercent = (rating >= 0 && rating <= 5) ? Math.round(rating) * 20 : 0;
+  const datestamp = new Date(date);
+  const month = datestamp.getMonth();
+  const monthTitle = [ 'January ', 'February ', 'March ', 'April ', 'May ', 'June ', 'July ', 'August ', 'September ', 'October ', 'November ', 'December '];
+  const dateMonthYear = `${monthTitle[month]} ${datestamp.getFullYear()}`;
 
   return (
     <li className="reviews__item">
@@ -29,7 +33,7 @@ function Comment({review}: CommentProps): JSX.Element {
         <p className="reviews__text">
           {comment}
         </p>
-        <time className="reviews__time" dateTime={date}>{date}</time>
+        <time className="reviews__time" dateTime={date}>{dateMonthYear}</time>
       </div>
     </li>
   );
