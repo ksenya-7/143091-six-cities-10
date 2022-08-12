@@ -1,5 +1,4 @@
 import React from 'react';
-import {useState} from 'react';
 import {Link} from 'react-router-dom';
 import Logo from '../../components/logo/logo';
 import Card from '../../components/card/card';
@@ -12,16 +11,11 @@ type FavoritesScreenProps = {
 const sortByMark = (item: Offer) => item.isPremium ? -1 : 1;
 
 function FavoritesScreen({offers}: FavoritesScreenProps): JSX.Element {
-  const [, setActiveCardId] = useState<number | undefined>(undefined);
-  const handleMouseEnter = (offerId:number) => {
-    setActiveCardId(offerId);
-  };
-  const handleMouseLeave = () => {
-    setActiveCardId(undefined);
-  };
+  const handleMouseEnter = () => null;
+  const handleMouseLeave = () => null;
 
-  const favoritesOfferAmsterdam = offers.filter((offer) => offer.location === 'Amsterdam' && offer.isFavorite);
-  const favoritesOfferCologne = offers.filter((offer) => offer.location === 'Cologne' && offer.isFavorite);
+  const favoritesOfferAmsterdam = offers.filter((offer) => offer.city.name === 'Amsterdam' && offer.isFavorite);
+  const favoritesOfferCologne = offers.filter((offer) => offer.city.name === 'Cologne' && offer.isFavorite);
 
   return (
     <React.Fragment>

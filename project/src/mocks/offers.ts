@@ -3,7 +3,14 @@ import {Offer} from '../types/offer';
 export const offers: Offer[] = [
   {
     id: 1,
-    location: 'Amsterdam',
+    city: {
+      location: {
+        latitude: 52.3909553943508,
+        longitude: 4.85309666406198,
+        zoom: 10,
+      },
+      name: 'Amsterdam',
+    },
     previewImage: {
       src: 'img/room-small.jpg',
       alt: 'Place image',
@@ -69,7 +76,14 @@ export const offers: Offer[] = [
   },
   {
     id: 2,
-    location: 'Amsterdam',
+    city: {
+      location: {
+        latitude: 52.369553943508,
+        longitude: 4.85309666406198,
+        zoom: 10,
+      },
+      name: 'Amsterdam',
+    },
     previewImage: {
       src: 'img/room-small.jpg',
       alt: 'Place image',
@@ -135,7 +149,14 @@ export const offers: Offer[] = [
   },
   {
     id: 3,
-    location: 'Amsterdam',
+    city: {
+      location: {
+        latitude: 52.3909553943508,
+        longitude: 4.929309666406198,
+        zoom: 10,
+      },
+      name: 'Amsterdam',
+    },
     previewImage: {
       src: 'img/room-small.jpg',
       alt: 'Place image',
@@ -201,7 +222,14 @@ export const offers: Offer[] = [
   },
   {
     id: 4,
-    location: 'Amsterdam',
+    city: {
+      location: {
+        latitude: 52.3809553943508,
+        longitude: 4.939309666406198,
+        zoom: 10,
+      },
+      name: 'Amsterdam',
+    },
     previewImage: {
       src: 'img/apartment-small-03.jpg',
       alt: 'Place image',
@@ -267,7 +295,14 @@ export const offers: Offer[] = [
   },
   {
     id: 5,
-    location: 'Cologne',
+    city: {
+      location: {
+        latitude: 50.930779,
+        longitude: 6.938384,
+        zoom: 10,
+      },
+      name: 'Cologne',
+    },
     previewImage: {
       src: 'img/apartment-small-04.jpg',
       alt: 'Place image',

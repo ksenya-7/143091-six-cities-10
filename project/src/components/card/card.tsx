@@ -3,7 +3,7 @@ import {Offer} from '../../types/offer';
 
 type OfferScreenProps = {
   offer: Offer;
-  onMouseEnter: (id:number) => void;
+  onMouseEnter: (id: number) => void;
   onMouseLeave: () => void;
   cardClassName?: string;
   imageClassName?: string;

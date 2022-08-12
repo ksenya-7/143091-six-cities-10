@@ -3,9 +3,18 @@ export type OfferImages = {
   alt: string;
 };
 
+export type City = {
+  location: {
+    latitude: number;
+    longitude: number;
+    zoom: number;
+  };
+  name: string;
+};
+
 export type Offer = {
   id: number;
-  location: string;
+  city: City;
   previewImage: OfferImages;
   images: OfferImages[];
   mark: string;
