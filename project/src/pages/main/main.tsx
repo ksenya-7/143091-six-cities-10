@@ -1,6 +1,6 @@
 import React, {useState} from 'react';
 import Logo from '../../components/logo/logo';
-import List from '../../components/list-offers/list-offers';
+import OffersList from '../../components/offers-list/offers-list';
 import Map from '../../components/map/map';
 import {Offer, City} from '../../types/offer';
 
@@ -12,9 +12,7 @@ type MainScreenProps = {
 
 function MainScreen(props: MainScreenProps): JSX.Element {
   const {offersCount, offers, city} = props;
-  const [selectedOffer, setSelectedOffer] = useState<Offer | undefined>(
-    undefined
-  );
+  const [selectedOffer, setSelectedOffer] = useState<Offer | undefined>();
 
   const handleMouseEnter = (id: number) => {
     const currentOffer = offers.find((offer) => offer.id === id);
@@ -99,7 +97,7 @@ function MainScreen(props: MainScreenProps): JSX.Element {
           </div>
           <div className="cities">
             <div className="cities__places-container container">
-              <List
+              <OffersList
                 offersCount={offersCount}
                 offers={offers}
                 onMouseEnter = {handleMouseEnter}

@@ -1,14 +1,14 @@
-import Card from '../../components/card/card';
+import Card from '../card/card';
 import {Offer} from '../../types/offer';
 
-type ListScreenProps = {
+type OffersListScreenProps = {
   offersCount: number;
   offers: Offer[];
   onMouseEnter: (id: number) => void;
   onMouseLeave: () => void;
 }
 
-function List({offersCount, offers, onMouseEnter, onMouseLeave}: ListScreenProps): JSX.Element {
+function OffersList({offersCount, offers, onMouseEnter, onMouseLeave}: OffersListScreenProps): JSX.Element {
   const filteredByCityOffers = offers.filter((offer) => offer.city.name === 'Amsterdam');
 
   return (
@@ -48,4 +48,4 @@ function List({offersCount, offers, onMouseEnter, onMouseLeave}: ListScreenProps
   );
 }
 
-export default List;
+export default OffersList;
