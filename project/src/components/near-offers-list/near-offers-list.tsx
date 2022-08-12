@@ -1,25 +1,25 @@
 import Card from '../card/card';
 import {Offer} from '../../types/offer';
 
-type OffersListProps = {
+type NearOffersListProps = {
   offers: Offer[];
   onMouseEnter: (id: number) => void;
   onMouseLeave: () => void;
 }
 
-function OffersList(props: OffersListProps): JSX.Element {
+function NearOffersList(props: NearOffersListProps): JSX.Element {
   const {offers, onMouseEnter, onMouseLeave} = props;
 
   return (
-    <div className="cities__places-list places__list tabs__content">
+    <div className="near-places__list places__list">
       {offers.map((offer) => (
         <Card
           offer={offer}
           key={offer.id}
           onMouseEnter = {onMouseEnter}
           onMouseLeave = {onMouseLeave}
-          cardClassName = {'cities__card'}
-          imageClassName = {'cities__image-wrapper'}
+          cardClassName = {'near-places__card'}
+          imageClassName = {'near-places__image-wrapper'}
           infoClassName = {''}
           imageWidth = {260}
           imageHeight = {200}
@@ -29,4 +29,4 @@ function OffersList(props: OffersListProps): JSX.Element {
   );
 }
 
-export default OffersList;
+export default NearOffersList;

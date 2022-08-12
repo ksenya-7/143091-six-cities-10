@@ -6,7 +6,8 @@ type ReviewsListProps = {
   reviews: Review[];
 }
 
-function ReviewsList({reviews}: ReviewsListProps): JSX.Element {
+function ReviewsList(props: ReviewsListProps): JSX.Element {
+  const {reviews} = props;
   const reviewCount = reviews.length;
   // console.log(reviews);
 
@@ -15,10 +16,10 @@ function ReviewsList({reviews}: ReviewsListProps): JSX.Element {
       <h2 className="reviews__title">Reviews &middot; <span className="reviews__amount">{reviewCount}</span></h2>
       <ul className="reviews__list">
         {/* {reviews.map((review) => {
-          // <Comment
-          //   key={review.id}
-          //   review={review}
-          // />;
+          <Comment
+            review={review}
+            key={review.id}
+          />;
         })} */}
       </ul>
       <FormReview />
