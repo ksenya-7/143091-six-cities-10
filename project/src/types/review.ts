@@ -1,14 +1,12 @@
 export type Review = {
-  id: string;
-  avatarReview: {
-    src: string;
-    alt: string;
-  };
-  nameUser: string;
-  rating: string;
-  text: string;
-  timeReview: {
-    datetime: string;
-    time: string;
+  id: number;
+  rating: number;
+  comment: string;
+  date: string;
+  user: {
+    avatarUrl: string;
+    id: number;
+    isPro: boolean;
+    name: string;
   };
 };

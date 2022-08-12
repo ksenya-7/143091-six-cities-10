@@ -15,6 +15,7 @@ type OfferScreenProps = {
 function Card(props: OfferScreenProps): JSX.Element {
   const {offer, cardClassName, imageClassName, infoClassName, imageWidth, imageHeight, onMouseEnter, onMouseLeave} = props;
   const {id, isPremium, mark, images, rating, title, isFavorite, price, entire} = offer;
+  const ratingAsPercent = (rating >= 0 && rating <= 5) ? Math.round(rating) * 20 : 0;
 
   const handleMouseEnter = () => {
     onMouseEnter(offer.id);
@@ -43,7 +44,7 @@ function Card(props: OfferScreenProps): JSX.Element {
         </div>
         <div className="place-card__rating rating">
           <div className="place-card__stars rating__stars">
-            <span style={{ width: `${rating.width}` }}></span>
+            <span style={{ width: `${ratingAsPercent}%` }}></span>
             <span className="visually-hidden">Rating</span>
           </div>
         </div>

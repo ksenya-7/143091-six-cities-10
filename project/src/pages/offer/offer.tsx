@@ -1,7 +1,8 @@
 import React from 'react';
 import {useParams} from 'react-router-dom';
 import Logo from '../../components/logo/logo';
-import FormReview from '../../components/form-review/form-review';
+import ReviewsList from '../../components/reviews-list/reviews-list';
+
 import {Offer} from '../../types/offer';
 import {Review} from '../../types/review';
 import NotFoundScreen from '../../pages/error/error';
@@ -13,12 +14,14 @@ type OfferScreenProps = {
 
 function RoomScreen(props: OfferScreenProps): JSX.Element {
   const {offers, reviews} = props;
+  // console.log(reviews);
   const {id} = useParams();
   const offer = offers.find((item) => item.id === Number(id));
   if(!offer) {
     return (<NotFoundScreen />);
   }
   const {images, isPremium, mark, title, isFavorite, rating, goods, price, entire, bedrooms, maxAdults, host, descriptions} = offer;
+  const ratingAsPercent = (rating >= 0 && rating <= 5) ? Math.round(rating) * 20 : 0;
 
   return (
     <React.Fragment>
@@ -81,10 +84,10 @@ function RoomScreen(props: OfferScreenProps): JSX.Element {
                 </div>
                 <div className="property__rating rating">
                   <div className="property__stars rating__stars">
-                    <span style={{ width: `${rating.width}` }}></span>
+                    <span style={{ width: `${ratingAsPercent}%` }}></span>
                     <span className="visually-hidden">Rating</span>
                   </div>
-                  <span className="property__rating-value rating__value">{rating.value}</span>
+                  <span className="property__rating-value rating__value">{rating}</span>
                 </div>
                 <ul className="property__features">
                   <li className="property__feature property__feature--entire">
@@ -138,7 +141,10 @@ function RoomScreen(props: OfferScreenProps): JSX.Element {
                     })}
                   </div>
                 </div>
-                <section className="property__reviews reviews">
+                <ReviewsList
+                  reviews={reviews}
+                />
+                {/* <section className="property__reviews reviews">
                   <h2 className="reviews__title">Reviews &middot; <span className="reviews__amount">1</span></h2>
                   <ul className="reviews__list">
                     {reviews.map((review, index) => {
@@ -170,7 +176,7 @@ function RoomScreen(props: OfferScreenProps): JSX.Element {
                     })}
                   </ul>
                   <FormReview />
-                </section>
+                </section> */}
               </div>
             </div>
             <section className="property__map map"></section>

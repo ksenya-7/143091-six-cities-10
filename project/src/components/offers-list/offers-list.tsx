@@ -1,14 +1,15 @@
 import Card from '../card/card';
 import {Offer} from '../../types/offer';
 
-type OffersListScreenProps = {
+type OffersListProps = {
   offersCount: number;
   offers: Offer[];
   onMouseEnter: (id: number) => void;
   onMouseLeave: () => void;
 }
 
-function OffersList({offersCount, offers, onMouseEnter, onMouseLeave}: OffersListScreenProps): JSX.Element {
+function OffersList(props: OffersListProps): JSX.Element {
+  const {offersCount, offers, onMouseEnter, onMouseLeave} = props;
   const filteredByCityOffers = offers.filter((offer) => offer.city.name === 'Amsterdam');
 
   return (
