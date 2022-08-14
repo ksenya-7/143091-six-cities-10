@@ -1,23 +1,20 @@
 import React, {useState} from 'react';
 import Logo from '../../components/logo/logo';
-import List from '../../components/list-offers/list-offers';
+import OffersList from '../../components/offers-list/offers-list';
+import CitiesList from '../../components/cities-list/cities-list';
 import Map from '../../components/map/map';
 import {Offer, City} from '../../types/offer';
 // import {useAppDispatch, useAppSelector} from '../../hooks';
 
 type MainScreenProps = {
-  offersCount: number;
   offers: Offer[];
   city: City;
+  cities: City[];
 }
 
 function MainScreen(props: MainScreenProps): JSX.Element {
-  const {offersCount, offers, city} = props;
-  const [selectedOffer, setSelectedOffer] = useState<Offer | undefined>(
-    undefined
-  );
-
-  // const selectedOffer = useAppSelector((state) => state.selectedOffer);
+  const {offers, city, cities} = props;
+  const [selectedOffer, setSelectedOffer] = useState<Offer | undefined>();
 
   const handleMouseEnter = (id: number) => {
     const currentOffer = offers.find((offer) => offer.id === id);
@@ -28,6 +25,8 @@ function MainScreen(props: MainScreenProps): JSX.Element {
   const handleMouseLeave = () => {
     setSelectedOffer(undefined);
   };
+
+  const filteredByCityOffers = offers.filter((offer) => offer.city.name === 'Amsterdam');
 
   return (
     <React.Fragment>
@@ -66,50 +65,39 @@ function MainScreen(props: MainScreenProps): JSX.Element {
           <h1 className="visually-hidden">Cities</h1>
           <div className="tabs">
             <section className="locations container">
-              <ul className="locations__list tabs__list">
-                <li className="locations__item">
-                  <a className="locations__item-link tabs__item" href={'/'}>
-                    <span>Paris</span>
-                  </a>
-                </li>
-                <li className="locations__item">
-                  <a className="locations__item-link tabs__item" href={'/'}>
-                    <span>Cologne</span>
-                  </a>
-                </li>
-                <li className="locations__item">
-                  <a className="locations__item-link tabs__item" href={'/'}>
-                    <span>Brussels</span>
-                  </a>
-                </li>
-                <li className="locations__item">
-                  <a className="locations__item-link tabs__item tabs__item--active" href={'/'}>
-                    <span>Amsterdam</span>
-                  </a>
-                </li>
-                <li className="locations__item">
-                  <a className="locations__item-link tabs__item" href={'/'}>
-                    <span>Hamburg</span>
-                  </a>
-                </li>
-                <li className="locations__item">
-                  <a className="locations__item-link tabs__item" href={'/'}>
-                    <span>Dusseldorf</span>
-                  </a>
-                </li>
-              </ul>
+              <CitiesList cities = {cities} />
             </section>
           </div>
           <div className="cities">
             <div className="cities__places-container container">
-              <List
-                offersCount={offersCount}
-                offers={offers}
-                onMouseEnter = {handleMouseEnter}
-                onMouseLeave = {handleMouseLeave}
-              />
+              <section className="cities__places places">
+                <h2 className="visually-hidden">Places</h2>
+                <b className="places__found">{filteredByCityOffers.length} places to stay in Amsterdam</b>
+                <form className="places__sorting" action="#" method="get">
+                  <span className="places__sorting-caption">Sort by</span>
+                  <span className="places__sorting-type" tabIndex={0}>
+                    Popular
+                    <svg className="places__sorting-arrow" width="7" height="4">
+                      <use xlinkHref="#icon-arrow-select" />
+                    </svg>
+                  </span>
+                  <ul className="places__options places__options--custom places__options--opened">
+                    <li className="places__option places__option--active" tabIndex={0}>Popular</li>
+                    <li className="places__option" tabIndex={0}>Price: low to high</li>
+                    <li className="places__option" tabIndex={0}>Price: high to low</li>
+                    <li className="places__option" tabIndex={0}>Top rated first</li>
+                  </ul>
+                </form>
+                <OffersList
+                  offers={filteredByCityOffers}
+                  onMouseEnter = {handleMouseEnter}
+                  onMouseLeave = {handleMouseLeave}
+                />
+              </section>
               <div className="cities__right-section">
-                <Map city={city} offers={offers} selectedOffer={selectedOffer} />
+                <section className="cities__map map">
+                  <Map city={city} offers={filteredByCityOffers} selectedOffer={selectedOffer} />
+                </section>
               </div>
             </div>
           </div>

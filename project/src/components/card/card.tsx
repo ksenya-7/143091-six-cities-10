@@ -1,5 +1,6 @@
 import {Link} from 'react-router-dom';
 import {Offer} from '../../types/offer';
+import {getRatingPercentage} from '../../utils';
 
 type OfferScreenProps = {
   offer: Offer;
@@ -43,7 +44,7 @@ function Card(props: OfferScreenProps): JSX.Element {
         </div>
         <div className="place-card__rating rating">
           <div className="place-card__stars rating__stars">
-            <span style={{ width: `${rating.width}` }}></span>
+            <span style={{ width: `${getRatingPercentage(rating)}%` }}></span>
             <span className="visually-hidden">Rating</span>
           </div>
         </div>

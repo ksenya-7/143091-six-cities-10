@@ -21,10 +21,7 @@ export type Offer = {
   isPremium: boolean;
   title: string;
   isFavorite: boolean;
-  rating: {
-    width: string;
-    value: number;
-  };
+  rating: number;
   entire: string;
   bedrooms: number;
   maxAdults: number;
