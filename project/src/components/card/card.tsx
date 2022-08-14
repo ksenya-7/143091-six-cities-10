@@ -14,7 +14,7 @@ type OfferScreenProps = {
 };
 
 function Card(props: OfferScreenProps): JSX.Element {
-  const {offer, cardClassName, imageClassName, infoClassName, imageWidth, imageHeight, onMouseEnter, onMouseLeave} = props;
+  const {offer, cardClassName, imageClassName, infoClassName = '', imageWidth, imageHeight, onMouseEnter, onMouseLeave} = props;
   const {id, isPremium, mark, images, rating, title, isFavorite, price, entire} = offer;
 
   const handleMouseEnter = () => {

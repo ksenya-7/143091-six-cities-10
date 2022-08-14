@@ -13,12 +13,13 @@ import {getRatingPercentage} from '../../utils';
 type OfferScreenProps = {
   offers: Offer[];
   reviews: Review[];
-  city: City;
+  activeCity: string;
+  cities: City[];
 };
 
 function RoomScreen(props: OfferScreenProps): JSX.Element {
   const [selectedOffer, setSelectedOffer] = useState<Offer | undefined>();
-  const {offers, reviews, city} = props;
+  const {offers, reviews, activeCity, cities} = props;
   const {id} = useParams();
   const linkedOffer = offers.find((item) => item.id === Number(id));
   if(!linkedOffer) {
@@ -37,6 +38,10 @@ function RoomScreen(props: OfferScreenProps): JSX.Element {
   };
 
   const filteredByNearOffers = offers.filter((offer) => offer.id !== Number(id) && offer.city.name === 'Amsterdam');
+  const checkedCity = cities.find((item) => item.name === activeCity);
+  if(!checkedCity) {
+    return (<NotFoundScreen />);
+  }
 
   return (
     <React.Fragment>
@@ -162,7 +167,7 @@ function RoomScreen(props: OfferScreenProps): JSX.Element {
               </div>
             </div>
             <section className="property__map map">
-              <Map city={city} offers={filteredByNearOffers} selectedOffer={selectedOffer} />
+              <Map city={checkedCity} offers={filteredByNearOffers} selectedOffer={selectedOffer} />
             </section>
           </section>
           <div className="container">

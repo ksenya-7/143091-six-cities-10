@@ -5,7 +5,7 @@ import App from './components/app/app';
 import {store} from './store';
 import {offers} from './mocks/offers';
 import {reviews} from './mocks/reviews';
-import {CITY, CITIES} from './const';
+import {CITIES, ACTIVE_CITY} from './const';
 
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement,
@@ -17,8 +17,8 @@ root.render(
       <App
         offers = {offers}
         reviews = {reviews}
-        city = {CITY}
         cities = {CITIES}
+        activeCity = {ACTIVE_CITY}
       />
     </Provider>
   </React.StrictMode>,

@@ -1,14 +1,5 @@
 import {City} from './types/offer';
 
-export const CITY: City = {
-  location: {
-    latitude: 52.3909553943508,
-    longitude: 4.85309666406198,
-    zoom: 10,
-  },
-  name: 'Amsterdam',
-};
-
 export enum AppRoute {
   Login = '/login',
   Favorites = '/favorites',
@@ -29,7 +20,7 @@ export const CITIES:City[] = [
     location: {
       latitude: 48.86,
       longitude: 2.35,
-      zoom: 12
+      zoom: 10
     },
     name: 'Paris'
   },
@@ -37,7 +28,7 @@ export const CITIES:City[] = [
     location: {
       latitude: 50.94,
       longitude: 6.96,
-      zoom: 12
+      zoom: 10
     },
     name: 'Cologne'
   },
@@ -45,15 +36,15 @@ export const CITIES:City[] = [
     location: {
       latitude: 50.85,
       longitude: 4.35,
-      zoom: 12
+      zoom: 10
     },
     name: 'Brussels'
   },
   {
     location: {
-      latitude: 52.3909553943508,
-      longitude: 4.85309666406198,
-      zoom: 12
+      latitude: 52.38,
+      longitude: 4.90,
+      zoom: 10
     },
     name: 'Amsterdam'
   },
@@ -61,7 +52,7 @@ export const CITIES:City[] = [
     location: {
       latitude: 53.55,
       longitude: 9.99,
-      zoom: 12
+      zoom: 10
     },
     name: 'Hamburg'
   },
@@ -69,8 +60,10 @@ export const CITIES:City[] = [
     location: {
       latitude: 51.23,
       longitude: 6.77,
-      zoom: 12
+      zoom: 10
     },
     name: 'Dusseldorf'
   }
 ];
+
+export const ACTIVE_CITY = 'Amsterdam';
