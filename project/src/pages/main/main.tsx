@@ -3,6 +3,7 @@ import Logo from '../../components/logo/logo';
 import List from '../../components/list-offers/list-offers';
 import Map from '../../components/map/map';
 import {Offer, City} from '../../types/offer';
+// import {useAppDispatch, useAppSelector} from '../../hooks';
 
 type MainScreenProps = {
   offersCount: number;
@@ -15,6 +16,8 @@ function MainScreen(props: MainScreenProps): JSX.Element {
   const [selectedOffer, setSelectedOffer] = useState<Offer | undefined>(
     undefined
   );
+
+  // const selectedOffer = useAppSelector((state) => state.selectedOffer);
 
   const handleMouseEnter = (id: number) => {
     const currentOffer = offers.find((offer) => offer.id === id);
