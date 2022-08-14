@@ -38,7 +38,7 @@ function Map(props: MapProps): JSX.Element {
 
         marker
           .setIcon(
-            selectedOffer !== undefined && offer.title === selectedOffer.title
+            selectedOffer !== undefined && offer.id === selectedOffer.id
               ? currentCustomIcon
               : defaultCustomIcon
           )
@@ -48,9 +48,7 @@ function Map(props: MapProps): JSX.Element {
   }, [map, offers, selectedOffer]);
 
   return (
-    <section className="cities__map map">
-      <div style={{height: '100%'}} ref={mapRef}></div>
-    </section>
+    <div style={{height: '100%'}} ref={mapRef} />
   );
 }
 
