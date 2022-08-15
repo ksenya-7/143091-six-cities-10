@@ -11,7 +11,6 @@ const initialState = {
 const reducer = createReducer(initialState, (builder) => {
   builder
     .addCase(setActiveCity, (state, action) => {
-      // console.log(action.payload);
       state.city = action.payload;
     })
     .addCase(setOffers, (state, action) => {

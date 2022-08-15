@@ -1,18 +1,25 @@
-import {cityObjects} from '../../const';
+import {cityNames} from '../../const';
+import {useAppDispatch} from '../../hooks';
+import {setActiveCity} from '../../store/action';
 
 type CitiesListProps = {
   activeCity: string,
-  onCitySet: (cityName: string) => void;
 }
 
-function CitiesList({activeCity, onCitySet}: CitiesListProps): JSX.Element {
+function CitiesList({activeCity}: CitiesListProps): JSX.Element {
+  const dispatch = useAppDispatch();
+
+  const handleSetCity = (cityName: string) => {
+    dispatch(setActiveCity(cityName));
+  };
+
   return (
     <ul className="locations__list tabs__list">
-      {cityObjects.map((city) => (
-        <li className="locations__item" key={city.name} onClick={() => onCitySet(city.name)} >
-          <a className={`locations__item-link ${city.name === activeCity ? 'tabs__item--active' : ''} tabs__item`} href={'/'}>
-            <span>{city.name}</span>
-          </a>
+      {cityNames.map((cityName) => (
+        <li className="locations__item" key={cityName} onClick={() => handleSetCity(cityName)} >
+          <span style={{cursor:'pointer'}} className={`locations__item-link ${cityName === activeCity ? 'tabs__item--active' : ''} tabs__item`} >
+            <span>{cityName}</span>
+          </span>
         </li>
       ))}
     </ul>

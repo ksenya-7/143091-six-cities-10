@@ -67,4 +67,4 @@ export const cities = {
 export const cityObjects = Object.values(cities);
 export const cityNames = Object.keys(cities);
 
-export const ACTIVE_CITY = 'Cologne';
+export const ACTIVE_CITY = 'Paris';

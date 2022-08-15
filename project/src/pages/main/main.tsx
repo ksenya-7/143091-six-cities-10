@@ -4,8 +4,7 @@ import OffersList from '../../components/offers-list/offers-list';
 import CitiesList from '../../components/cities-list/cities-list';
 import Map from '../../components/map/map';
 import {Offer} from '../../types/offer';
-import {useAppSelector, useAppDispatch} from '../../hooks';
-import {setActiveCity} from '../../store/action';
+import {useAppSelector} from '../../hooks';
 import {selectedOffersByCity} from '../../store/selectors';
 import {cities} from '../../const';
 
@@ -24,13 +23,6 @@ function MainScreen(): JSX.Element {
 
   const handleMouseLeave = () => {
     setSelectedOffer(undefined);
-  };
-
-  const dispatch = useAppDispatch();
-
-  const handleSetCity = (cityName: string) => {
-    dispatch(setActiveCity(cityName));
-    // console.log(cityName);
   };
 
   return (
@@ -70,7 +62,7 @@ function MainScreen(): JSX.Element {
           <h1 className="visually-hidden">Cities</h1>
           <div className="tabs">
             <section className="locations container">
-              <CitiesList activeCity = {activeCity} onCitySet = {handleSetCity}/>
+              <CitiesList activeCity = {activeCity}/>
             </section>
           </div>
           <div className="cities">
