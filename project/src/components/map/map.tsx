@@ -45,10 +45,14 @@ function Map(props: MapProps): JSX.Element {
           .addTo(map);
       });
     }
-  }, [map, offers, selectedOffer]);
+
+    if(map){
+      map.flyTo([city.location.latitude, city.location.longitude]);
+    }
+  }, [map, offers, selectedOffer, city]);
 
   return (
-    <div style={{height: '100%'}} ref={mapRef} />
+    <div style={{height: '100%'}} ref={mapRef} data-city={city.name}/>
   );
 }
 
