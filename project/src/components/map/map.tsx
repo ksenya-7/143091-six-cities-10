@@ -44,9 +44,7 @@ function Map(props: MapProps): JSX.Element {
           )
           .addTo(map);
       });
-    }
 
-    if(map){
       map.flyTo([city.location.latitude, city.location.longitude]);
     }
   }, [map, offers, selectedOffer, city]);
