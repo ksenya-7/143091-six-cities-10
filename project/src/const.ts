@@ -1,5 +1,3 @@
-import {City} from './types/offer';
-
 export enum AppRoute {
   Login = '/login',
   Favorites = '/favorites',
@@ -15,8 +13,8 @@ export enum AuthorizationStatus {
 
 export const MONTHS = [ 'January ', 'February ', 'March ', 'April ', 'May ', 'June ', 'July ', 'August ', 'September ', 'October ', 'November ', 'December '];
 
-export const CITIES:City[] = [
-  {
+export const cities = {
+  'Paris': {
     location: {
       latitude: 48.86,
       longitude: 2.35,
@@ -24,7 +22,7 @@ export const CITIES:City[] = [
     },
     name: 'Paris'
   },
-  {
+  'Cologne': {
     location: {
       latitude: 50.94,
       longitude: 6.96,
@@ -32,7 +30,7 @@ export const CITIES:City[] = [
     },
     name: 'Cologne'
   },
-  {
+  'Brussels': {
     location: {
       latitude: 50.85,
       longitude: 4.35,
@@ -40,7 +38,7 @@ export const CITIES:City[] = [
     },
     name: 'Brussels'
   },
-  {
+  'Amsterdam': {
     location: {
       latitude: 52.38,
       longitude: 4.90,
@@ -48,7 +46,7 @@ export const CITIES:City[] = [
     },
     name: 'Amsterdam'
   },
-  {
+  'Hamburg': {
     location: {
       latitude: 53.55,
       longitude: 9.99,
@@ -56,7 +54,7 @@ export const CITIES:City[] = [
     },
     name: 'Hamburg'
   },
-  {
+  'Dusseldorf': {
     location: {
       latitude: 51.23,
       longitude: 6.77,
@@ -64,6 +62,9 @@ export const CITIES:City[] = [
     },
     name: 'Dusseldorf'
   }
-];
+};
 
-export const ACTIVE_CITY = 'Amsterdam';
+export const cityObjects = Object.values(cities);
+export const cityNames = Object.keys(cities);
+
+export const ACTIVE_CITY = 'Cologne';

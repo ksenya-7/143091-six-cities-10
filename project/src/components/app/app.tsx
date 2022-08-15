@@ -24,11 +24,7 @@ function App({offers, reviews, cities, activeCity}: AppScreenProps): JSX.Element
         <Route
           path={AppRoute.Root}
           element={
-            <MainScreen
-              cities = {cities}
-              offers = {offers}
-              activeCity = {activeCity}
-            />
+            <MainScreen />
           }
         />
         <Route

@@ -5,7 +5,7 @@ import App from './components/app/app';
 import {store} from './store';
 import {offers} from './mocks/offers';
 import {reviews} from './mocks/reviews';
-import {CITIES, ACTIVE_CITY} from './const';
+import {cityObjects, ACTIVE_CITY} from './const';
 
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement,
@@ -17,7 +17,7 @@ root.render(
       <App
         offers = {offers}
         reviews = {reviews}
-        cities = {CITIES}
+        cities = {cityObjects}
         activeCity = {ACTIVE_CITY}
       />
     </Provider>
