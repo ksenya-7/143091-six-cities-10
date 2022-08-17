@@ -20,7 +20,6 @@ function NearOffersList(props: NearOffersListProps): JSX.Element {
           onMouseLeave = {onMouseLeave}
           cardClassName = {'near-places__card'}
           imageClassName = {'near-places__image-wrapper'}
-          infoClassName = {''}
           imageWidth = {260}
           imageHeight = {200}
         />

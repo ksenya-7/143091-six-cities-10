@@ -1,20 +1,22 @@
 import React, {useState} from 'react';
 import Logo from '../../components/logo/logo';
 import OffersList from '../../components/offers-list/offers-list';
+import CitiesList from '../../components/cities-list/cities-list';
 import Map from '../../components/map/map';
-import {Offer, City} from '../../types/offer';
+import {Offer} from '../../types/offer';
+import {useAppSelector} from '../../hooks';
+import {selectedOffersByCity} from '../../store/selectors';
+import {cities} from '../../const';
 
-type MainScreenProps = {
-  offers: Offer[];
-  city: City;
-}
 
-function MainScreen(props: MainScreenProps): JSX.Element {
-  const {offers, city} = props;
+function MainScreen(): JSX.Element {
   const [selectedOffer, setSelectedOffer] = useState<Offer | undefined>();
 
+  const offers = useAppSelector(selectedOffersByCity);
+  const activeCity = useAppSelector((state) => state.city);
+
   const handleMouseEnter = (id: number) => {
-    const currentOffer = offers.find((offer) => offer.id === id);
+    const currentOffer = offers.find((item) => item.id === id);
 
     setSelectedOffer(currentOffer);
   };
@@ -22,9 +24,6 @@ function MainScreen(props: MainScreenProps): JSX.Element {
   const handleMouseLeave = () => {
     setSelectedOffer(undefined);
   };
-
-  const filteredByCityOffers = offers.filter((offer) => offer.city.name === 'Amsterdam');
-  const offersCount = filteredByCityOffers.length;
 
   return (
     <React.Fragment>
@@ -63,45 +62,14 @@ function MainScreen(props: MainScreenProps): JSX.Element {
           <h1 className="visually-hidden">Cities</h1>
           <div className="tabs">
             <section className="locations container">
-              <ul className="locations__list tabs__list">
-                <li className="locations__item">
-                  <a className="locations__item-link tabs__item" href={'/'}>
-                    <span>Paris</span>
-                  </a>
-                </li>
-                <li className="locations__item">
-                  <a className="locations__item-link tabs__item" href={'/'}>
-                    <span>Cologne</span>
-                  </a>
-                </li>
-                <li className="locations__item">
-                  <a className="locations__item-link tabs__item" href={'/'}>
-                    <span>Brussels</span>
-                  </a>
-                </li>
-                <li className="locations__item">
-                  <a className="locations__item-link tabs__item tabs__item--active" href={'/'}>
-                    <span>Amsterdam</span>
-                  </a>
-                </li>
-                <li className="locations__item">
-                  <a className="locations__item-link tabs__item" href={'/'}>
-                    <span>Hamburg</span>
-                  </a>
-                </li>
-                <li className="locations__item">
-                  <a className="locations__item-link tabs__item" href={'/'}>
-                    <span>Dusseldorf</span>
-                  </a>
-                </li>
-              </ul>
+              <CitiesList activeCity = {activeCity}/>
             </section>
           </div>
           <div className="cities">
             <div className="cities__places-container container">
               <section className="cities__places places">
                 <h2 className="visually-hidden">Places</h2>
-                <b className="places__found">{offersCount} places to stay in Amsterdam</b>
+                <b className="places__found">{offers.length} places to stay in {activeCity}</b>
                 <form className="places__sorting" action="#" method="get">
                   <span className="places__sorting-caption">Sort by</span>
                   <span className="places__sorting-type" tabIndex={0}>
@@ -118,14 +86,14 @@ function MainScreen(props: MainScreenProps): JSX.Element {
                   </ul>
                 </form>
                 <OffersList
-                  offers={filteredByCityOffers}
+                  offers={offers}
                   onMouseEnter = {handleMouseEnter}
                   onMouseLeave = {handleMouseLeave}
                 />
               </section>
               <div className="cities__right-section">
                 <section className="cities__map map">
-                  <Map city={city} offers={filteredByCityOffers} selectedOffer={selectedOffer} />
+                  <Map city={cities[activeCity as keyof typeof cities]} offers={offers} selectedOffer={selectedOffer} />
                 </section>
               </div>
             </div>

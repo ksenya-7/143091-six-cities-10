@@ -8,23 +8,24 @@ import Map from '../../components/map/map';
 import {Offer, City} from '../../types/offer';
 import {Review} from '../../types/review';
 import NotFoundScreen from '../../pages/error/error';
+import {getRatingPercentage} from '../../utils';
 
 type OfferScreenProps = {
   offers: Offer[];
   reviews: Review[];
-  city: City;
+  activeCity: string;
+  cities: City[];
 };
 
 function RoomScreen(props: OfferScreenProps): JSX.Element {
   const [selectedOffer, setSelectedOffer] = useState<Offer | undefined>();
-  const {offers, reviews, city} = props;
+  const {offers, reviews, activeCity, cities} = props;
   const {id} = useParams();
   const linkedOffer = offers.find((item) => item.id === Number(id));
   if(!linkedOffer) {
     return (<NotFoundScreen />);
   }
   const {images, isPremium, mark, title, isFavorite, rating, goods, price, entire, bedrooms, maxAdults, host, descriptions} = linkedOffer;
-  const ratingAsPercent = (rating >= 0 && rating <= 5) ? Math.round(rating) * 20 : 0;
 
   const handleMouseEnter = (idOffer: number) => {
     const currentOffer = offers.find((offer) => offer.id === idOffer);
@@ -37,6 +38,10 @@ function RoomScreen(props: OfferScreenProps): JSX.Element {
   };
 
   const filteredByNearOffers = offers.filter((offer) => offer.id !== Number(id) && offer.city.name === 'Amsterdam');
+  const checkedCity = cities.find((item) => item.name === activeCity);
+  if(!checkedCity) {
+    return (<NotFoundScreen />);
+  }
 
   return (
     <React.Fragment>
@@ -99,7 +104,7 @@ function RoomScreen(props: OfferScreenProps): JSX.Element {
                 </div>
                 <div className="property__rating rating">
                   <div className="property__stars rating__stars">
-                    <span style={{ width: `${ratingAsPercent}%` }}></span>
+                    <span style={{ width: `${getRatingPercentage(rating)}%` }}></span>
                     <span className="visually-hidden">Rating</span>
                   </div>
                   <span className="property__rating-value rating__value">{rating}</span>
@@ -162,7 +167,7 @@ function RoomScreen(props: OfferScreenProps): JSX.Element {
               </div>
             </div>
             <section className="property__map map">
-              <Map city={city} offers={filteredByNearOffers} selectedOffer={selectedOffer} />
+              <Map city={checkedCity} offers={filteredByNearOffers} selectedOffer={selectedOffer} />
             </section>
           </section>
           <div className="container">

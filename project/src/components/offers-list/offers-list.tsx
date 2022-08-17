@@ -20,7 +20,6 @@ function OffersList(props: OffersListProps): JSX.Element {
           onMouseLeave = {onMouseLeave}
           cardClassName = {'cities__card'}
           imageClassName = {'cities__image-wrapper'}
-          infoClassName = {''}
           imageWidth = {260}
           imageHeight = {200}
         />

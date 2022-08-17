@@ -13,16 +13,19 @@ import {Review} from '../../types/review';
 type AppScreenProps = {
   offers: Offer[];
   reviews: Review[];
-  city: City;
+  cities: City[];
+  activeCity: string;
 }
 
-function App({offers, reviews, city}: AppScreenProps): JSX.Element {
+function App({offers, reviews, cities, activeCity}: AppScreenProps): JSX.Element {
   return (
     <BrowserRouter>
       <Routes>
         <Route
           path={AppRoute.Root}
-          element={<MainScreen city={city} offers={offers} />}
+          element={
+            <MainScreen />
+          }
         />
         <Route
           path={AppRoute.Login}
@@ -40,7 +43,7 @@ function App({offers, reviews, city}: AppScreenProps): JSX.Element {
         />
         <Route
           path={AppRoute.Room}
-          element={<RoomScreen city={city} offers={offers} reviews={reviews}/>}
+          element={<RoomScreen activeCity = {activeCity} offers={offers} reviews={reviews} cities={cities}/>}
         />
         <Route
           path="*"

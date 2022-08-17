@@ -1,4 +1,6 @@
 import {Review} from '../../types/review';
+import {MONTHS} from '../../const';
+import {getRatingPercentage} from '../../utils';
 
 type CommentProps = {
   review: Review;
@@ -7,11 +9,8 @@ type CommentProps = {
 function Comment({review}: CommentProps): JSX.Element {
   const {date, comment, rating, user} = review;
 
-  const ratingAsPercent = (rating >= 0 && rating <= 5) ? Math.round(rating) * 20 : 0;
   const datestamp = new Date(date);
   const month = datestamp.getMonth();
-  const monthTitle = [ 'January ', 'February ', 'March ', 'April ', 'May ', 'June ', 'July ', 'August ', 'September ', 'October ', 'November ', 'December '];
-  const dateMonthYear = `${monthTitle[month]} ${datestamp.getFullYear()}`;
 
   return (
     <li className="reviews__item">
@@ -26,14 +25,14 @@ function Comment({review}: CommentProps): JSX.Element {
       <div className="reviews__info">
         <div className="reviews__rating rating">
           <div className="reviews__stars rating__stars">
-            <span style={{ width: `${ratingAsPercent}%` }}></span>
+            <span style={{ width: `${getRatingPercentage(rating)}%` }}></span>
             <span className="visually-hidden">Rating</span>
           </div>
         </div>
         <p className="reviews__text">
           {comment}
         </p>
-        <time className="reviews__time" dateTime={date}>{dateMonthYear}</time>
+        <time className="reviews__time" dateTime={date}>{`${MONTHS[month]} ${datestamp.getFullYear()}`}</time>
       </div>
     </li>
   );

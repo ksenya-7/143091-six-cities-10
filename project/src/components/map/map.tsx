@@ -44,11 +44,13 @@ function Map(props: MapProps): JSX.Element {
           )
           .addTo(map);
       });
+
+      map.flyTo([city.location.latitude, city.location.longitude]);
     }
-  }, [map, offers, selectedOffer]);
+  }, [map, offers, selectedOffer, city]);
 
   return (
-    <div style={{height: '100%'}} ref={mapRef} />
+    <div style={{height: '100%'}} ref={mapRef} data-city={city.name}/>
   );
 }
 
