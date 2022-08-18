@@ -68,3 +68,11 @@ export const cityObjects = Object.values(cities);
 export const cityNames = Object.keys(cities);
 
 export const ACTIVE_CITY = 'Paris';
+
+export const AUTH_TOKEN_KEY_NAME = 'six-cities';
+
+export enum APIRoute {
+  Offers = '/hotels',
+  Login = '/login',
+  Logout = '/logout',
+}
