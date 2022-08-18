@@ -3,16 +3,15 @@ import {Link} from 'react-router-dom';
 import Logo from '../../components/logo/logo';
 import Card from '../../components/card/card';
 import {Offer} from '../../types/offer';
-
-type FavoritesScreenProps = {
-  offers: Offer[];
-};
+import {useAppSelector} from '../../hooks';
 
 const sortByMark = (item: Offer) => item.isPremium ? -1 : 1;
 
-function FavoritesScreen({offers}: FavoritesScreenProps): JSX.Element {
+function FavoritesScreen(): JSX.Element {
   const handleMouseEnter = () => null;
   const handleMouseLeave = () => null;
+
+  const offers = useAppSelector((state) => state.offers);
 
   const favoritesOfferAmsterdam = offers.filter((offer) => offer.city.name === 'Amsterdam' && offer.isFavorite);
   const favoritesOfferCologne = offers.filter((offer) => offer.city.name === 'Cologne' && offer.isFavorite);

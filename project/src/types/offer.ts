@@ -15,8 +15,8 @@ export type City = {
 export type Offer = {
   id: number;
   city: City;
-  previewImage: OfferImages;
-  images: OfferImages[];
+  previewImage: string;
+  images: string[];
   mark: string;
   isPremium: boolean;
   title: string;

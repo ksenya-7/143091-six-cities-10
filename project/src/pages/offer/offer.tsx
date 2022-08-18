@@ -9,9 +9,9 @@ import {Offer, City} from '../../types/offer';
 import {Review} from '../../types/review';
 import NotFoundScreen from '../../pages/error/error';
 import {getRatingPercentage} from '../../utils';
+import {useAppSelector} from '../../hooks';
 
 type OfferScreenProps = {
-  offers: Offer[];
   reviews: Review[];
   activeCity: string;
   cities: City[];
@@ -19,7 +19,10 @@ type OfferScreenProps = {
 
 function RoomScreen(props: OfferScreenProps): JSX.Element {
   const [selectedOffer, setSelectedOffer] = useState<Offer | undefined>();
-  const {offers, reviews, activeCity, cities} = props;
+  const {reviews, activeCity, cities} = props;
+
+  const offers = useAppSelector((state) => state.offers);
+
   const {id} = useParams();
   const linkedOffer = offers.find((item) => item.id === Number(id));
   if(!linkedOffer) {
@@ -81,10 +84,10 @@ function RoomScreen(props: OfferScreenProps): JSX.Element {
             <div className="property__gallery-container container">
               <div className="property__gallery">
                 {images.map((image, index) => {
-                  const keyValue = `${index}-${image.src}`;
+                  const keyValue = `${index}-${image}`;
                   return (
                     <div key={keyValue} className="property__image-wrapper">
-                      <img className="property__image" src={image.src} alt={image.alt}/>
+                      <img className="property__image" src={image} alt="Place"/>
                     </div>
                   );
                 })}

@@ -26,7 +26,7 @@ function Card(props: OfferScreenProps): JSX.Element {
       {isPremium ? <div className="place-card__mark"><span>{mark}</span></div> : null}
       <div className={`${imageClassName} place-card__image-wrapper`}>
         <a href={'/'}>
-          <img className="place-card__image" src={images[1].src} width={imageWidth} height={imageHeight} alt={images[1].alt} />
+          <img className="place-card__image" src={images[0]} width={imageWidth} height={imageHeight} alt="Place" />
         </a>
       </div>
       <div className={`${infoClassName} place-card__info`}>

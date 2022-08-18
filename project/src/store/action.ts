@@ -6,3 +6,5 @@ export const setActiveCity = createAction<string>('offers/setActiveCity');
 export const setOffers = createAction<Offer[]>('offers/setOffers');
 
 export const loadOffers = createAction<Offer[]>('data/loadOffers');
+
+export const setDataLoadedStatus = createAction<boolean>('data/setDataLoadedStatus');
