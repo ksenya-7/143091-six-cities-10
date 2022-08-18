@@ -30,7 +30,7 @@ function RoomScreen(props: OfferScreenProps): JSX.Element {
     return (<NotFoundScreen />);
   }
 
-  const {images, isPremium, title, isFavorite, rating, goods, price, entire, bedrooms, maxAdults, host, description} = linkedOffer;
+  const {images, isPremium, title, isFavorite, rating, goods, price, type, bedrooms, maxAdults, host, description} = linkedOffer;
 
   const slicedImages = images.slice(0,6);
   const handleMouseEnter = (idOffer: number) => {
@@ -118,7 +118,7 @@ function RoomScreen(props: OfferScreenProps): JSX.Element {
                   <span className="property__rating-value rating__value">{rating}</span>
                 </div>
                 <ul className="property__features">
-                  {entire ? <li className="property__feature property__feature--entire">{entire}</li> : null}
+                  {type ? <li className="property__feature property__feature--entire">{type}</li> : null}
                   {bedrooms ? <li className="property__feature property__feature--bedrooms">{bedrooms}</li> : null}
                   {maxAdults ? <li className="property__feature property__feature--adults">Max {maxAdults} adults</li> : null}
                 </ul>
