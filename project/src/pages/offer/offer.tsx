@@ -5,31 +5,34 @@ import ReviewsList from '../../components/reviews-list/reviews-list';
 import NearOffersList from '../../components/near-offers-list/near-offers-list';
 import Map from '../../components/map/map';
 
-import {Offer, City} from '../../types/offer';
+import {Offer} from '../../types/offer';
 import {Review} from '../../types/review';
 import NotFoundScreen from '../../pages/error/error';
 import {getRatingPercentage} from '../../utils';
 import {useAppSelector} from '../../hooks';
+import {cityObjects} from '../../const';
 
 type OfferScreenProps = {
   reviews: Review[];
-  activeCity: string;
-  cities: City[];
 };
 
 function RoomScreen(props: OfferScreenProps): JSX.Element {
   const [selectedOffer, setSelectedOffer] = useState<Offer | undefined>();
-  const {reviews, activeCity, cities} = props;
+  const {reviews} = props;
 
   const offers = useAppSelector((state) => state.offers);
+  const activeCity = useAppSelector((state) => state.city);
+  const cities = cityObjects;
 
   const {id} = useParams();
   const linkedOffer = offers.find((item) => item.id === Number(id));
   if(!linkedOffer) {
     return (<NotFoundScreen />);
   }
-  const {images, isPremium, mark, title, isFavorite, rating, goods, price, entire, bedrooms, maxAdults, host, descriptions} = linkedOffer;
 
+  const {images, isPremium, title, isFavorite, rating, goods, price, entire, bedrooms, maxAdults, host, description} = linkedOffer;
+
+  const slicedImages = images.slice(0,6);
   const handleMouseEnter = (idOffer: number) => {
     const currentOffer = offers.find((offer) => offer.id === idOffer);
 
@@ -42,6 +45,8 @@ function RoomScreen(props: OfferScreenProps): JSX.Element {
 
   const filteredByNearOffers = offers.filter((offer) => offer.id !== Number(id) && offer.city.name === 'Amsterdam');
   const checkedCity = cities.find((item) => item.name === activeCity);
+  // console.log(cities);
+
   if(!checkedCity) {
     return (<NotFoundScreen />);
   }
@@ -83,7 +88,7 @@ function RoomScreen(props: OfferScreenProps): JSX.Element {
           <section className="property">
             <div className="property__gallery-container container">
               <div className="property__gallery">
-                {images.map((image, index) => {
+                {slicedImages.map((image, index) => {
                   const keyValue = `${index}-${image}`;
                   return (
                     <div key={keyValue} className="property__image-wrapper">
@@ -95,7 +100,7 @@ function RoomScreen(props: OfferScreenProps): JSX.Element {
             </div>
             <div className="property__container container">
               <div className="property__wrapper">
-                {isPremium ? <div className="property__mark"><span>{mark}</span></div> : null}
+                {isPremium ? <div className="property__mark"><span>Premium</span></div> : null}
                 <div className="property__name-wrapper">
                   <h1 className="property__name">{title}</h1>
                   <button className={`property__bookmark-button ${isFavorite ? 'property__bookmark-button--active' : ''} button`} type="button">
@@ -113,15 +118,9 @@ function RoomScreen(props: OfferScreenProps): JSX.Element {
                   <span className="property__rating-value rating__value">{rating}</span>
                 </div>
                 <ul className="property__features">
-                  <li className="property__feature property__feature--entire">
-                    {entire}
-                  </li>
-                  <li className="property__feature property__feature--bedrooms">
-                    {bedrooms} Bedrooms
-                  </li>
-                  <li className="property__feature property__feature--adults">
-                    Max {maxAdults} adults
-                  </li>
+                  {entire ? <li className="property__feature property__feature--entire">{entire}</li> : null}
+                  {bedrooms ? <li className="property__feature property__feature--bedrooms">{bedrooms}</li> : null}
+                  {maxAdults ? <li className="property__feature property__feature--adults">Max {maxAdults} adults</li> : null}
                 </ul>
                 <div className="property__price">
                   <b className="property__price-value">&euro;{price}</b>
@@ -154,14 +153,9 @@ function RoomScreen(props: OfferScreenProps): JSX.Element {
                     </span>
                   </div>
                   <div className="property__description">
-                    {descriptions.map((description, index) => {
-                      const keyValue = `${index}-${description}`;
-                      return (
-                        <p key={keyValue} className="property__text">
-                          {description}
-                        </p>
-                      );
-                    })}
+                    <p className="property__text">
+                      {description}
+                    </p>
                   </div>
                 </div>
                 <ReviewsList

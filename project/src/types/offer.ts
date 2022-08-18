@@ -12,7 +12,6 @@ export type Offer = {
   city: City;
   previewImage: string;
   images: string[];
-  mark: string;
   isPremium: boolean;
   title: string;
   isFavorite: boolean;
@@ -28,5 +27,5 @@ export type Offer = {
     id: number;
     isPro: boolean;
   };
-  descriptions: string[];
+  description: string;
 };

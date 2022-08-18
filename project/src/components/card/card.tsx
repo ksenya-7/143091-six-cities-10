@@ -15,7 +15,7 @@ type OfferScreenProps = {
 
 function Card(props: OfferScreenProps): JSX.Element {
   const {offer, cardClassName, imageClassName, infoClassName = '', imageWidth, imageHeight, onMouseEnter, onMouseLeave} = props;
-  const {id, isPremium, mark, images, rating, title, isFavorite, price, entire} = offer;
+  const {id, isPremium, images, rating, title, isFavorite, price, entire} = offer;
 
   const handleMouseEnter = () => {
     onMouseEnter(offer.id);
@@ -23,7 +23,7 @@ function Card(props: OfferScreenProps): JSX.Element {
 
   return (
     <article className={`${cardClassName} place-card`} onMouseEnter={handleMouseEnter} onMouseLeave={onMouseLeave}>
-      {isPremium ? <div className="place-card__mark"><span>{mark}</span></div> : null}
+      {isPremium ? <div className="place-card__mark"><span>Premium</span></div> : null}
       <div className={`${imageClassName} place-card__image-wrapper`}>
         <a href={'/'}>
           <img className="place-card__image" src={images[0]} width={imageWidth} height={imageHeight} alt="Place" />

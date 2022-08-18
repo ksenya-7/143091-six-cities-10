@@ -13,6 +13,7 @@ function MainScreen(): JSX.Element {
   const [selectedOffer, setSelectedOffer] = useState<Offer | undefined>();
 
   const offers = useAppSelector(selectedOffersByCity);
+  // console.log(offers);
   const activeCity = useAppSelector((state) => state.city);
 
   const handleMouseEnter = (id: number) => {

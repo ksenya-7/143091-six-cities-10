@@ -7,17 +7,14 @@ import LoginScreen from '../../pages/login/login';
 import RoomScreen from '../../pages/offer/offer';
 import NotFoundScreen from '../../pages/error/error';
 import PrivateRoute from '../private-route/private-route';
-import {City} from '../../types/offer';
 import {Review} from '../../types/review';
 import LoadingScreen from '../../pages/loading-screen/loading-screen';
 
 type AppScreenProps = {
   reviews: Review[];
-  cities: City[];
-  activeCity: string;
 }
 
-function App({reviews, cities, activeCity}: AppScreenProps): JSX.Element {
+function App({reviews}: AppScreenProps): JSX.Element {
   const {isDataLoaded} = useAppSelector((state) => state);
   // console.log(isDataLoaded);
 
@@ -52,7 +49,7 @@ function App({reviews, cities, activeCity}: AppScreenProps): JSX.Element {
         />
         <Route
           path={AppRoute.Room}
-          element={<RoomScreen activeCity = {activeCity} reviews={reviews} cities={cities}/>}
+          element={<RoomScreen reviews={reviews}/>}
         />
         <Route
           path="*"
