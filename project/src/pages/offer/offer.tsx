@@ -45,7 +45,6 @@ function RoomScreen(props: OfferScreenProps): JSX.Element {
 
   const filteredByNearOffers = offers.filter((offer) => offer.id !== Number(id) && offer.city.name === 'Amsterdam');
   const checkedCity = cities.find((item) => item.name === activeCity);
-  // console.log(cities);
 
   if(!checkedCity) {
     return (<NotFoundScreen />);

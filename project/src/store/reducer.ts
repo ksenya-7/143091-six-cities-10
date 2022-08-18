@@ -12,7 +12,7 @@ type InitalState = {
 const initialState: InitalState = {
   city: ACTIVE_CITY,
   offers: [],
-  isDataLoaded: false,
+  isDataLoaded: true,
 };
 
 const reducer = createReducer(initialState, (builder) => {
