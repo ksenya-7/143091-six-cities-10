@@ -1,8 +1,3 @@
-export type OfferImages = {
-  src: string;
-  alt: string;
-};
-
 export type City = {
   location: {
     latitude: number;
