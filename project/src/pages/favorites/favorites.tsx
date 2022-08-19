@@ -13,8 +13,8 @@ function FavoritesScreen(): JSX.Element {
 
   const offers = useAppSelector((state) => state.offers);
 
-  const favoritesOfferAmsterdam = offers.filter((offer) => offer.city.name === 'Amsterdam' && offer.isFavorite);
-  const favoritesOfferCologne = offers.filter((offer) => offer.city.name === 'Cologne' && offer.isFavorite);
+  const favoritesOfferAmsterdam = offers.filter((offer: Offer) => offer.city.name === 'Amsterdam' && offer.isFavorite);
+  const favoritesOfferCologne = offers.filter((offer: Offer) => offer.city.name === 'Cologne' && offer.isFavorite);
 
   return (
     <React.Fragment>
@@ -35,7 +35,7 @@ function FavoritesScreen(): JSX.Element {
                       <div className="header__avatar-wrapper user__avatar-wrapper">
                       </div>
                       <span className="header__user-name user__name">Oliver.conner@gmail.com</span>
-                      <span className="header__favorite-count">{offers.filter((offer) => offer.isFavorite).length}</span>
+                      <span className="header__favorite-count">{offers.filter((offer: Offer) => offer.isFavorite).length}</span>
                     </a>
                   </li>
                   <li className="header__nav-item">
@@ -63,7 +63,7 @@ function FavoritesScreen(): JSX.Element {
                     </div>
                   </div>
                   <div className="favorites__places">
-                    {favoritesOfferAmsterdam.sort(sortByMark).map((offer) => (
+                    {favoritesOfferAmsterdam.sort(sortByMark).map((offer: Offer) => (
                       <Card
                         offer={offer}
                         key={offer.id}
@@ -88,7 +88,7 @@ function FavoritesScreen(): JSX.Element {
                     </div>
                   </div>
                   <div className="favorites__places">
-                    {favoritesOfferCologne.sort(sortByMark).map((offer) => (
+                    {favoritesOfferCologne.sort(sortByMark).map((offer: Offer) => (
                       <Card
                         offer={offer}
                         key={offer.id}
