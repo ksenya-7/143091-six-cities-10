@@ -3,12 +3,11 @@ import {Link} from 'react-router-dom';
 import Logo from '../../components/logo/logo';
 import Card from '../../components/card/card';
 import {Offer} from '../../types/offer';
+import {sortByMark} from '../../utils';
 
 type FavoritesScreenProps = {
   offers: Offer[];
 };
-
-const sortByMark = (item: Offer) => item.isPremium ? -1 : 1;
 
 function FavoritesScreen({offers}: FavoritesScreenProps): JSX.Element {
   const handleMouseEnter = () => null;

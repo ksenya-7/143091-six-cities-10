@@ -68,3 +68,14 @@ export const cityObjects = Object.values(cities);
 export const cityNames = Object.keys(cities);
 
 export const ACTIVE_CITY = 'Paris';
+
+export const typesOfSorting = ['Popular', 'Price: low to high', 'Price: high to low', 'Top rated first'];
+
+export enum Sorting {
+  Popular = 'Popular',
+  PriceToHigh = 'Price: low to high',
+  PriceToLow = 'Price: high to low',
+  TopFirst = 'Top rated first',
+}
+
+export const ACTIVE_SORTING = 'Popular';

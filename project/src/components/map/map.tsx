@@ -50,7 +50,7 @@ function Map(props: MapProps): JSX.Element {
   }, [map, offers, selectedOffer, city]);
 
   return (
-    <div style={{height: '100%'}} ref={mapRef} data-city={city.name}/>
+    <div style={{height: '100%'}} ref={mapRef}/>
   );
 }
 
