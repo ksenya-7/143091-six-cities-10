@@ -1,20 +1,19 @@
 import React, {useState} from 'react';
 import Logo from '../../components/logo/logo';
 import OffersList from '../../components/offers-list/offers-list';
-import SortingOffers from '../../components/sorting-form/sorting-form';
+import Sorting from '../../components/sorting-form/sorting-form';
 import CitiesList from '../../components/cities-list/cities-list';
 import Map from '../../components/map/map';
 import {Offer} from '../../types/offer';
 import {useAppSelector} from '../../hooks';
-import {selectedOffers} from '../../store/selectors';
+import {selectOffers} from '../../store/selectors';
 import {cities} from '../../const';
 
 function MainScreen(): JSX.Element {
   const [selectedOffer, setSelectedOffer] = useState<Offer | undefined>();
 
   const activeCity = useAppSelector((state) => state.city);
-  const typeOfSorting = useAppSelector((state) => state.sorting);
-  const offers = useAppSelector(selectedOffers);
+  const offers = useAppSelector(selectOffers);
 
   const handleMouseEnter = (id: number) => {
     const currentOffer = offers.find((item) => item.id === id);
@@ -71,7 +70,7 @@ function MainScreen(): JSX.Element {
               <section className="cities__places places">
                 <h2 className="visually-hidden">Places</h2>
                 <b className="places__found">{offers.length} places to stay in {activeCity}</b>
-                <SortingOffers typeOfSorting = {typeOfSorting}/>
+                <Sorting />
                 <OffersList
                   offers={offers}
                   onMouseEnter = {handleMouseEnter}

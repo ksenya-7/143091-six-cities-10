@@ -1,20 +1,13 @@
 import {useState} from 'react';
-import {useAppDispatch} from '../../hooks';
+import {useAppDispatch, useAppSelector} from '../../hooks';
 import {setActiveSorting} from '../../store/action';
 import {typesOfSorting} from '../../const';
 
-type SortingOffersProps = {
-  typeOfSorting: string;
-}
-
-let isOpen = false;
-
-function SortingOffers({typeOfSorting}: SortingOffersProps): JSX.Element {
-  const [, setSortingOpenData] = useState(isOpen);
+function Sorting(): JSX.Element {
+  const [sortingOpen, setSortingOpen] = useState(false);
 
   const handleSortingOpen = () => {
-    setSortingOpenData((currentState) => !currentState);
-    isOpen = !isOpen;
+    setSortingOpen((currentState) => !currentState);
   };
 
   const dispatch = useAppDispatch();
@@ -22,6 +15,8 @@ function SortingOffers({typeOfSorting}: SortingOffersProps): JSX.Element {
   const handleTypesOfSortingClick = (type: string) => {
     dispatch(setActiveSorting(type));
   };
+
+  const typeOfSorting = useAppSelector((state) => state.sorting);
 
   return (
     <form className="places__sorting" action="#" method="get" onClick={handleSortingOpen}>
@@ -32,7 +27,7 @@ function SortingOffers({typeOfSorting}: SortingOffersProps): JSX.Element {
           <use xlinkHref="#icon-arrow-select" />
         </svg>
       </span>
-      <ul className={`places__options places__options--custom ${isOpen ? 'places__options--opened' : ''}`}>
+      <ul className={`places__options places__options--custom ${sortingOpen ? 'places__options--opened' : ''}`}>
         {typesOfSorting.map((type) => (
           <li className={`places__option ${type === typeOfSorting ? 'places__option--active' : ''}`} key={type} onClick={() => handleTypesOfSortingClick(type)} >
             {type}
@@ -43,4 +38,4 @@ function SortingOffers({typeOfSorting}: SortingOffersProps): JSX.Element {
   );
 }
 
-export default SortingOffers;
+export default Sorting;

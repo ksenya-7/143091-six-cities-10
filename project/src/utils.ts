@@ -4,8 +4,6 @@ export const getRatingPercentage = (item: number) => (item >= 0 && item <= 5) ? 
 
 export const sortByMark = (item: Offer) => item.isPremium ? -1 : 1;
 
-export const sortByPopular = () => 0;
-
 export const sortByPriceLowToHigh = (offerA: Offer, offerB: Offer) => offerA.price - offerB.price;
 
 export const sortByPriceHighToLow = (offerA: Offer, offerB: Offer) => offerB.price - offerA.price;
