@@ -8,9 +8,6 @@ import {useAppSelector} from '../../hooks';
 const sortByMark = (item: Offer) => item.isPremium ? -1 : 1;
 
 function FavoritesScreen(): JSX.Element {
-  const handleMouseEnter = () => null;
-  const handleMouseLeave = () => null;
-
   const offers = useAppSelector((state) => state.offers);
 
   const favoritesOfferAmsterdam = offers.filter((offer: Offer) => offer.city.name === 'Amsterdam' && offer.isFavorite);
@@ -67,13 +64,11 @@ function FavoritesScreen(): JSX.Element {
                       <Card
                         offer={offer}
                         key={offer.id}
-                        onMouseEnter = {handleMouseEnter}
-                        onMouseLeave = {handleMouseLeave}
-                        cardClassName = {'favorites__card'}
-                        imageClassName = {'favorites__image-wrapper'}
-                        infoClassName = {'favorites__card-info'}
-                        imageWidth = {150}
-                        imageHeight = {110}
+                        cardClassName={'favorites__card'}
+                        imageClassName={'favorites__image-wrapper'}
+                        infoClassName={'favorites__card-info'}
+                        imageWidth={150}
+                        imageHeight={110}
                       />
                     ))}
                   </div>
@@ -92,13 +87,11 @@ function FavoritesScreen(): JSX.Element {
                       <Card
                         offer={offer}
                         key={offer.id}
-                        onMouseEnter = {handleMouseEnter}
-                        onMouseLeave = {handleMouseLeave}
-                        cardClassName = {'favorites__card'}
-                        imageClassName = {'favorites__image-wrapper'}
-                        infoClassName = {'favorites__card-info'}
-                        imageWidth = {150}
-                        imageHeight = {110}
+                        cardClassName={'favorites__card'}
+                        imageClassName={'favorites__image-wrapper'}
+                        infoClassName={'favorites__card-info'}
+                        imageWidth={150}
+                        imageHeight={110}
                       />
                     ))}
                   </div>

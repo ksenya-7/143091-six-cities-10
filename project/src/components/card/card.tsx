@@ -4,8 +4,8 @@ import {getRatingPercentage} from '../../utils';
 
 type OfferScreenProps = {
   offer: Offer;
-  onMouseEnter: (id: number) => void;
-  onMouseLeave: () => void;
+  onMouseEnter?: (id: number) => void;
+  onMouseLeave?: () => void;
   cardClassName?: string;
   imageClassName?: string;
   infoClassName?: string;
@@ -18,7 +18,9 @@ function Card(props: OfferScreenProps): JSX.Element {
   const {id, isPremium, images, rating, title, isFavorite, price, type} = offer;
 
   const handleMouseEnter = () => {
-    onMouseEnter(offer.id);
+    if (onMouseEnter) {
+      onMouseEnter(offer.id);
+    }
   };
 
   return (

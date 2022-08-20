@@ -1,20 +1,20 @@
 import {createReducer} from '@reduxjs/toolkit';
 import {setActiveCity, setOffers, loadOffers, setActiveSorting, setDataLoadedStatus} from './action';
 import {Offer} from '../types/offer';
-import {ACTIVE_CITY, ACTIVE_SORTING} from '../const';
+import {ACTIVE_CITY, SortingType} from '../const';
 
-type InitalState = {
+type InitialState = {
   city: string,
   offers: Offer[],
   isDataLoaded: boolean,
-  sorting: string,
+  sorting: SortingType,
 }
 
-const initialState: InitalState = {
+const initialState: InitialState = {
   city: ACTIVE_CITY,
   offers: [],
   isDataLoaded: true,
-  sorting: ACTIVE_SORTING,
+  sorting: SortingType.Popular,
 };
 
 const reducer = createReducer(initialState, (builder) => {
