@@ -4,14 +4,10 @@ import Logo from '../../components/logo/logo';
 import Card from '../../components/card/card';
 import {Offer} from '../../types/offer';
 import {useAppSelector} from '../../hooks';
-
-const sortByMark = (item: Offer) => item.isPremium ? -1 : 1;
+import {cityNames} from '../../const';
 
 function FavoritesScreen(): JSX.Element {
   const offers = useAppSelector((state) => state.offers);
-
-  const favoritesOfferAmsterdam = offers.filter((offer: Offer) => offer.city.name === 'Amsterdam' && offer.isFavorite);
-  const favoritesOfferCologne = offers.filter((offer: Offer) => offer.city.name === 'Cologne' && offer.isFavorite);
 
   return (
     <React.Fragment>
@@ -51,51 +47,30 @@ function FavoritesScreen(): JSX.Element {
             <section className="favorites">
               <h1 className="favorites__title">Saved listing</h1>
               <ul className="favorites__list">
-                <li className="favorites__locations-items">
-                  <div className="favorites__locations locations locations--current">
-                    <div className="locations__item">
-                      <a className="locations__item-link" href={'/'}>
-                        <span>Amsterdam</span>
-                      </a>
+                {cityNames.map((cityName) => (
+                  <li className="favorites__locations-items" key={cityName}>
+                    <div className="favorites__locations locations locations--current">
+                      <div className="locations__item">
+                        <a className="locations__item-link" href={'/'}>
+                          <span>{cityName}</span>
+                        </a>
+                      </div>
                     </div>
-                  </div>
-                  <div className="favorites__places">
-                    {favoritesOfferAmsterdam.sort(sortByMark).map((offer: Offer) => (
-                      <Card
-                        offer={offer}
-                        key={offer.id}
-                        cardClassName={'favorites__card'}
-                        imageClassName={'favorites__image-wrapper'}
-                        infoClassName={'favorites__card-info'}
-                        imageWidth={150}
-                        imageHeight={110}
-                      />
-                    ))}
-                  </div>
-                </li>
-
-                <li className="favorites__locations-items">
-                  <div className="favorites__locations locations locations--current">
-                    <div className="locations__item">
-                      <a className="locations__item-link" href={'/'}>
-                        <span>Cologne</span>
-                      </a>
+                    <div className="favorites__places">
+                      {offers.filter((offer) => offer.city.name === cityName).map((offer) => (
+                        <Card
+                          offer={offer}
+                          key={offer.id}
+                          cardClassName={'favorites__card'}
+                          imageClassName={'favorites__image-wrapper'}
+                          infoClassName={'favorites__card-info'}
+                          imageWidth={150}
+                          imageHeight={110}
+                        />
+                      ))}
                     </div>
-                  </div>
-                  <div className="favorites__places">
-                    {favoritesOfferCologne.sort(sortByMark).map((offer: Offer) => (
-                      <Card
-                        offer={offer}
-                        key={offer.id}
-                        cardClassName={'favorites__card'}
-                        imageClassName={'favorites__image-wrapper'}
-                        infoClassName={'favorites__card-info'}
-                        imageWidth={150}
-                        imageHeight={110}
-                      />
-                    ))}
-                  </div>
-                </li>
+                  </li>
+                ))}
               </ul>
             </section>
           </div>

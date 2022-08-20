@@ -15,23 +15,3 @@ export const selectOffers = (state: State) => (
     selectOffersByCity(state) :
     selectOffersByCity(state).sort(sortings[state.sorting])
 );
-
-// {
-//   let sortingOffers = selectOffersByCity(state);
-//   switch(state.sorting) {
-//     case SortingType.Popular:
-//       sortingOffers = selectOffersByCity(state);
-//       break;
-//     case SortingType.PriceToHigh:
-//       sortingOffers = selectOffersByCity(state).sort(sortByPriceLowToHigh);
-//       break;
-//     case SortingType.PriceToLow:
-//       sortingOffers = selectOffersByCity(state).sort(sortByPriceHighToLow);
-//       break;
-//     case SortingType.RatingFirst:
-//       sortingOffers = selectOffersByCity(state).sort(sortByRating);
-//       break;
-//   }
-
-//   return sortingOffers;
-// };
