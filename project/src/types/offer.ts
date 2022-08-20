@@ -1,8 +1,3 @@
-export type OfferImages = {
-  src: string;
-  alt: string;
-};
-
 export type City = {
   location: {
     latitude: number;
@@ -13,25 +8,29 @@ export type City = {
 };
 
 export type Offer = {
-  id: number;
-  city: City;
-  previewImage: OfferImages;
-  images: OfferImages[];
-  mark: string;
-  isPremium: boolean;
-  title: string;
-  isFavorite: boolean;
-  rating: number;
-  entire: string;
   bedrooms: number;
-  maxAdults: number;
-  price: number;
+  city: City;
+  description: string;
   goods: string[];
   host: {
     avatarUrl: string;
-    name: string;
     id: number;
     isPro: boolean;
+    name: string;
   };
-  descriptions: string[];
+  id: number;
+  images: string[];
+  isFavorite: boolean;
+  isPremium: boolean;
+  location: {
+    latitude: number;
+    longitude: number;
+    zoom: number;
+  };
+  maxAdults: number;
+  previewImage: string;
+  price: number;
+  rating: number;
+  title: string;
+  type: string;
 };

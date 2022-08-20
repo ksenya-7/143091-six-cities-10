@@ -3,18 +3,15 @@ import {Link} from 'react-router-dom';
 import Logo from '../../components/logo/logo';
 import Card from '../../components/card/card';
 import {Offer} from '../../types/offer';
-import {sortByMark} from '../../utils';
+import {useAppSelector} from '../../hooks';
 
-type FavoritesScreenProps = {
-  offers: Offer[];
-};
+const sortByMark = (item: Offer) => item.isPremium ? -1 : 1;
 
-function FavoritesScreen({offers}: FavoritesScreenProps): JSX.Element {
-  const handleMouseEnter = () => null;
-  const handleMouseLeave = () => null;
+function FavoritesScreen(): JSX.Element {
+  const offers = useAppSelector((state) => state.offers);
 
-  const favoritesOfferAmsterdam = offers.filter((offer) => offer.city.name === 'Amsterdam' && offer.isFavorite);
-  const favoritesOfferCologne = offers.filter((offer) => offer.city.name === 'Cologne' && offer.isFavorite);
+  const favoritesOfferAmsterdam = offers.filter((offer: Offer) => offer.city.name === 'Amsterdam' && offer.isFavorite);
+  const favoritesOfferCologne = offers.filter((offer: Offer) => offer.city.name === 'Cologne' && offer.isFavorite);
 
   return (
     <React.Fragment>
@@ -35,7 +32,7 @@ function FavoritesScreen({offers}: FavoritesScreenProps): JSX.Element {
                       <div className="header__avatar-wrapper user__avatar-wrapper">
                       </div>
                       <span className="header__user-name user__name">Oliver.conner@gmail.com</span>
-                      <span className="header__favorite-count">{offers.filter((offer) => offer.isFavorite).length}</span>
+                      <span className="header__favorite-count">{offers.filter((offer: Offer) => offer.isFavorite).length}</span>
                     </a>
                   </li>
                   <li className="header__nav-item">
@@ -63,17 +60,15 @@ function FavoritesScreen({offers}: FavoritesScreenProps): JSX.Element {
                     </div>
                   </div>
                   <div className="favorites__places">
-                    {favoritesOfferAmsterdam.sort(sortByMark).map((offer) => (
+                    {favoritesOfferAmsterdam.sort(sortByMark).map((offer: Offer) => (
                       <Card
                         offer={offer}
                         key={offer.id}
-                        onMouseEnter = {handleMouseEnter}
-                        onMouseLeave = {handleMouseLeave}
-                        cardClassName = {'favorites__card'}
-                        imageClassName = {'favorites__image-wrapper'}
-                        infoClassName = {'favorites__card-info'}
-                        imageWidth = {150}
-                        imageHeight = {110}
+                        cardClassName={'favorites__card'}
+                        imageClassName={'favorites__image-wrapper'}
+                        infoClassName={'favorites__card-info'}
+                        imageWidth={150}
+                        imageHeight={110}
                       />
                     ))}
                   </div>
@@ -88,17 +83,15 @@ function FavoritesScreen({offers}: FavoritesScreenProps): JSX.Element {
                     </div>
                   </div>
                   <div className="favorites__places">
-                    {favoritesOfferCologne.sort(sortByMark).map((offer) => (
+                    {favoritesOfferCologne.sort(sortByMark).map((offer: Offer) => (
                       <Card
                         offer={offer}
                         key={offer.id}
-                        onMouseEnter = {handleMouseEnter}
-                        onMouseLeave = {handleMouseLeave}
-                        cardClassName = {'favorites__card'}
-                        imageClassName = {'favorites__image-wrapper'}
-                        infoClassName = {'favorites__card-info'}
-                        imageWidth = {150}
-                        imageHeight = {110}
+                        cardClassName={'favorites__card'}
+                        imageClassName={'favorites__image-wrapper'}
+                        infoClassName={'favorites__card-info'}
+                        imageWidth={150}
+                        imageHeight={110}
                       />
                     ))}
                   </div>

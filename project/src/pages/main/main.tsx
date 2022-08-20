@@ -16,7 +16,7 @@ function MainScreen(): JSX.Element {
   const offers = useAppSelector(selectOffers);
 
   const handleMouseEnter = (id: number) => {
-    const currentOffer = offers.find((item) => item.id === id);
+    const currentOffer = offers.find((offer: Offer) => offer.id === id);
 
     setSelectedOffer(currentOffer);
   };

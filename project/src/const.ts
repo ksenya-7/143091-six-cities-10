@@ -69,13 +69,19 @@ export const cityNames = Object.keys(cities);
 
 export const ACTIVE_CITY = 'Paris';
 
-export const typesOfSorting = ['Popular', 'Price: low to high', 'Price: high to low', 'Top rated first'];
+export const AUTH_TOKEN_KEY_NAME = 'six-cities';
 
-export enum Sorting {
+export enum APIRoute {
+  Offers = '/hotels',
+  Login = '/login',
+  Logout = '/logout',
+}
+
+export enum SortingType {
   Popular = 'Popular',
   PriceToHigh = 'Price: low to high',
   PriceToLow = 'Price: high to low',
-  TopFirst = 'Top rated first',
+  RatingFirst = 'Top rated first',
 }
 
-export const ACTIVE_SORTING = 'Popular';
+export const sortingTypes = Object.values(SortingType);
