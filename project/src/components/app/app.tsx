@@ -1,30 +1,18 @@
-import {Route, BrowserRouter, Routes} from 'react-router-dom';
-import {useAppSelector} from '../../hooks';
+import {Route, Routes} from 'react-router-dom';
 import {AppRoute, AuthorizationStatus} from '../../const';
+import browserHistory from '../../browser-history';
+import HistoryRouter from '../history-route/history-route';
+import PrivateRoute from '../private-route/private-route';
 import MainScreen from '../../pages/main/main';
 import FavoritesScreen from '../../pages/favorites/favorites';
 import LoginScreen from '../../pages/login/login';
 import RoomScreen from '../../pages/offer/offer';
 import NotFoundScreen from '../../pages/error/error';
-import PrivateRoute from '../private-route/private-route';
-import {Review} from '../../types/review';
-import LoadingScreen from '../../pages/loading-screen/loading-screen';
 
-type AppScreenProps = {
-  reviews: Review[];
-}
 
-function App({reviews}: AppScreenProps): JSX.Element {
-  const {isDataLoaded} = useAppSelector((state) => state);
-
-  if (isDataLoaded) {
-    return (
-      <LoadingScreen />
-    );
-  }
-
+function App(): JSX.Element {
   return (
-    <BrowserRouter>
+    <HistoryRouter history={browserHistory}>
       <Routes>
         <Route
           path={AppRoute.Root}
@@ -48,14 +36,14 @@ function App({reviews}: AppScreenProps): JSX.Element {
         />
         <Route
           path={AppRoute.Room}
-          element={<RoomScreen reviews={reviews}/>}
+          element={<RoomScreen/>}
         />
         <Route
           path="*"
           element={<NotFoundScreen />}
         />
       </Routes>
-    </BrowserRouter>
+    </HistoryRouter>
   );
 }
 

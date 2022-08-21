@@ -7,7 +7,7 @@ import {useAppSelector} from '../../hooks';
 import {cityNames} from '../../const';
 
 function FavoritesScreen(): JSX.Element {
-  const offers = useAppSelector((state) => state.offers);
+  const offers = useAppSelector((state) => state.favorite);
 
   return (
     <React.Fragment>

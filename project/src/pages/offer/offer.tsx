@@ -6,19 +6,13 @@ import NearOffersList from '../../components/near-offers-list/near-offers-list';
 import Map from '../../components/map/map';
 
 import {Offer} from '../../types/offer';
-import {Review} from '../../types/review';
 import NotFoundScreen from '../../pages/error/error';
 import {getRatingPercentage} from '../../utils';
 import {useAppSelector} from '../../hooks';
 import {cityObjects} from '../../const';
 
-type OfferScreenProps = {
-  reviews: Review[];
-};
-
-function RoomScreen(props: OfferScreenProps): JSX.Element {
-  const [selectedOffer, setSelectedOffer] = useState<Offer | undefined>();
-  const {reviews} = props;
+function RoomScreen(): JSX.Element {
+  const [, setSelectedOffer] = useState<Offer | undefined>();
 
   const offers = useAppSelector((state) => state.offers);
   const activeCity = useAppSelector((state) => state.city);
@@ -33,6 +27,7 @@ function RoomScreen(props: OfferScreenProps): JSX.Element {
   const {images, isPremium, title, isFavorite, rating, goods, price, type, bedrooms, maxAdults, host, description} = linkedOffer;
 
   const slicedImages = images.slice(0,6);
+
   const handleMouseEnter = (idOffer: number) => {
     const currentOffer = offers.find((offer) => offer.id === idOffer);
 
@@ -157,13 +152,11 @@ function RoomScreen(props: OfferScreenProps): JSX.Element {
                     </p>
                   </div>
                 </div>
-                <ReviewsList
-                  reviews={reviews}
-                />
+                <ReviewsList />
               </div>
             </div>
             <section className="property__map map">
-              <Map city={checkedCity} offers={filteredByNearOffers} selectedOffer={selectedOffer} />
+              <Map city={checkedCity} offers={filteredByNearOffers} />
             </section>
           </section>
           <div className="container">

@@ -5,15 +5,22 @@ import Sorting from '../../components/sorting-form/sorting-form';
 import CitiesList from '../../components/cities-list/cities-list';
 import Map from '../../components/map/map';
 import {Offer} from '../../types/offer';
-import {useAppSelector} from '../../hooks';
+import {useAppSelector, useAppDispatch} from '../../hooks';
 import {selectOffers} from '../../store/selectors';
 import {cities} from '../../const';
+import {Link} from 'react-router-dom';
+// import {Link, useNavigate} from 'react-router-dom';
+// import {AppRoute} from '../../const';
+import {logoutAction} from '../../store/api-actions';
+import LoadingScreen from '../../pages/loading-screen/loading-screen';
+import {isCheckedAuth, isAuth} from '../../utils';
 
 function MainScreen(): JSX.Element {
-  const [selectedOffer, setSelectedOffer] = useState<Offer | undefined>();
-
+  // const navigate = useNavigate();
+  const dispatch = useAppDispatch();
   const activeCity = useAppSelector((state) => state.city);
   const offers = useAppSelector(selectOffers);
+  const [selectedOffer, setSelectedOffer] = useState<Offer | undefined>();
 
   const handleMouseEnter = (id: number) => {
     const currentOffer = offers.find((offer: Offer) => offer.id === id);
@@ -24,6 +31,14 @@ function MainScreen(): JSX.Element {
   const handleMouseLeave = () => {
     setSelectedOffer(undefined);
   };
+
+  const {authorizationStatus, isDataLoaded} = useAppSelector((state) => state);
+
+  if (isCheckedAuth(authorizationStatus) || isDataLoaded) {
+    return (
+      <LoadingScreen />
+    );
+  }
 
   return (
     <React.Fragment>
@@ -48,9 +63,27 @@ function MainScreen(): JSX.Element {
                     </a>
                   </li>
                   <li className="header__nav-item">
-                    <a className="header__nav-link" href={'/'}>
-                      <span className="header__signout">Sign out</span>
-                    </a>
+                    {!isAuth(authorizationStatus) &&
+                      <Link
+                        // onClick={() => {
+                        //   navigate(AppRoute.Login);
+                        // }}
+                        className="header__nav-link"
+                        to='/login'
+                      >
+                        <span className="header__signout">Sign in</span>
+                      </Link>}
+                    {isAuth(authorizationStatus) &&
+                      <Link
+                        onClick={(evt) => {
+                          evt.preventDefault();
+                          dispatch(logoutAction());
+                        }}
+                        className="header__nav-link"
+                        to='/'
+                      >
+                        <span className="header__signout">Sign out</span>
+                      </Link>}
                   </li>
                 </ul>
               </nav>

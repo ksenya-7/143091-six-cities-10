@@ -1,12 +1,16 @@
 import Comment from '../comment/comment';
-import {Review} from '../../types/review';
+// import {Review} from '../../types/review';
 import FormReview from '../../components/form-review/form-review';
+import {useAppSelector} from '../../hooks';
 
-type ReviewsListProps = {
-  reviews: Review[];
-}
+// type ReviewsListProps = {
+//   reviews: Review[];
+// }
 
-function ReviewsList({reviews}: ReviewsListProps): JSX.Element {
+function ReviewsList(): JSX.Element {
+  const reviews = useAppSelector((state) => state.reviews);
+  // console.log(reviews);
+
   const reviewCount = reviews.length;
 
   return (
