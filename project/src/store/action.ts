@@ -9,9 +9,9 @@ export const setActiveSorting = createAction<SortingType>('offers/setActiveSorti
 
 export const setOffers = createAction<Offer[]>('offers/setOffers');
 
-export const loadOffers = createAction<Offer[]>('data/loadOffers');
+export const loadOffers = createAction<Offer[]>('offers/loadOffers');
 
-export const loadFavorite = createAction<Offer[]>('data/loadFavorite');
+export const loadFavorite = createAction<Offer[]>('offers/loadFavorite');
 
 export const loadReviews = createAction<Review[]>('data/loadReviews');
 

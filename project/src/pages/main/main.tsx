@@ -9,17 +9,16 @@ import {useAppSelector, useAppDispatch} from '../../hooks';
 import {selectOffers} from '../../store/selectors';
 import {cities} from '../../const';
 import {Link} from 'react-router-dom';
-// import {Link, useNavigate} from 'react-router-dom';
-// import {AppRoute} from '../../const';
+import {AppRoute} from '../../const';
 import {logoutAction} from '../../store/api-actions';
 import LoadingScreen from '../../pages/loading-screen/loading-screen';
 import {isCheckedAuth, isAuth} from '../../utils';
 
 function MainScreen(): JSX.Element {
-  // const navigate = useNavigate();
   const dispatch = useAppDispatch();
   const activeCity = useAppSelector((state) => state.city);
   const offers = useAppSelector(selectOffers);
+  const {authorizationStatus, isDataLoaded} = useAppSelector((state) => state);
   const [selectedOffer, setSelectedOffer] = useState<Offer | undefined>();
 
   const handleMouseEnter = (id: number) => {
@@ -31,8 +30,6 @@ function MainScreen(): JSX.Element {
   const handleMouseLeave = () => {
     setSelectedOffer(undefined);
   };
-
-  const {authorizationStatus, isDataLoaded} = useAppSelector((state) => state);
 
   if (isCheckedAuth(authorizationStatus) || isDataLoaded) {
     return (
@@ -65,13 +62,12 @@ function MainScreen(): JSX.Element {
                   <li className="header__nav-item">
                     {!isAuth(authorizationStatus) &&
                       <Link
-                        // onClick={() => {
-                        //   navigate(AppRoute.Login);
-                        // }}
-                        className="header__nav-link"
-                        to='/login'
+                        className="header__nav-link header__nav-link--profile"
+                        to={AppRoute.Login}
                       >
-                        <span className="header__signout">Sign in</span>
+                        <div className="header__avatar-wrapper user__avatar-wrapper">
+                        </div>
+                        <span className="header__login">Sign in</span>
                       </Link>}
                     {isAuth(authorizationStatus) &&
                       <Link

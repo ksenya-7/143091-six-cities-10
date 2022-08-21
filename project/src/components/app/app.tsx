@@ -1,5 +1,5 @@
 import {Route, Routes} from 'react-router-dom';
-import {AppRoute, AuthorizationStatus} from '../../const';
+import {AppRoute} from '../../const';
 import browserHistory from '../../browser-history';
 import HistoryRouter from '../history-route/history-route';
 import PrivateRoute from '../private-route/private-route';
@@ -27,9 +27,7 @@ function App(): JSX.Element {
         <Route
           path={AppRoute.Favorites}
           element={
-            <PrivateRoute
-              authorizationStatus={AuthorizationStatus.Auth}
-            >
+            <PrivateRoute>
               <FavoritesScreen />
             </PrivateRoute>
           }

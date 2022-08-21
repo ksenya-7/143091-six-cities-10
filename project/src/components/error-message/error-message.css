@@ -4,7 +4,8 @@
   top: 10px;
   left: 25%;
   padding: 10px;
-  background-color: #4481c3;
+  background-color: #b866d9;
   color: white;
   border-radius: 5px;
+  transform: skew(-15deg);
 }
