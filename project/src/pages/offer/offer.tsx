@@ -38,7 +38,7 @@ function RoomScreen(): JSX.Element {
     setSelectedOffer(undefined);
   };
 
-  const filteredByNearOffers = offers.filter((offer) => offer.id !== Number(id) && offer.city.name === 'Amsterdam');
+  const filteredByNearOffers = offers.filter((offer) => offer.id !== Number(id) && offer.city.name === activeCity);
   const checkedCity = cities.find((item) => item.name === activeCity);
 
   if(!checkedCity) {

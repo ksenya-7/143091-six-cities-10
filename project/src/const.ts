@@ -8,7 +8,7 @@ export const TIMEOUT_SHOW_ERROR = 5000;
 
 export enum APIRoute {
   Offers = '/hotels',
-  Reviews = '/comments',
+  Reviews = '/comments/:id',
   Login = '/login',
   Logout = '/logout',
   Favorite = '/favorite',
