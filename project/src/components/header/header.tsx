@@ -9,12 +9,7 @@ function Header(): JSX.Element {
 
   const authorizationStatus = useAppSelector((state) => state.authorizationStatus);
   const favoriteOffers = useAppSelector((state) => state.favorite);
-
   const userData = useAppSelector((state) => state.userData);
-  let userEmail;
-  if (userData) {
-    userEmail = userData.email;
-  }
 
   return (
     <header className="header">
@@ -44,7 +39,7 @@ function Header(): JSX.Element {
                     <Link className="header__nav-link header__nav-link--profile" to={AppRoute.Favorites}>
                       <div className="header__avatar-wrapper user__avatar-wrapper">
                       </div>
-                      <span className="header__user-name user__name">{userEmail}</span>
+                      <span className="header__user-name user__name">{userData ? `${userData.email}` : ''}</span>
                       <span className="header__favorite-count">{favoriteOffers.length}</span>
                     </Link>
                   </li>
