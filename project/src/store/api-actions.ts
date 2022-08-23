@@ -57,7 +57,7 @@ export const fetchReviewAction = createAsyncThunk<void, string, {
 }>(
   'data/fetchReviews',
   async (idHotel, {dispatch, extra: api}) => {
-    const {data} = await api.get<Review[]>(APIRoute.Reviews.replace(':id', `${idHotel}`));
+    const {data} = await api.get<Review[]>(APIRoute.Reviews.replace(':id', idHotel));
 
     dispatch(setDataLoadedStatus(true));
     dispatch(loadReviews(data));
