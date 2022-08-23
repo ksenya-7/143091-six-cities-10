@@ -4,7 +4,7 @@ export const ACTIVE_CITY = 'Paris';
 
 export const AUTH_TOKEN_KEY_NAME = 'six-cities';
 
-export const TIMEOUT_SHOW_ERROR = 5000;
+export const TIMEOUT_SHOW_ERROR = 3000;
 
 export enum APIRoute {
   Offers = '/hotels',

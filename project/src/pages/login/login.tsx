@@ -1,32 +1,37 @@
 import React from 'react';
-import Logo from '../../components/logo/logo';
-import {useRef, FormEvent} from 'react';
-import {Link, useNavigate} from 'react-router-dom';
+import {useRef, useState, FormEvent, ChangeEvent} from 'react';
+import {Link} from 'react-router-dom';
 import {useAppDispatch} from '../../hooks';
 import {loginAction} from '../../store/api-actions';
-import {AuthData} from '../../types/auth-data';
 import {AppRoute} from '../../const';
+import {isValidPassword} from '../../utils';
+import './error-password.css';
+
 
 function LoginScreen(): JSX.Element {
   const loginRef = useRef<HTMLInputElement | null>(null);
   const passwordRef = useRef<HTMLInputElement | null>(null);
+  const [invalidInputData, setInvalidInputData] = useState(false);
 
   const dispatch = useAppDispatch();
-  const navigate = useNavigate();
 
-  const onSubmit = (authData: AuthData) => {
-    dispatch(loginAction(authData));
-    navigate(AppRoute.Root);
+  const handleInput = ({target}:ChangeEvent<HTMLInputElement>) => {
+    const {value} = target;
+    if (value !== null && isValidPassword(value)) {
+      setInvalidInputData(false);
+    } else {
+      setInvalidInputData(true);
+    }
   };
 
   const handleSubmit = (evt: FormEvent<HTMLFormElement>) => {
     evt.preventDefault();
 
-    if (loginRef.current !== null && passwordRef.current !== null) {
-      onSubmit({
+    if (loginRef.current !== null && passwordRef.current !== null && isValidPassword(passwordRef.current.value)) {
+      dispatch(loginAction({
         login: loginRef.current.value,
         password: passwordRef.current.value,
-      });
+      }));
     }
   };
 
@@ -41,7 +46,9 @@ function LoginScreen(): JSX.Element {
           <div className="container">
             <div className="header__wrapper">
               <div className="header__left">
-                <Logo />
+                <Link className="header__logo-link" to="/">
+                  <img className="header__logo" src="img/logo.svg" alt="6 cities logo" width="81" height="41"/>
+                </Link>
               </div>
             </div>
           </div>
@@ -67,16 +74,15 @@ function LoginScreen(): JSX.Element {
                   <label className="visually-hidden">Password</label>
                   <input
                     ref={passwordRef}
-                    className="login__input form__input"
+                    onInput={handleInput}
+                    className={`login__input form__input ${invalidInputData ? 'error-password' : ''}`}
                     type="password"
                     name="password"
                     id="password"
-                    // pattern="[A-Za-z0-9]"
-                    // pattern="[^\s]"
                     placeholder="Password" required
                   />
                 </div>
-                <button className="login__submit form__submit button" type="submit">Sign in</button>
+                <button className="login__submit form__submit button" type="submit" disabled={invalidInputData}>Sign in</button>
               </form>
             </section>
             <section className="locations locations--login locations--current">

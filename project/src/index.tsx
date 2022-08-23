@@ -3,13 +3,15 @@ import ReactDOM from 'react-dom/client';
 import {Provider} from 'react-redux';
 import App from './components/app/app';
 import ErrorMessage from './components/error-message/error-message';
+import {getToken} from './services/token';
 import {store} from './store';
-import {fetchOfferAction, fetchFavoriteAction, checkAuthAction} from './store/api-actions';
+import {fetchOfferAction, checkAuthAction} from './store/api-actions';
 
-store.dispatch(checkAuthAction());
+if(getToken()){
+  store.dispatch(checkAuthAction());
+}
 
 store.dispatch(fetchOfferAction());
-store.dispatch(fetchFavoriteAction());
 
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement,
