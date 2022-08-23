@@ -4,7 +4,7 @@ import Header from '../../components/header/header';
 import Card from '../../components/card/card';
 import {useAppSelector, useAppDispatch} from '../../hooks';
 import {cityNames} from '../../const';
-import {fetchFavoriteAction} from '../../store/api-actions';
+import {fetchFavoriteOffersAction} from '../../store/api-actions';
 import NotFoundScreen from '../../pages/error/error';
 
 function FavoritesScreen(): JSX.Element {
@@ -12,7 +12,7 @@ function FavoritesScreen(): JSX.Element {
   const offers = useAppSelector((state) => state.favorite);
 
   useEffect(() => {
-    dispatch(fetchFavoriteAction());
+    dispatch(fetchFavoriteOffersAction());
   }, [dispatch]);
 
   if(!offers) {

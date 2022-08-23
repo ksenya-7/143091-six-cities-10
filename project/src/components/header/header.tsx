@@ -1,20 +1,19 @@
-import React from 'react';
 import {Link} from 'react-router-dom';
 import {useAppSelector, useAppDispatch} from '../../hooks';
 import {logoutAction} from '../../store/api-actions';
-import {getEmail} from '../../services/email';
 import {isAuth} from '../../utils';
 import {AppRoute} from '../../const';
 
 function Header(): JSX.Element {
   const dispatch = useAppDispatch();
-  const {authorizationStatus, favorite} = useAppSelector((state) => state);
 
-  const favoriteCount = favorite.length;
+  const authorizationStatus = useAppSelector((state) => state.authorizationStatus);
+  const favoriteOffers = useAppSelector((state) => state.favorite);
 
-  let userEmail = useAppSelector((state) => state.userEmail);
-  if(userEmail === '') {
-    userEmail = getEmail();
+  const userData = useAppSelector((state) => state.userData);
+  let userEmail;
+  if (userData) {
+    userEmail = userData.email;
   }
 
   return (
@@ -40,13 +39,13 @@ function Header(): JSX.Element {
                   </Link>
                 </li>}
               {isAuth(authorizationStatus) &&
-                <React.Fragment>
+                <>
                   <li className="header__nav-item user">
                     <Link className="header__nav-link header__nav-link--profile" to={AppRoute.Favorites}>
                       <div className="header__avatar-wrapper user__avatar-wrapper">
                       </div>
                       <span className="header__user-name user__name">{userEmail}</span>
-                      <span className="header__favorite-count">{favoriteCount}</span>
+                      <span className="header__favorite-count">{favoriteOffers.length}</span>
                     </Link>
                   </li>
                   <li className="header__nav-item">
@@ -61,7 +60,7 @@ function Header(): JSX.Element {
                       <span className="header__signout">Sign out</span>
                     </Link>
                   </li>
-                </React.Fragment>}
+                </>}
             </ul>
           </nav>
         </div>

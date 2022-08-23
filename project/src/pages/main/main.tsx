@@ -9,16 +9,10 @@ import {useAppSelector} from '../../hooks';
 import {selectOffers} from '../../store/selectors';
 import {cities} from '../../const';
 import LoadingScreen from '../../pages/loading-screen/loading-screen';
-import {getEmail} from '../../services/email';
 
 
 function MainScreen(): JSX.Element {
   const activeCity = useAppSelector((state) => state.city);
-
-  let userEmail = useAppSelector((state) => state.userEmail);
-  if(userEmail === '') {
-    userEmail = getEmail();
-  }
 
   const offers = useAppSelector(selectOffers);
   const {isDataLoaded} = useAppSelector((state) => state);

@@ -17,11 +17,7 @@ function LoginScreen(): JSX.Element {
 
   const handleInput = ({target}:ChangeEvent<HTMLInputElement>) => {
     const {value} = target;
-    if (value !== null && isValidPassword(value)) {
-      setInvalidInputData(false);
-    } else {
-      setInvalidInputData(true);
-    }
+    setInvalidInputData(value === null || !isValidPassword(value));
   };
 
   const handleSubmit = (evt: FormEvent<HTMLFormElement>) => {
