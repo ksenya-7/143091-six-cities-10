@@ -1,3 +1,19 @@
+export const MONTHS = [ 'January ', 'February ', 'March ', 'April ', 'May ', 'June ', 'July ', 'August ', 'September ', 'October ', 'November ', 'December '];
+
+export const ACTIVE_CITY = 'Paris';
+
+export const AUTH_TOKEN_KEY_NAME = 'six-cities';
+
+export const TIMEOUT_SHOW_ERROR = 3000;
+
+export enum APIRoute {
+  Offers = '/hotels',
+  Reviews = '/comments/:id',
+  Login = '/login',
+  Logout = '/logout',
+  Favorite = '/favorite',
+}
+
 export enum AppRoute {
   Login = '/login',
   Favorites = '/favorites',
@@ -10,8 +26,6 @@ export enum AuthorizationStatus {
   NoAuth = 'NO_AUTH',
   Unknown = 'UNKNOWN',
 }
-
-export const MONTHS = [ 'January ', 'February ', 'March ', 'April ', 'May ', 'June ', 'July ', 'August ', 'September ', 'October ', 'November ', 'December '];
 
 export const cities = {
   'Paris': {
@@ -66,16 +80,6 @@ export const cities = {
 
 export const cityObjects = Object.values(cities);
 export const cityNames = Object.keys(cities);
-
-export const ACTIVE_CITY = 'Paris';
-
-export const AUTH_TOKEN_KEY_NAME = 'six-cities';
-
-export enum APIRoute {
-  Offers = '/hotels',
-  Login = '/login',
-  Logout = '/logout',
-}
 
 export enum SortingType {
   Popular = 'Popular',
