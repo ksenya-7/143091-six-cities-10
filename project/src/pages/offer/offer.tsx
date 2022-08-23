@@ -1,29 +1,35 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 import {useParams} from 'react-router-dom';
+import {useAppSelector, useAppDispatch} from '../../hooks';
 import Header from '../../components/header/header';
 import ReviewsList from '../../components/reviews-list/reviews-list';
 import NearOffersList from '../../components/near-offers-list/near-offers-list';
 import Map from '../../components/map/map';
-
 import {Offer} from '../../types/offer';
 import NotFoundScreen from '../../pages/error/error';
 import {getRatingPercentage} from '../../utils';
-import {useAppSelector} from '../../hooks';
 import {cityObjects} from '../../const';
+import {fetchReviewAction} from '../../store/api-actions';
 
 function RoomScreen(): JSX.Element {
+  const dispatch = useAppDispatch();
+  const {id} = useParams();
   const [, setSelectedOffer] = useState<Offer | undefined>();
+
+  useEffect(() => {
+    if (id) {
+      dispatch(fetchReviewAction(id));
+    }
+  }, [dispatch, id]);
 
   const offers = useAppSelector((state) => state.offers);
   const activeCity = useAppSelector((state) => state.city);
   const cities = cityObjects;
 
-  const {id} = useParams();
   const linkedOffer = offers.find((item) => item.id === Number(id));
   if(!linkedOffer) {
     return (<NotFoundScreen />);
   }
-
   const {images, isPremium, title, isFavorite, rating, goods, price, type, bedrooms, maxAdults, host, description} = linkedOffer;
 
   const slicedImages = images.slice(0,6);
@@ -39,6 +45,7 @@ function RoomScreen(): JSX.Element {
   };
 
   const filteredByNearOffers = offers.filter((offer) => offer.id !== Number(id) && offer.city.name === activeCity);
+  const slicedNearOffers = filteredByNearOffers.slice(0,3);
   const checkedCity = cities.find((item) => item.name === activeCity);
 
   if(!checkedCity) {
@@ -131,23 +138,21 @@ function RoomScreen(): JSX.Element {
               </div>
             </div>
             <section className="property__map map">
-              <Map city={checkedCity} offers={filteredByNearOffers} />
+              <Map city={checkedCity} offers={slicedNearOffers} />
             </section>
           </section>
           <div className="container">
             <section className="near-places places">
               <h2 className="near-places__title">Other places in the neighbourhood</h2>
               <NearOffersList
-                offers={filteredByNearOffers}
+                offers={slicedNearOffers}
                 onMouseEnter = {handleMouseEnter}
                 onMouseLeave = {handleMouseLeave}
               />
             </section>
           </div>
         </main>
-
       </div>
-
     </React.Fragment>
   );
 }

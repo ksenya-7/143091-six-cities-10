@@ -9,9 +9,6 @@ export const sortByPriceHighToLow = (offerA: Offer, offerB: Offer) => offerB.pri
 
 export const sortByRating = (offerA: Offer, offerB: Offer) => offerB.rating - offerA.rating;
 
-// export const isCheckedAuth = (authorizationStatus: AuthorizationStatus): boolean =>
-//   authorizationStatus === AuthorizationStatus.Unknown;
-
 export const isAuth = (authorizationStatus: AuthorizationStatus): boolean =>
   authorizationStatus === AuthorizationStatus.Auth;
 

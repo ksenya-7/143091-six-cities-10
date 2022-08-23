@@ -50,33 +50,20 @@ export const fetchFavoriteAction = createAsyncThunk<void, undefined, {
   },
 );
 
-export const fetchReviewAction = createAsyncThunk<void, undefined, {
+export const fetchReviewAction = createAsyncThunk<void, string, {
   dispatch: AppDispatch,
   state: State,
   extra: AxiosInstance
 }>(
   'data/fetchReviews',
-  async (_arg, {dispatch, extra: api}) => {
-    const {data} = await api.get<Review[]>(APIRoute.Reviews);
+  async (idHotel, {dispatch, extra: api}) => {
+    const {data} = await api.get<Review[]>(APIRoute.Reviews.replace(':id', `${idHotel}`));
 
+    dispatch(setDataLoadedStatus(true));
     dispatch(loadReviews(data));
+    dispatch(setDataLoadedStatus(false));
   },
 );
-
-// export const fetchReviewAction = createAsyncThunk<void, number, {
-//   dispatch: AppDispatch,
-//   state: State,
-//   extra: AxiosInstance
-// }>(
-//   'data/fetchReviews',
-//   async (idHotel, {dispatch, extra: api}) => {
-//     const {data} = await api.get<Review[]>(APIRoute.Reviews/:`${idHotel}`);
-
-//     dispatch(setDataLoadedStatus(true));
-//     dispatch(loadReviews(data));
-//     dispatch(setDataLoadedStatus(false));
-//   },
-// );
 
 export const checkAuthAction = createAsyncThunk<void, undefined, {
   dispatch: AppDispatch,
