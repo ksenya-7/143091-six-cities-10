@@ -19,7 +19,7 @@ function ReviewsList({id}: ReviewsListProps): JSX.Element {
     <section className="property__reviews reviews">
       <h2 className="reviews__title">Reviews &middot; <span className="reviews__amount">{reviews.length}</span></h2>
       <ul className="reviews__list">
-        {sortedReviews && sortedReviews.map((review) => (
+        {sortedReviews.map((review) => (
           <Comment
             review={review}
             key={review.id}
