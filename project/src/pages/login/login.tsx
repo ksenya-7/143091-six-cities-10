@@ -15,7 +15,7 @@ function LoginScreen(): JSX.Element {
 
   const dispatch = useAppDispatch();
 
-  const handleInput = ({target}:ChangeEvent<HTMLInputElement>) => {
+  const handleInputChange = ({target}:ChangeEvent<HTMLInputElement>) => {
     const {value} = target;
     setInvalidInputData(value === null || !isValidPassword(value));
   };
@@ -70,7 +70,7 @@ function LoginScreen(): JSX.Element {
                   <label className="visually-hidden">Password</label>
                   <input
                     ref={passwordRef}
-                    onInput={handleInput}
+                    onInput={handleInputChange}
                     className={`login__input form__input ${invalidInputData ? 'error-password' : ''}`}
                     type="password"
                     name="password"

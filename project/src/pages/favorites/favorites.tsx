@@ -9,7 +9,7 @@ import NotFoundScreen from '../../pages/error/error';
 
 function FavoritesScreen(): JSX.Element {
   const dispatch = useAppDispatch();
-  const offers = useAppSelector((state) => state.favorite);
+  const offers = useAppSelector((state) => state.favoriteOffers);
 
   useEffect(() => {
     dispatch(fetchFavoriteOffersAction());

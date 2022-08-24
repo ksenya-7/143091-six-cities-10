@@ -1,5 +1,5 @@
 import {createReducer} from '@reduxjs/toolkit';
-import {setActiveCity, setOffers, loadOffers, loadFavoriteOffers, loadReviews, setActiveSorting, setDataLoadedStatus, requireAuthorization, setError, setUserData} from './action';
+import {setActiveCity, setOffers, loadOffers, loadFavoriteOffers, loadReviews, setActiveSorting, setDataLoadedStatus, requireAuthorization, setError, setUserData, loadNearbyOffers, loadOfferById, setReview} from './action';
 import {Offer} from '../types/offer';
 import {Review} from '../types/review';
 import {UserData} from '../types/user-data';
@@ -8,7 +8,9 @@ import {ACTIVE_CITY, SortingType, AuthorizationStatus} from '../const';
 type InitialState = {
   city: string,
   offers: Offer[],
-  favorite: Offer[],
+  favoriteOffers: Offer[],
+  offerById: Offer | undefined,
+  nearbyOffers: Offer[],
   reviews: Review[],
   isDataLoaded: boolean,
   sorting: SortingType,
@@ -20,7 +22,9 @@ type InitialState = {
 const initialState: InitialState = {
   city: ACTIVE_CITY,
   offers: [],
-  favorite: [],
+  favoriteOffers: [],
+  offerById: undefined,
+  nearbyOffers: [],
   reviews: [],
   isDataLoaded: false,
   sorting: SortingType.Popular,
@@ -44,9 +48,12 @@ const reducer = createReducer(initialState, (builder) => {
       state.offers = action.payload;
     })
     .addCase(loadFavoriteOffers, (state, action) => {
-      state.favorite = action.payload;
+      state.favoriteOffers = action.payload;
     })
     .addCase(loadReviews, (state, action) => {
+      state.reviews = action.payload;
+    })
+    .addCase(setReview, (state, action) => {
       state.reviews = action.payload;
     })
     .addCase(setDataLoadedStatus, (state, action) => {
@@ -57,6 +64,12 @@ const reducer = createReducer(initialState, (builder) => {
     })
     .addCase(setError, (state, action) => {
       state.error = action.payload;
+    })
+    .addCase(loadOfferById, (state, action) => {
+      state.offerById = action.payload;
+    })
+    .addCase(loadNearbyOffers, (state, action) => {
+      state.nearbyOffers = action.payload;
     })
     .addCase(setUserData, (state, action) => {
       state.userData = action.payload;

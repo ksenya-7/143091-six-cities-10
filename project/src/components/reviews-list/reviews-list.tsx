@@ -1,10 +1,16 @@
 import Comment from '../comment/comment';
 import FormReview from '../../components/form-review/form-review';
 import {useAppSelector} from '../../hooks';
+import {isAuth} from '../../utils';
 
 
-function ReviewsList(): JSX.Element {
+type ReviewsListProps = {
+  id: string;
+}
+
+function ReviewsList({id}: ReviewsListProps): JSX.Element {
   const reviews = useAppSelector((state) => state.reviews);
+  const authorizationStatus = useAppSelector((state) => state.authorizationStatus);
 
   return (
     <section className="property__reviews reviews">
@@ -17,7 +23,7 @@ function ReviewsList(): JSX.Element {
           />
         ))}
       </ul>
-      <FormReview />
+      {isAuth(authorizationStatus) && <FormReview id={id}/>}
     </section>
   );
 }

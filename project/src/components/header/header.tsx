@@ -8,7 +8,7 @@ function Header(): JSX.Element {
   const dispatch = useAppDispatch();
 
   const authorizationStatus = useAppSelector((state) => state.authorizationStatus);
-  const favoriteOffers = useAppSelector((state) => state.favorite);
+  const favoriteOffers = useAppSelector((state) => state.favoriteOffers);
   const userData = useAppSelector((state) => state.userData);
 
   return (
