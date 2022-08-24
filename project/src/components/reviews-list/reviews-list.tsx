@@ -13,10 +13,7 @@ function ReviewsList({id}: ReviewsListProps): JSX.Element {
   const reviews = useAppSelector((state) => state.reviews);
   const authorizationStatus = useAppSelector((state) => state.authorizationStatus);
 
-  let sortedReviews;
-  if (reviews) {
-    sortedReviews = [...reviews].sort(sortByDate).slice(0, MAX_REVIEWS_COUNT);
-  }
+  const sortedReviews = [...reviews].sort(sortByDate).slice(0, MAX_REVIEWS_COUNT);
 
   return (
     <section className="property__reviews reviews">
