@@ -10,6 +10,12 @@ export const REVIEW_MIN_LENGTH = 50;
 
 export const REVIEW_MAX_LENGTH = 300;
 
+export const MAX_REVIEWS_COUNT = 10;
+
+export const MAX_IMAGES_COUNT = 6;
+
+export const OFFERS_NEARBY_COUNT = 3;
+
 export enum APIRoute {
   Offers = '/hotels',
   Login = '/login',

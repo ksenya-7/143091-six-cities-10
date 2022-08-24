@@ -8,7 +8,7 @@ import Map from '../../components/map/map';
 import {Offer} from '../../types/offer';
 import NotFoundScreen from '../../pages/error/error';
 import {getRatingPercentage} from '../../utils';
-import {cityObjects} from '../../const';
+import {cityObjects, OFFERS_NEARBY_COUNT, MAX_IMAGES_COUNT} from '../../const';
 import {fetchReviewsAction, fetchNearbyOffersAction, fetchOfferByIdAction} from '../../store/api-actions';
 
 function RoomScreen(): JSX.Element {
@@ -18,7 +18,7 @@ function RoomScreen(): JSX.Element {
 
   const activeCity = useAppSelector((state) => state.city);
   const offerById = useAppSelector((state) => state.offerById);
-  const nearbyOffers = useAppSelector((state) => state.nearbyOffers).slice(0,3);
+  const nearbyOffers = useAppSelector((state) => state.nearbyOffers).slice(0, OFFERS_NEARBY_COUNT);
 
   useEffect(() => {
     if (id) {
@@ -38,7 +38,7 @@ function RoomScreen(): JSX.Element {
 
   const {images, isPremium, title, isFavorite, rating, goods, price, type, bedrooms, maxAdults, host, description} = offerById;
 
-  const slicedImages = images.slice(0,6);
+  const slicedImages = images.slice(0, MAX_IMAGES_COUNT);
 
 
   const handleMouseEnter = () => {
