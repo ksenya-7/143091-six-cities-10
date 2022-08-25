@@ -10,3 +10,9 @@ export type Review = {
     name: string;
   };
 };
+
+export type PostReview = {
+  hotelId: string;
+  comment: string;
+  rating: string;
+};

@@ -1,4 +1,6 @@
+import dayjs from 'dayjs';
 import {Offer} from './types/offer';
+import {Review} from './types/review';
 import {AuthorizationStatus} from './const';
 
 export const getRatingPercentage = (item: number) => (item >= 0 && item <= 5) ? Math.round(item) * 20 : 0;
@@ -17,3 +19,5 @@ export const isValidPassword = (password: string) => password
   .match(
     /[a-zA-Z]+[0-9]|[0-9]+[a-zA-z]/
   );
+
+export const sortByDate = (reviewA: Review, reviewB: Review) => dayjs(reviewB.date).diff(reviewA.date, 'minute');

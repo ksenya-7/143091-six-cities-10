@@ -8,49 +8,46 @@ import Map from '../../components/map/map';
 import {Offer} from '../../types/offer';
 import NotFoundScreen from '../../pages/error/error';
 import {getRatingPercentage} from '../../utils';
-import {cityObjects} from '../../const';
-import {fetchReviewAction} from '../../store/api-actions';
+import {cityObjects, OFFERS_NEARBY_COUNT, MAX_IMAGES_COUNT} from '../../const';
+import {fetchReviewsAction, fetchNearbyOffersAction, fetchOfferByIdAction} from '../../store/api-actions';
 
 function RoomScreen(): JSX.Element {
   const dispatch = useAppDispatch();
   const {id} = useParams();
   const [, setSelectedOffer] = useState<Offer | undefined>();
 
+  const activeCity = useAppSelector((state) => state.city);
+  const offerById = useAppSelector((state) => state.offerById);
+  const nearbyOffers = useAppSelector((state) => state.nearbyOffers).slice(0, OFFERS_NEARBY_COUNT);
+
   useEffect(() => {
     if (id) {
-      dispatch(fetchReviewAction(id));
+      dispatch(fetchOfferByIdAction(id));
+      dispatch(fetchNearbyOffersAction(id));
+      dispatch(fetchReviewsAction(id));
     }
   }, [dispatch, id]);
 
-  const offers = useAppSelector((state) => state.offers);
-  const activeCity = useAppSelector((state) => state.city);
   const cities = cityObjects;
 
-  const linkedOffer = offers.find((item) => item.id === Number(id));
-  if(!linkedOffer) {
+  const checkedCity = cities.find((item) => item.name === activeCity);
+
+  if(!checkedCity || !offerById || !id) {
     return (<NotFoundScreen />);
   }
-  const {images, isPremium, title, isFavorite, rating, goods, price, type, bedrooms, maxAdults, host, description} = linkedOffer;
 
-  const slicedImages = images.slice(0,6);
+  const {images, isPremium, title, isFavorite, rating, goods, price, type, bedrooms, maxAdults, host, description} = offerById;
 
-  const handleMouseEnter = (idOffer: number) => {
-    const currentOffer = offers.find((offer) => offer.id === idOffer);
+  const slicedImages = images.slice(0, MAX_IMAGES_COUNT);
 
-    setSelectedOffer(currentOffer);
+
+  const handleMouseEnter = () => {
+    setSelectedOffer(offerById);
   };
 
   const handleMouseLeave = () => {
     setSelectedOffer(undefined);
   };
-
-  const filteredByNearOffers = offers.filter((offer) => offer.id !== Number(id) && offer.city.name === activeCity);
-  const slicedNearOffers = filteredByNearOffers.slice(0,3);
-  const checkedCity = cities.find((item) => item.name === activeCity);
-
-  if(!checkedCity) {
-    return (<NotFoundScreen />);
-  }
 
   return (
     <React.Fragment>
@@ -134,18 +131,18 @@ function RoomScreen(): JSX.Element {
                     </p>
                   </div>
                 </div>
-                <ReviewsList />
+                <ReviewsList id={id} />
               </div>
             </div>
             <section className="property__map map">
-              <Map city={checkedCity} offers={slicedNearOffers} />
+              <Map city={checkedCity} offers={nearbyOffers} />
             </section>
           </section>
           <div className="container">
             <section className="near-places places">
               <h2 className="near-places__title">Other places in the neighbourhood</h2>
               <NearOffersList
-                offers={slicedNearOffers}
+                offers={nearbyOffers}
                 onMouseEnter = {handleMouseEnter}
                 onMouseLeave = {handleMouseLeave}
               />
