@@ -27,9 +27,9 @@ export const selectOffersByCity = (state: State): Offer[] => state[NameSpace.Off
 //   //   selectOffersByCity(state).sort(sortings[state[NameSpace.Data].sorting])
 // );
 
+// console.log(state[NameSpace.Data].sorting);
 
 export const selectOffers = (state: State) => {
-  // console.log(state[NameSpace.Data].sorting);
   switch(state[NameSpace.Data].sorting) {
     case SortingType.Popular:
       return selectOffersByCity(state);
