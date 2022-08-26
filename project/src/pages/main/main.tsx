@@ -9,13 +9,14 @@ import {useAppSelector} from '../../hooks';
 import {cities} from '../../const';
 import LoadingScreen from '../../pages/loading-screen/loading-screen';
 import {getActiveCity} from '../../store/data-process/selectors';
-import {selectOffersByCity, getDataLoaded} from '../../store/offer-process/selectors';
+import {selectOffers, getDataLoaded} from '../../store/offer-process/selectors';
 
 
 function MainScreen(): JSX.Element {
   const activeCity = useAppSelector(getActiveCity);
 
-  const offers = useAppSelector(selectOffersByCity);
+  const offers = useAppSelector(selectOffers);
+
   const isDataLoaded = useAppSelector(getDataLoaded);
   const [selectedOffer, setSelectedOffer] = useState<Offer | undefined>();
 
