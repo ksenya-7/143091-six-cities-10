@@ -17,7 +17,7 @@ function RoomScreen(): JSX.Element {
   const [, setSelectedOffer] = useState<Offer | undefined>();
 
   const activeCity = useAppSelector((state) => state.city);
-  const offerById = useAppSelector((state) => state.offerById);
+  const activeOffer = useAppSelector((state) => state.offerById);
   const nearbyOffers = useAppSelector((state) => state.nearbyOffers).slice(0, OFFERS_NEARBY_COUNT);
 
   useEffect(() => {
@@ -32,17 +32,17 @@ function RoomScreen(): JSX.Element {
 
   const checkedCity = cities.find((item) => item.name === activeCity);
 
-  if(!checkedCity || !offerById || !id) {
+  if(!checkedCity || !activeOffer || !id) {
     return (<NotFoundScreen />);
   }
 
-  const {images, isPremium, title, isFavorite, rating, goods, price, type, bedrooms, maxAdults, host, description} = offerById;
+  const {images, isPremium, title, isFavorite, rating, goods, price, type, bedrooms, maxAdults, host, description} = activeOffer;
 
   const slicedImages = images.slice(0, MAX_IMAGES_COUNT);
 
 
   const handleMouseEnter = () => {
-    setSelectedOffer(offerById);
+    setSelectedOffer(activeOffer);
   };
 
   const handleMouseLeave = () => {

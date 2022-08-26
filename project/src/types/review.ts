@@ -11,7 +11,7 @@ export type Review = {
   };
 };
 
-export type PostReview = {
+export type ReviewAddParams = {
   hotelId: string;
   comment: string;
   rating: string;

@@ -1,7 +1,7 @@
 import React, {useRef, useState, FormEvent, ChangeEvent} from 'react';
 import {useAppDispatch} from '../../hooks';
 import {PostReviewAction} from '../../store/api-actions';
-import {PostReview} from '../../types/review';
+import {ReviewAddParams} from '../../types/review';
 import {ratingStars, REVIEW_MAX_LENGTH, REVIEW_MIN_LENGTH} from '../../const';
 
 
@@ -25,7 +25,7 @@ function FormReview({id}: FormReviewProps): JSX.Element {
     setFormData({...formData, [name]:value});
   };
 
-  const onSubmit = (newReview: PostReview) => {
+  const onSubmit = (newReview: ReviewAddParams) => {
     dispatch(PostReviewAction(newReview));
   };
 

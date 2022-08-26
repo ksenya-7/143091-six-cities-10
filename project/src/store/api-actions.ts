@@ -2,7 +2,7 @@ import {AxiosInstance} from 'axios';
 import {createAsyncThunk} from '@reduxjs/toolkit';
 import {AppDispatch, State} from '../types/state.js';
 import {Offer} from '../types/offer';
-import {Review, PostReview} from '../types/review';
+import {Review, ReviewAddParams} from '../types/review';
 import {loadOffers, loadFavoriteOffers, loadReviews, setDataLoadedStatus, requireAuthorization, setError, redirectToRoute, setUserData, loadNearbyOffers, loadOfferById, setReview} from './action';
 import {saveToken, dropToken} from '../services/token';
 import {APIRoute, AuthorizationStatus, TIMEOUT_SHOW_ERROR, AppRoute} from '../const';
@@ -93,14 +93,14 @@ export const fetchReviewsAction = createAsyncThunk<void, string, {
   },
 );
 
-export const PostReviewAction = createAsyncThunk<void, PostReview, {
+export const PostReviewAction = createAsyncThunk<void, ReviewAddParams, {
   dispatch: AppDispatch,
   state: State,
   extra: AxiosInstance
 }>(
   'data/PostReview',
   async ({comment, rating, hotelId}, {dispatch, extra: api}) => {
-    await api.post<PostReview>(APIRoute.NewReview.replace(':id', hotelId), {comment, rating});
+    await api.post<ReviewAddParams>(APIRoute.NewReview.replace(':id', hotelId), {comment, rating});
     const {data} = await api.get<Review[]>(APIRoute.Reviews.replace(':id', hotelId));
 
     dispatch(setDataLoadedStatus(true));
