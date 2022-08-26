@@ -9,21 +9,24 @@ import {Offer} from '../../types/offer';
 import NotFoundScreen from '../../pages/error/error';
 import {getRatingPercentage} from '../../utils';
 import {cityObjects, OFFERS_NEARBY_COUNT, MAX_IMAGES_COUNT} from '../../const';
-import {fetchReviewsAction, fetchNearbyOffersAction, fetchOfferByIdAction} from '../../store/api-actions';
+import {fetchReviewsAction, fetchOffersNearbyAction, fetchOfferByIdAction} from '../../store/api-actions';
+import {getActiveCity} from '../../store/data-process/selectors';
+import {getActiveOffer, getOffersNearby} from '../../store/offer-process/selectors';
+
 
 function RoomScreen(): JSX.Element {
   const dispatch = useAppDispatch();
   const {id} = useParams();
   const [, setSelectedOffer] = useState<Offer | undefined>();
 
-  const activeCity = useAppSelector((state) => state.city);
-  const activeOffer = useAppSelector((state) => state.offerById);
-  const nearbyOffers = useAppSelector((state) => state.nearbyOffers).slice(0, OFFERS_NEARBY_COUNT);
+  const activeCity = useAppSelector(getActiveCity);
+  const activeOffer = useAppSelector(getActiveOffer);
+  const offersNearby = useAppSelector(getOffersNearby).slice(0, OFFERS_NEARBY_COUNT);
 
   useEffect(() => {
     if (id) {
       dispatch(fetchOfferByIdAction(id));
-      dispatch(fetchNearbyOffersAction(id));
+      dispatch(fetchOffersNearbyAction(id));
       dispatch(fetchReviewsAction(id));
     }
   }, [dispatch, id]);
@@ -135,14 +138,14 @@ function RoomScreen(): JSX.Element {
               </div>
             </div>
             <section className="property__map map">
-              <Map city={checkedCity} offers={nearbyOffers} />
+              <Map city={checkedCity} offers={offersNearby} />
             </section>
           </section>
           <div className="container">
             <section className="near-places places">
               <h2 className="near-places__title">Other places in the neighbourhood</h2>
               <NearOffersList
-                offers={nearbyOffers}
+                offers={offersNearby}
                 onMouseEnter = {handleMouseEnter}
                 onMouseLeave = {handleMouseLeave}
               />

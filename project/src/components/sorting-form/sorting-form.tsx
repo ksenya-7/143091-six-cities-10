@@ -1,11 +1,12 @@
 import {useState} from 'react';
 import {useAppDispatch, useAppSelector} from '../../hooks';
-import {setActiveSorting} from '../../store/action';
+import {setActiveSorting} from '../../store/data-process/data-process';
 import {sortingTypes, SortingType} from '../../const';
+import {getActiveSorting} from '../../store/data-process/selectors';
 
 function Sorting(): JSX.Element {
   const dispatch = useAppDispatch();
-  const activeSorting = useAppSelector((state) => state.sorting);
+  const activeSorting = useAppSelector(getActiveSorting);
   const [sortingOpen, setSortingOpen] = useState(false);
 
   const handleSortingOpen = () => {

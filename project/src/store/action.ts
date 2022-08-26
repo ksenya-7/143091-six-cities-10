@@ -1,33 +1,4 @@
 import {createAction} from '@reduxjs/toolkit';
-import {Offer} from '../types/offer';
-import {Review} from '../types/review';
-import {UserData} from '../types/user-data';
-import {AppRoute, SortingType, AuthorizationStatus} from '../const';
-
-export const setActiveCity = createAction<string>('offers/setActiveCity');
-
-export const setActiveSorting = createAction<SortingType>('offers/setActiveSorting');
-
-export const setOffers = createAction<Offer[]>('offers/setOffers');
-
-export const loadOffers = createAction<Offer[]>('offers/loadOffers');
-
-export const loadFavoriteOffers = createAction<Offer[]>('offers/loadFavoriteOffers');
-
-export const loadOfferById = createAction<Offer>('offers/loadOfferById');
-
-export const loadNearbyOffers = createAction<Offer[]>('offers/loadNearbyOffers');
-
-export const loadReviews = createAction<Review[]>('data/loadReviews');
-
-export const setReview = createAction<Review[]>('data/setReview');
-
-export const setDataLoadedStatus = createAction<boolean>('data/setDataLoadedStatus');
-
-export const requireAuthorization = createAction<AuthorizationStatus>('user/requireAuthorization');
-
-export const setError = createAction<string | null>('data/setError');
+import {AppRoute} from '../const';
 
 export const redirectToRoute = createAction<AppRoute>('data/redirectToRoute');
-
-export const setUserData = createAction<UserData>('data/setUserData');

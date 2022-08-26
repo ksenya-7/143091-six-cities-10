@@ -3,13 +3,15 @@ import {useAppSelector, useAppDispatch} from '../../hooks';
 import {logoutAction} from '../../store/api-actions';
 import {isAuth} from '../../utils';
 import {AppRoute} from '../../const';
+import {getAuthorizationStatus, getUserData} from '../../store/user-process/selectors';
+import {getFavoriteOffers} from '../../store/offer-process/selectors';
 
 function Header(): JSX.Element {
   const dispatch = useAppDispatch();
 
-  const authorizationStatus = useAppSelector((state) => state.authorizationStatus);
-  const favoriteOffers = useAppSelector((state) => state.favoriteOffers);
-  const userData = useAppSelector((state) => state.userData);
+  const authorizationStatus = useAppSelector(getAuthorizationStatus);
+  const favoriteOffers = useAppSelector(getFavoriteOffers);
+  const userData = useAppSelector(getUserData);
 
   return (
     <header className="header">

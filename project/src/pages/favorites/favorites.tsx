@@ -6,10 +6,11 @@ import {useAppSelector, useAppDispatch} from '../../hooks';
 import {cityNames} from '../../const';
 import {fetchFavoriteOffersAction} from '../../store/api-actions';
 import NotFoundScreen from '../../pages/error/error';
+import {getFavoriteOffers} from '../../store/offer-process/selectors';
 
 function FavoritesScreen(): JSX.Element {
   const dispatch = useAppDispatch();
-  const offers = useAppSelector((state) => state.favoriteOffers);
+  const offers = useAppSelector(getFavoriteOffers);
 
   useEffect(() => {
     dispatch(fetchFavoriteOffersAction());

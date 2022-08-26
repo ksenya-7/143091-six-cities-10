@@ -6,16 +6,17 @@ import CitiesList from '../../components/cities-list/cities-list';
 import Map from '../../components/map/map';
 import {Offer} from '../../types/offer';
 import {useAppSelector} from '../../hooks';
-import {selectOffers} from '../../store/selectors';
 import {cities} from '../../const';
 import LoadingScreen from '../../pages/loading-screen/loading-screen';
+import {getActiveCity} from '../../store/data-process/selectors';
+import {selectOffersByCity, getDataLoaded} from '../../store/offer-process/selectors';
 
 
 function MainScreen(): JSX.Element {
-  const activeCity = useAppSelector((state) => state.city);
+  const activeCity = useAppSelector(getActiveCity);
 
-  const offers = useAppSelector(selectOffers);
-  const {isDataLoaded} = useAppSelector((state) => state);
+  const offers = useAppSelector(selectOffersByCity);
+  const isDataLoaded = useAppSelector(getDataLoaded);
   const [selectedOffer, setSelectedOffer] = useState<Offer | undefined>();
 
   const handleMouseEnter = (id: number) => {
