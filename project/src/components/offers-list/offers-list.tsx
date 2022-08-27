@@ -1,6 +1,7 @@
 import Card from '../card/card';
 import {Offer} from '../../types/offer';
 
+
 type OffersListProps = {
   offers: Offer[];
   onMouseEnter: (id: number) => void;
@@ -16,12 +17,12 @@ function OffersList(props: OffersListProps): JSX.Element {
         <Card
           offer={offer}
           key={offer.id}
-          onMouseEnter = {onMouseEnter}
-          onMouseLeave = {onMouseLeave}
-          cardClassName = {'cities__card'}
-          imageClassName = {'cities__image-wrapper'}
-          imageWidth = {260}
-          imageHeight = {200}
+          onMouseEnter={onMouseEnter}
+          onMouseLeave={onMouseLeave}
+          cardClassName={'cities__card'}
+          imageClassName={'cities__image-wrapper'}
+          imageWidth={260}
+          imageHeight={200}
         />
       ))}
     </div>

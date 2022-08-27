@@ -3,6 +3,8 @@ import FormReview from '../../components/form-review/form-review';
 import {useAppSelector} from '../../hooks';
 import {isAuth, sortByDate} from '../../utils';
 import {MAX_REVIEWS_COUNT} from '../../const';
+import {getAuthorizationStatus} from '../../store/user-process/selectors';
+import {getReviews} from '../../store/data-process/selectors';
 
 
 type ReviewsListProps = {
@@ -10,9 +12,8 @@ type ReviewsListProps = {
 }
 
 function ReviewsList({id}: ReviewsListProps): JSX.Element {
-  const reviews = useAppSelector((state) => state.reviews);
-  const authorizationStatus = useAppSelector((state) => state.authorizationStatus);
-
+  const reviews = useAppSelector(getReviews);
+  const authorizationStatus = useAppSelector(getAuthorizationStatus);
   const sortedReviews = [...reviews].sort(sortByDate).slice(0, MAX_REVIEWS_COUNT);
 
   return (

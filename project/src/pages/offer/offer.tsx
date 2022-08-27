@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from 'react';
+import {useState, useEffect} from 'react';
 import {useParams} from 'react-router-dom';
 import {useAppSelector, useAppDispatch} from '../../hooks';
 import Header from '../../components/header/header';
@@ -9,40 +9,39 @@ import {Offer} from '../../types/offer';
 import NotFoundScreen from '../../pages/error/error';
 import {getRatingPercentage} from '../../utils';
 import {cityObjects, OFFERS_NEARBY_COUNT, MAX_IMAGES_COUNT} from '../../const';
-import {fetchReviewsAction, fetchNearbyOffersAction, fetchOfferByIdAction} from '../../store/api-actions';
+import {fetchReviewsAction, fetchOffersNearbyAction, fetchOfferByIdAction} from '../../store/api-actions';
+import {getActiveCity} from '../../store/data-process/selectors';
+import {getActiveOffer, getOffersNearby} from '../../store/offer-process/selectors';
+
 
 function RoomScreen(): JSX.Element {
   const dispatch = useAppDispatch();
   const {id} = useParams();
   const [, setSelectedOffer] = useState<Offer | undefined>();
-
-  const activeCity = useAppSelector((state) => state.city);
-  const offerById = useAppSelector((state) => state.offerById);
-  const nearbyOffers = useAppSelector((state) => state.nearbyOffers).slice(0, OFFERS_NEARBY_COUNT);
+  const activeCity = useAppSelector(getActiveCity);
+  const activeOffer = useAppSelector(getActiveOffer);
+  const offersNearby = useAppSelector(getOffersNearby).slice(0, OFFERS_NEARBY_COUNT);
 
   useEffect(() => {
     if (id) {
       dispatch(fetchOfferByIdAction(id));
-      dispatch(fetchNearbyOffersAction(id));
+      dispatch(fetchOffersNearbyAction(id));
       dispatch(fetchReviewsAction(id));
     }
   }, [dispatch, id]);
 
   const cities = cityObjects;
-
   const checkedCity = cities.find((item) => item.name === activeCity);
 
-  if(!checkedCity || !offerById || !id) {
+  if(!checkedCity || !activeOffer || !id) {
     return (<NotFoundScreen />);
   }
 
-  const {images, isPremium, title, isFavorite, rating, goods, price, type, bedrooms, maxAdults, host, description} = offerById;
-
+  const {images, isPremium, title, isFavorite, rating, goods, price, type, bedrooms, maxAdults, host, description} = activeOffer;
   const slicedImages = images.slice(0, MAX_IMAGES_COUNT);
 
-
   const handleMouseEnter = () => {
-    setSelectedOffer(offerById);
+    setSelectedOffer(activeOffer);
   };
 
   const handleMouseLeave = () => {
@@ -50,13 +49,22 @@ function RoomScreen(): JSX.Element {
   };
 
   return (
-    <React.Fragment>
+    <>
       <div style={{ display: 'none' }}>
-        <svg xmlns="http://www.w3.org/2000/svg"><symbol id="icon-arrow-select" viewBox={'0 0 7 4'}><path fillRule="evenodd" clipRule="evenodd" d="M0 0l3.5 2.813L7 0v1.084L3.5 4 0 1.084V0z"></path></symbol><symbol id="icon-bookmark" viewBox={'0 0 17 18'}><path d="M3.993 2.185l.017-.092V2c0-.554.449-1 .99-1h10c.522 0 .957.41.997.923l-2.736 14.59-4.814-2.407-.39-.195-.408.153L1.31 16.44 3.993 2.185z"></path></symbol><symbol id="icon-star" viewBox={'0 0 13 12'}><path fillRule="evenodd" clipRule="evenodd" d="M6.5 9.644L10.517 12 9.451 7.56 13 4.573l-4.674-.386L6.5 0 4.673 4.187 0 4.573 3.549 7.56 2.483 12 6.5 9.644z"></path></symbol></svg>
+        <svg xmlns="http://www.w3.org/2000/svg">
+          <symbol id="icon-arrow-select" viewBox={'0 0 7 4'}>
+            <path fillRule="evenodd" clipRule="evenodd" d="M0 0l3.5 2.813L7 0v1.084L3.5 4 0 1.084V0z" />
+          </symbol>
+          <symbol id="icon-bookmark" viewBox={'0 0 17 18'}>
+            <path d="M3.993 2.185l.017-.092V2c0-.554.449-1 .99-1h10c.522 0 .957.41.997.923l-2.736 14.59-4.814-2.407-.39-.195-.408.153L1.31 16.44 3.993 2.185z" />
+          </symbol>
+          <symbol id="icon-star" viewBox={'0 0 13 12'}>
+            <path fillRule="evenodd" clipRule="evenodd" d="M6.5 9.644L10.517 12 9.451 7.56 13 4.573l-4.674-.386L6.5 0 4.673 4.187 0 4.573 3.549 7.56 2.483 12 6.5 9.644z" />
+          </symbol>
+        </svg>
       </div>
       <div className="page">
         <Header />
-
         <main className="page__main page__main--property">
           <section className="property">
             <div className="property__gallery-container container">
@@ -85,7 +93,7 @@ function RoomScreen(): JSX.Element {
                 </div>
                 <div className="property__rating rating">
                   <div className="property__stars rating__stars">
-                    <span style={{ width: `${getRatingPercentage(rating)}%` }}></span>
+                    <span style={{ width: `${getRatingPercentage(rating)}%` }} />
                     <span className="visually-hidden">Rating</span>
                   </div>
                   <span className="property__rating-value rating__value">{rating}</span>
@@ -135,22 +143,22 @@ function RoomScreen(): JSX.Element {
               </div>
             </div>
             <section className="property__map map">
-              <Map city={checkedCity} offers={nearbyOffers} />
+              <Map city={checkedCity} offers={offersNearby} />
             </section>
           </section>
           <div className="container">
             <section className="near-places places">
               <h2 className="near-places__title">Other places in the neighbourhood</h2>
               <NearOffersList
-                offers={nearbyOffers}
-                onMouseEnter = {handleMouseEnter}
-                onMouseLeave = {handleMouseLeave}
+                offers={offersNearby}
+                onMouseEnter={handleMouseEnter}
+                onMouseLeave={handleMouseLeave}
               />
             </section>
           </div>
         </main>
       </div>
-    </React.Fragment>
+    </>
   );
 }
 
