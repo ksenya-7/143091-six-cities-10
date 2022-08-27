@@ -1,5 +1,5 @@
 import {createAction, createSlice} from '@reduxjs/toolkit';
-import {fetchReviewsAction, postReviewAction} from '../api-actions';
+import {fetchReviewsAction, postReviewAction, fetchOffersAction, fetchOfferByIdAction, fetchOffersNearbyAction} from '../api-actions';
 import type {Review} from '../../types/review';
 import {NameSpace, ACTIVE_CITY, SortingType} from '../../const';
 
@@ -47,6 +47,15 @@ export const dataProcess = createSlice({
         state.reviews = action.payload;
       })
       .addCase(postReviewAction.rejected, (state, action) => {
+        state.error = action.error.message;
+      })
+      .addCase(fetchOffersAction.rejected, (state, action) => {
+        state.error = action.error.message;
+      })
+      .addCase(fetchOfferByIdAction.rejected, (state, action) => {
+        state.error = action.error.message;
+      })
+      .addCase(fetchOffersNearbyAction.rejected, (state, action) => {
         state.error = action.error.message;
       });
   }
