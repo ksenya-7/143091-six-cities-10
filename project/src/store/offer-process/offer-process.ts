@@ -40,9 +40,15 @@ export const offerProcess = createSlice({
         state.offerById = action.payload;
         state.isDataLoaded = true;
       })
+      .addCase(fetchFavoriteOffersAction.pending, (state) => {
+        state.isDataLoaded = false;
+      })
       .addCase(fetchFavoriteOffersAction.fulfilled, (state, action) => {
         state.favoriteOffers = action.payload;
         state.isDataLoaded = true;
+      })
+      .addCase(fetchOffersNearbyAction.pending, (state) => {
+        state.isDataLoaded = false;
       })
       .addCase(fetchOffersNearbyAction.fulfilled, (state, action) => {
         state.offersNearby = action.payload;

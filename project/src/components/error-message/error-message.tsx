@@ -1,10 +1,10 @@
 import {useAppSelector} from '../../hooks';
 import './error-message.css';
-import {setErrorMessage} from '../../store/data-process/selectors';
+import {getErrorMessage} from '../../store/data-process/selectors';
 
 
 function ErrorMessage(): JSX.Element | null {
-  const error = useAppSelector(setErrorMessage);
+  const error = useAppSelector(getErrorMessage);
 
   return (error)
     ? <div className='error-message'>{`${error}`}</div>

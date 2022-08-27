@@ -8,7 +8,7 @@ type DataProcess = {
   city: string,
   sorting: SortingType,
   reviews: Review[],
-  error: string | null,
+  error?: string | null,
 };
 
 const initialState: DataProcess = {
@@ -20,7 +20,7 @@ const initialState: DataProcess = {
 
 export const setActiveCity = createAction<string>('data/setActiveCity');
 export const setActiveSorting = createAction<SortingType>('data/setActiveSorting');
-export const setError = createAction<string | null>('data/setError');
+export const getError = createAction<string | null>('data/getError');
 
 export const dataProcess = createSlice({
   name: NameSpace.Data,
@@ -34,14 +34,20 @@ export const dataProcess = createSlice({
       .addCase(setActiveSorting, (state, action) => {
         state.sorting = action.payload;
       })
-      .addCase(setError, (state, action) => {
+      .addCase(getError, (state, action) => {
         state.error = action.payload;
       })
       .addCase(fetchReviewsAction.fulfilled, (state, action) => {
         state.reviews = action.payload;
       })
+      .addCase(fetchReviewsAction.rejected, (state, action) => {
+        state.error = action.error.message;
+      })
       .addCase(postReviewAction.fulfilled, (state, action) => {
         state.reviews = action.payload;
+      })
+      .addCase(postReviewAction.rejected, (state, action) => {
+        state.error = action.error.message;
       });
   }
 });
