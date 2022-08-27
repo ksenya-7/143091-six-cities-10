@@ -7,6 +7,7 @@ import {getToken} from './services/token';
 import {store} from './store';
 import {fetchOffersAction, checkAuthAction} from './store/api-actions';
 
+
 if(getToken()){
   store.dispatch(checkAuthAction());
 }
@@ -19,7 +20,7 @@ const root = ReactDOM.createRoot(
 
 root.render(
   <React.StrictMode>
-    <Provider store = {store}>
+    <Provider store={store}>
       <ErrorMessage />
       <App />
     </Provider>

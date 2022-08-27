@@ -2,6 +2,7 @@ import {cityNames} from '../../const';
 import {useAppDispatch} from '../../hooks';
 import {setActiveCity} from '../../store/data-process/data-process';
 
+
 type CitiesListProps = {
   activeCity: string,
 }

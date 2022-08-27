@@ -14,7 +14,6 @@ type ReviewsListProps = {
 function ReviewsList({id}: ReviewsListProps): JSX.Element {
   const reviews = useAppSelector(getReviews);
   const authorizationStatus = useAppSelector(getAuthorizationStatus);
-
   const sortedReviews = [...reviews].sort(sortByDate).slice(0, MAX_REVIEWS_COUNT);
 
   return (

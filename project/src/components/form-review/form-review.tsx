@@ -13,6 +13,7 @@ function FormReview({id}: FormReviewProps): JSX.Element {
   const dispatch = useAppDispatch();
 
   const formRef = useRef<HTMLFormElement | null>(null);
+
   const [formData, setFormData] = useState(({
     rating: '',
     review: '',

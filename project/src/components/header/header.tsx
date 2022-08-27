@@ -6,6 +6,7 @@ import {AppRoute} from '../../const';
 import {getAuthorizationStatus, getUserData} from '../../store/user-process/selectors';
 import {getFavoriteOffers} from '../../store/offer-process/selectors';
 
+
 function Header(): JSX.Element {
   const dispatch = useAppDispatch();
 

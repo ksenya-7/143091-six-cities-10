@@ -4,6 +4,7 @@ import {setActiveSorting} from '../../store/data-process/data-process';
 import {sortingTypes, SortingType} from '../../const';
 import {getActiveSorting} from '../../store/data-process/selectors';
 
+
 function Sorting(): JSX.Element {
   const dispatch = useAppDispatch();
   const activeSorting = useAppSelector(getActiveSorting);

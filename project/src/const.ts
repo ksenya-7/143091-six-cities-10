@@ -1,19 +1,11 @@
 export const MONTHS = ['January ', 'February ', 'March ', 'April ', 'May ', 'June ', 'July ', 'August ', 'September ', 'October ', 'November ', 'December '];
-
 export const ACTIVE_CITY = 'Paris';
-
 export const AUTH_TOKEN_KEY_NAME = 'six-cities';
-
 export const TIMEOUT_SHOW_ERROR = 3000;
-
 export const REVIEW_MIN_LENGTH = 50;
-
 export const REVIEW_MAX_LENGTH = 300;
-
 export const MAX_REVIEWS_COUNT = 10;
-
 export const MAX_IMAGES_COUNT = 6;
-
 export const OFFERS_NEARBY_COUNT = 3;
 
 export enum NameSpace {

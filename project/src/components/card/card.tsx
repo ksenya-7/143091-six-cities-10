@@ -46,7 +46,7 @@ function Card(props: OfferScreenProps): JSX.Element {
         </div>
         <div className="place-card__rating rating">
           <div className="place-card__stars rating__stars">
-            <span style={{ width: `${getRatingPercentage(rating)}%` }}></span>
+            <span style={{ width: `${getRatingPercentage(rating)}%` }} />
             <span className="visually-hidden">Rating</span>
           </div>
         </div>

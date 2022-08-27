@@ -2,6 +2,7 @@ import {Review} from '../../types/review';
 import {MONTHS} from '../../const';
 import {getRatingPercentage} from '../../utils';
 
+
 type CommentProps = {
   review: Review;
 }
@@ -25,7 +26,7 @@ function Comment({review}: CommentProps): JSX.Element {
       <div className="reviews__info">
         <div className="reviews__rating rating">
           <div className="reviews__stars rating__stars">
-            <span style={{ width: `${getRatingPercentage(rating)}%` }}></span>
+            <span style={{ width: `${getRatingPercentage(rating)}%` }} />
             <span className="visually-hidden">Rating</span>
           </div>
         </div>

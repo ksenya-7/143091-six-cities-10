@@ -4,6 +4,7 @@ import useMap from '../../hooks/useMap';
 import {City, Offer} from '../../types/offer';
 import 'leaflet/dist/leaflet.css';
 
+
 type MapProps = {
   city: City;
   offers: Offer[];
@@ -35,7 +36,6 @@ function Map(props: MapProps): JSX.Element {
           lat: offer.location.latitude,
           lng: offer.location.longitude,
         });
-
         marker
           .setIcon(
             selectedOffer !== undefined && offer.id === selectedOffer.id
@@ -44,7 +44,6 @@ function Map(props: MapProps): JSX.Element {
           )
           .addTo(map);
       });
-
       map.flyTo([city.location.latitude, city.location.longitude]);
     }
   }, [map, offers, selectedOffer, city]);

@@ -3,6 +3,7 @@ import {useAppSelector} from '../../hooks';
 import {AppRoute, AuthorizationStatus} from '../../const';
 import {getAuthorizationStatus} from '../../store/user-process/selectors';
 
+
 type PrivateRouteProps = {
   children: JSX.Element;
 }
