@@ -1,6 +1,6 @@
 import {AxiosInstance} from 'axios';
 import {createAsyncThunk} from '@reduxjs/toolkit';
-import {AppDispatch, State} from '../types/state.js';
+import {AppDispatch} from '../types/state.js';
 import {Offer} from '../types/offer';
 import {Review, ReviewAddParams} from '../types/review';
 import {redirectToRoute} from './action';
@@ -11,8 +11,6 @@ import {UserData} from '../types/user-data';
 
 
 export const fetchOffersAction = createAsyncThunk<Offer[], undefined, {
-  dispatch: AppDispatch,
-  state: State,
   extra: AxiosInstance
 }>(
   'data/fetchOffers',
@@ -24,8 +22,6 @@ export const fetchOffersAction = createAsyncThunk<Offer[], undefined, {
 );
 
 export const fetchOfferByIdAction = createAsyncThunk<Offer, string, {
-  dispatch: AppDispatch,
-  state: State,
   extra: AxiosInstance
 }>(
   'data/fetchOfferById',
@@ -37,8 +33,6 @@ export const fetchOfferByIdAction = createAsyncThunk<Offer, string, {
 );
 
 export const fetchFavoriteOffersAction = createAsyncThunk<Offer[], undefined, {
-  dispatch: AppDispatch,
-  state: State,
   extra: AxiosInstance
 }>(
   'data/fetchFavorite',
@@ -50,8 +44,6 @@ export const fetchFavoriteOffersAction = createAsyncThunk<Offer[], undefined, {
 );
 
 export const fetchOffersNearbyAction = createAsyncThunk<Offer[], string, {
-  dispatch: AppDispatch,
-  state: State,
   extra: AxiosInstance
 }>(
   'data/fetchNearbyOffers',
@@ -63,8 +55,6 @@ export const fetchOffersNearbyAction = createAsyncThunk<Offer[], string, {
 );
 
 export const fetchReviewsAction = createAsyncThunk<Review[], string, {
-  dispatch: AppDispatch,
-  state: State,
   extra: AxiosInstance
 }>(
   'data/fetchReviews',
@@ -76,8 +66,6 @@ export const fetchReviewsAction = createAsyncThunk<Review[], string, {
 );
 
 export const postReviewAction = createAsyncThunk<Review[], ReviewAddParams, {
-  dispatch: AppDispatch,
-  state: State,
   extra: AxiosInstance
 }>(
   'data/PostReview',
@@ -90,8 +78,6 @@ export const postReviewAction = createAsyncThunk<Review[], ReviewAddParams, {
 );
 
 export const checkAuthAction = createAsyncThunk<UserData, undefined, {
-  dispatch: AppDispatch,
-  state: State,
   extra: AxiosInstance
 }>(
   'user/checkAuth',
@@ -103,7 +89,6 @@ export const checkAuthAction = createAsyncThunk<UserData, undefined, {
 
 export const loginAction = createAsyncThunk<UserData, AuthData, {
   dispatch: AppDispatch,
-  state: State,
   extra: AxiosInstance
 }>(
   'user/login',
@@ -117,8 +102,6 @@ export const loginAction = createAsyncThunk<UserData, AuthData, {
 );
 
 export const logoutAction = createAsyncThunk<void, undefined, {
-  dispatch: AppDispatch,
-  state: State,
   extra: AxiosInstance
 }>(
   'user/logout',
