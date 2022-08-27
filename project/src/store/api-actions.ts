@@ -4,22 +4,11 @@ import {AppDispatch, State} from '../types/state.js';
 import {Offer} from '../types/offer';
 import {Review, ReviewAddParams} from '../types/review';
 import {redirectToRoute} from './action';
-import {setError} from '../store/data-process/data-process';
 import {saveToken, dropToken} from '../services/token';
-import {APIRoute, TIMEOUT_SHOW_ERROR, AppRoute} from '../const';
+import {APIRoute, AppRoute} from '../const';
 import {AuthData} from '../types/auth-data';
 import {UserData} from '../types/user-data';
-import {store} from './';
 
-export const clearErrorAction = createAsyncThunk(
-  'data/clearError',
-  () => {
-    setTimeout(
-      () => store.dispatch(setError(null)),
-      TIMEOUT_SHOW_ERROR,
-    );
-  },
-);
 
 export const fetchOffersAction = createAsyncThunk<Offer[], undefined, {
   dispatch: AppDispatch,

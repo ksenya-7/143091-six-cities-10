@@ -30,7 +30,7 @@ function MainScreen(): JSX.Element {
     setSelectedOffer(undefined);
   };
 
-  if (isDataLoaded) {
+  if (!isDataLoaded) {
     return (
       <LoadingScreen />
     );

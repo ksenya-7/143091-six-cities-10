@@ -1,7 +1,16 @@
 import {createSlice} from '@reduxjs/toolkit';
 import {NameSpace} from '../../const';
-import {OfferProcess} from '../../types/state';
 import {fetchOffersAction, fetchOfferByIdAction, fetchOffersNearbyAction, fetchFavoriteOffersAction} from '../api-actions';
+import {Offer} from '../../types/offer';
+
+
+type OfferProcess = {
+  offers: Offer[],
+  favoriteOffers: Offer[],
+  offerById: Offer | undefined,
+  offersNearby: Offer[],
+  isDataLoaded: boolean,
+};
 
 const initialState: OfferProcess = {
   offers: [],
@@ -15,7 +24,7 @@ export const offerProcess = createSlice({
   name: NameSpace.Offer,
   initialState,
   reducers: {},
-  extraReducers(builder) {
+  extraReducers: (builder) => {
     builder
       .addCase(fetchOffersAction.pending, (state) => {
         state.isDataLoaded = false;

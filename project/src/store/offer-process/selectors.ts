@@ -15,20 +15,6 @@ export const getFavoriteOffers = (state: State): Offer[] => state[NameSpace.Offe
 
 export const selectOffersByCity = (state: State): Offer[] => state[NameSpace.Offer].offers.filter((offer) => offer.city.name === state[NameSpace.Data].city);
 
-// const sortings = {
-//   [SortingType.PriceToHigh]: sortByPriceLowToHigh,
-//   [SortingType.PriceToLow]: sortByPriceHighToLow,
-//   [SortingType.RatingFirst]: sortByRating,
-// };
-
-// export const selectOffers = (state: State) => (
-//   // state[NameSpace.Data].sorting === SortingType.Popular ?
-//   //   selectOffersByCity(state) :
-//   //   selectOffersByCity(state).sort(sortings[state[NameSpace.Data].sorting])
-// );
-
-// console.log(state[NameSpace.Data].sorting);
-
 export const selectOffers = (state: State) => {
   switch(state[NameSpace.Data].sorting) {
     case SortingType.Popular:
@@ -41,3 +27,25 @@ export const selectOffers = (state: State) => {
       return selectOffersByCity(state).sort(sortByRating);
   }
 };
+
+// export const selectSorting = (state: State) => state[NameSpace.Data].sorting;
+// export const selectCity = (state: State) => state[NameSpace.Data].city;
+// export const selectAllOffers = (state: State) => state[NameSpace.Offer].offers;
+
+// export const selectCityOffers = createSelector(
+//   selectCity,
+//   selectAllOffers,
+//   (city, offers) => offers.filter((offer) => offer.city.name === city)
+// );
+
+// const sortings = {
+//   [SortingType.PriceToHigh]: sortByPriceLowToHigh,
+//   [SortingType.PriceToLow]: sortByPriceHighToLow,
+//   [SortingType.RatingFirst]: sortByRating,
+// };
+
+// export const selectOffers = createSelector(
+//   selectSorting,
+//   selectCityOffers,
+//   (sorting, offers) => (sorting === SortingType.Popular ? offers : offers.sort(sortings[sorting]))
+// );
