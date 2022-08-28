@@ -1,10 +1,6 @@
 import {AxiosInstance} from 'axios';
 import {createAsyncThunk} from '@reduxjs/toolkit';
-<<<<<<< Updated upstream
 import {AppDispatch} from '../types/state.js';
-=======
-import {AppDispatch, State} from '../types/state';
->>>>>>> Stashed changes
 import {Offer} from '../types/offer';
 import {StatusFavoriteOffer} from '../types/favorite';
 import {Review, ReviewAddParams} from '../types/review';
