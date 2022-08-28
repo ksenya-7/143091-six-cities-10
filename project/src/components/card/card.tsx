@@ -1,8 +1,12 @@
 import {Link} from 'react-router-dom';
-import {useAppDispatch} from '../../hooks';
-import {toggleFavoriteStatusOfferAction} from '../../store/api-actions';
+import {useAppDispatch, useAppSelector} from '../../hooks';
+import {toggleFavoriteStatusOfferAction, fetchOffersAction, fetchFavoriteOffersAction} from '../../store/api-actions';
+import {redirectToRoute} from '../../store/action';
+import {getAuthorizationStatus} from '../../store/user-process/selectors';
 import {Offer} from '../../types/offer';
 import {getRatingPercentage} from '../../utils';
+import {AppRoute, AuthorizationStatus} from '../../const';
+
 
 type OfferScreenProps = {
   offer: Offer;
@@ -13,14 +17,14 @@ type OfferScreenProps = {
   infoClassName?: string;
   imageWidth: number;
   imageHeight: number;
-  isFavorite: boolean;
+  // isFavorite: boolean;
 };
 
 function Card(props: OfferScreenProps): JSX.Element {
   const dispatch = useAppDispatch();
+  const authorizationStatus = useAppSelector(getAuthorizationStatus);
   const {offer, cardClassName, imageClassName, infoClassName = '', imageWidth, imageHeight, onMouseEnter, onMouseLeave} = props;
-  const {id, isPremium, images, rating, title, price, type} = offer;
-  let {isFavorite} = props;
+  const {id, isPremium, images, rating, title, price, type, isFavorite} = offer;
 
   const handleMouseEnter = () => {
     if (onMouseEnter) {
@@ -29,13 +33,13 @@ function Card(props: OfferScreenProps): JSX.Element {
   };
 
   const handleClickBookmarkButton = () => {
-    const statusAndId = {
-      hotelId: offer.id,
-      status: offer.isFavorite ? '1' : '0',
-    };
-    dispatch(toggleFavoriteStatusOfferAction(statusAndId));
-    isFavorite = !isFavorite;
-    // console.log(isFavorite);
+    if(authorizationStatus === AuthorizationStatus.Auth) {
+      dispatch(toggleFavoriteStatusOfferAction({hotelId: offer.id, status: offer.isFavorite ? '0' : '1'}));
+      dispatch(fetchOffersAction());
+      dispatch(fetchFavoriteOffersAction());
+    } else {
+      dispatch(redirectToRoute(AppRoute.Login));
+    }
   };
 
   return (

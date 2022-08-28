@@ -12,10 +12,15 @@ import {cityObjects, OFFERS_NEARBY_COUNT, MAX_IMAGES_COUNT} from '../../const';
 import {fetchReviewsAction, fetchOffersNearbyAction, fetchOfferByIdAction} from '../../store/api-actions';
 import {getActiveCity} from '../../store/data-process/selectors';
 import {getActiveOffer, getOffersNearby} from '../../store/offer-process/selectors';
+import {toggleFavoriteStatusOfferAction, fetchOffersAction, fetchFavoriteOffersAction} from '../../store/api-actions';
+import {redirectToRoute} from '../../store/action';
+import {getAuthorizationStatus} from '../../store/user-process/selectors';
+import {AppRoute, AuthorizationStatus} from '../../const';
 
 
 function RoomScreen(): JSX.Element {
   const dispatch = useAppDispatch();
+  const authorizationStatus = useAppSelector(getAuthorizationStatus);
   const {id} = useParams();
   const [, setSelectedOffer] = useState<Offer | undefined>();
   const activeCity = useAppSelector(getActiveCity);
@@ -46,6 +51,16 @@ function RoomScreen(): JSX.Element {
 
   const handleMouseLeave = () => {
     setSelectedOffer(undefined);
+  };
+
+  const handleClickBookmarkButton = () => {
+    if(authorizationStatus === AuthorizationStatus.Auth) {
+      dispatch(toggleFavoriteStatusOfferAction({hotelId: activeOffer.id, status: activeOffer.isFavorite ? '0' : '1'}));
+      dispatch(fetchOffersAction());
+      dispatch(fetchFavoriteOffersAction());
+    } else {
+      dispatch(redirectToRoute(AppRoute.Login));
+    }
   };
 
   return (
@@ -84,7 +99,11 @@ function RoomScreen(): JSX.Element {
                 {isPremium ? <div className="property__mark"><span>Premium</span></div> : null}
                 <div className="property__name-wrapper">
                   <h1 className="property__name">{title}</h1>
-                  <button className={`property__bookmark-button ${isFavorite ? 'property__bookmark-button--active' : ''} button`} type="button">
+                  <button
+                    className={`property__bookmark-button ${isFavorite ? 'property__bookmark-button--active' : ''} button`}
+                    type="button"
+                    onClick={handleClickBookmarkButton}
+                  >
                     <svg className="property__bookmark-icon" width="31" height="33">
                       <use xlinkHref="#icon-bookmark" />
                     </svg>

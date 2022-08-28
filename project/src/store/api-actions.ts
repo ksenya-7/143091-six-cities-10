@@ -44,13 +44,12 @@ export const fetchFavoriteOffersAction = createAsyncThunk<Offer[], undefined, {
   },
 );
 
-export const toggleFavoriteStatusOfferAction = createAsyncThunk<Offer[], StatusFavoriteOffer, {
+export const toggleFavoriteStatusOfferAction = createAsyncThunk<Offer, StatusFavoriteOffer, {
   extra: AxiosInstance
 }>(
   'offer/toggleFavoriteStatusOfferAction',
   async ({hotelId, status}, { extra: api }) => {
-    await api.post<Offer>(APIRoute.FavoriteStatus.replace(':id', hotelId.toString()).replace(':status', status));
-    const {data} = await api.get<Offer[]>(APIRoute.Favorite);
+    const {data} = await api.post<Offer>(APIRoute.FavoriteStatus.replace(':id', hotelId.toString()).replace(':status', status));
 
     return data;
   }
