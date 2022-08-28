@@ -45,13 +45,14 @@ function FavoritesScreen(): JSX.Element {
               <ul className="favorites__list">
                 {cityNames.map((cityName) => (
                   <li className="favorites__locations-items" key={cityName}>
-                    <div className="favorites__locations locations locations--current">
-                      <div className="locations__item">
-                        <a className="locations__item-link" href={'/'}>
-                          <span>{cityName}</span>
-                        </a>
-                      </div>
-                    </div>
+                    {offers.filter((offer) => offer.city.name === cityName).length > 0 &&
+                      <div className="favorites__locations locations locations--current">
+                        <div className="locations__item">
+                          <a className="locations__item-link" href={'/'}>
+                            <span>{cityName}</span>
+                          </a>
+                        </div>
+                      </div>}
                     <div className="favorites__places">
                       {offers.filter((offer) => offer.city.name === cityName).map((offer) => (
                         <Card
