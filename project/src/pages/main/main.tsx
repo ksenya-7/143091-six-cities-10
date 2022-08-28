@@ -3,11 +3,12 @@ import Header from '../../components/header/header';
 import OffersList from '../../components/offers-list/offers-list';
 import Sorting from '../../components/sorting-form/sorting-form';
 import CitiesList from '../../components/cities-list/cities-list';
+import MainEmpty from '../../components/main-empty/main-empty';
 import Map from '../../components/map/map';
+import LoadingScreen from '../../pages/loading-screen/loading-screen';
 import {Offer} from '../../types/offer';
 import {useAppSelector} from '../../hooks';
 import {cities} from '../../const';
-import LoadingScreen from '../../pages/loading-screen/loading-screen';
 import {getActiveCity} from '../../store/data-process/selectors';
 import {selectOffers, getDataLoaded} from '../../store/offer-process/selectors';
 
@@ -30,6 +31,12 @@ function MainScreen(): JSX.Element {
   if (!isDataLoaded) {
     return (
       <LoadingScreen />
+    );
+  }
+
+  if (!offers) {
+    return (
+      <MainEmpty />
     );
   }
 
