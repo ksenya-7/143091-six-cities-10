@@ -17,7 +17,6 @@ type OfferScreenProps = {
   infoClassName?: string;
   imageWidth: number;
   imageHeight: number;
-  // isFavorite: boolean;
 };
 
 function Card(props: OfferScreenProps): JSX.Element {

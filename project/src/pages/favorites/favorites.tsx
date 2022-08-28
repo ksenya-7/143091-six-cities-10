@@ -62,7 +62,6 @@ function FavoritesScreen(): JSX.Element {
                           infoClassName={'favorites__card-info'}
                           imageWidth={150}
                           imageHeight={110}
-                          // isFavorite={offer.isFavorite}
                         />
                       ))}
                     </div>
