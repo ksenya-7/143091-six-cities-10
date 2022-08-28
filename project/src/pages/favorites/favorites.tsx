@@ -2,10 +2,10 @@ import {useEffect} from 'react';
 import {Link} from 'react-router-dom';
 import Header from '../../components/header/header';
 import Card from '../../components/card/card';
+import FavoritesEmpty from '../../components/favorites-empty/favorites-empty';
 import {useAppSelector, useAppDispatch} from '../../hooks';
 import {cityNames} from '../../const';
 import {fetchFavoriteOffersAction} from '../../store/api-actions';
-import NotFoundScreen from '../../pages/error/error';
 import {getFavoriteOffers} from '../../store/offer-process/selectors';
 
 
@@ -17,8 +17,8 @@ function FavoritesScreen(): JSX.Element {
     dispatch(fetchFavoriteOffersAction());
   }, [dispatch]);
 
-  if(!offers) {
-    return (<NotFoundScreen />);
+  if(offers.length === 0) {
+    return (<FavoritesEmpty />);
   }
 
   return (
@@ -62,6 +62,7 @@ function FavoritesScreen(): JSX.Element {
                           infoClassName={'favorites__card-info'}
                           imageWidth={150}
                           imageHeight={110}
+                          isFavorite={offer.isFavorite}
                         />
                       ))}
                     </div>

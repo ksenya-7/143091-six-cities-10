@@ -1,6 +1,6 @@
 import {createSlice} from '@reduxjs/toolkit';
 import {NameSpace} from '../../const';
-import {fetchOffersAction, fetchOfferByIdAction, fetchOffersNearbyAction, fetchFavoriteOffersAction} from '../api-actions';
+import {fetchOffersAction, fetchOfferByIdAction, fetchOffersNearbyAction, fetchFavoriteOffersAction, toggleFavoriteStatusOfferAction} from '../api-actions';
 import {Offer} from '../../types/offer';
 
 
@@ -46,6 +46,9 @@ export const offerProcess = createSlice({
       .addCase(fetchFavoriteOffersAction.fulfilled, (state, action) => {
         state.favoriteOffers = action.payload;
         state.isDataLoaded = true;
+      })
+      .addCase(toggleFavoriteStatusOfferAction.fulfilled, (state, action) => {
+        state.favoriteOffers = action.payload;
       })
       .addCase(fetchOffersNearbyAction.pending, (state) => {
         state.isDataLoaded = false;

@@ -23,6 +23,7 @@ function NearOffersList(props: NearOffersListProps): JSX.Element {
           imageClassName={'near-places__image-wrapper'}
           imageWidth={260}
           imageHeight={200}
+          isFavorite={offer.isFavorite}
         />
       ))}
     </div>

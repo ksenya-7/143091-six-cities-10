@@ -23,6 +23,7 @@ function OffersList(props: OffersListProps): JSX.Element {
           imageClassName={'cities__image-wrapper'}
           imageWidth={260}
           imageHeight={200}
+          isFavorite={offer.isFavorite}
         />
       ))}
     </div>

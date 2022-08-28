@@ -19,6 +19,7 @@ export enum APIRoute {
   Login = '/login',
   Logout = '/logout',
   Favorite = '/favorite',
+  FavoriteStatus = '/favorite/:id/:status',
   OfferById = '/hotels/:id',
   Nearby = '/hotels/:id/nearby',
   Reviews = '/comments/:id',

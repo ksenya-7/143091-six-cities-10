@@ -1,4 +1,6 @@
 import {Link} from 'react-router-dom';
+import {useAppDispatch} from '../../hooks';
+import {toggleFavoriteStatusOfferAction} from '../../store/api-actions';
 import {Offer} from '../../types/offer';
 import {getRatingPercentage} from '../../utils';
 
@@ -11,16 +13,29 @@ type OfferScreenProps = {
   infoClassName?: string;
   imageWidth: number;
   imageHeight: number;
+  isFavorite: boolean;
 };
 
 function Card(props: OfferScreenProps): JSX.Element {
+  const dispatch = useAppDispatch();
   const {offer, cardClassName, imageClassName, infoClassName = '', imageWidth, imageHeight, onMouseEnter, onMouseLeave} = props;
-  const {id, isPremium, images, rating, title, isFavorite, price, type} = offer;
+  const {id, isPremium, images, rating, title, price, type} = offer;
+  let {isFavorite} = props;
 
   const handleMouseEnter = () => {
     if (onMouseEnter) {
       onMouseEnter(offer.id);
     }
+  };
+
+  const handleClickBookmarkButton = () => {
+    const statusAndId = {
+      hotelId: offer.id,
+      status: offer.isFavorite ? '1' : '0',
+    };
+    dispatch(toggleFavoriteStatusOfferAction(statusAndId));
+    isFavorite = !isFavorite;
+    // console.log(isFavorite);
   };
 
   return (
@@ -37,7 +52,11 @@ function Card(props: OfferScreenProps): JSX.Element {
             <b className="place-card__price-value">&euro;{price}</b>
             <span className="place-card__price-text">&#47;&nbsp;night</span>
           </div>
-          <button className={isFavorite ? 'place-card__bookmark-button place-card__bookmark-button--active button' : 'place-card__bookmark-button button'} type="button">
+          <button
+            className={`place-card__bookmark-button ${isFavorite ? 'place-card__bookmark-button--active' : ''} button`}
+            type="button"
+            onClick={handleClickBookmarkButton}
+          >
             <svg className="place-card__bookmark-icon" width="18" height="19">
               <use xlinkHref="#icon-bookmark" />
             </svg>
