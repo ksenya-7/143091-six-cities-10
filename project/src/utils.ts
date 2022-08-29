@@ -19,3 +19,5 @@ export const isValidPassword = (password: string) => password
   );
 
 export const sortByDate = (reviewA: Review, reviewB: Review) => dayjs(reviewB.date).diff(reviewA.date, 'minute');
+
+export const getRandomInRange = (min: number, max: number) => Math.floor(Math.random() * (max - min + 1)) + min;

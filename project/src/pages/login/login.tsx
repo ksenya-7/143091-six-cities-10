@@ -2,8 +2,9 @@ import {useRef, useState, FormEvent, ChangeEvent} from 'react';
 import {Link} from 'react-router-dom';
 import {useAppDispatch} from '../../hooks';
 import {loginAction} from '../../store/api-actions';
-import {AppRoute} from '../../const';
-import {isValidPassword} from '../../utils';
+import {setActiveCity} from '../../store/data-process/data-process';
+import {cityObjects, AppRoute} from '../../const';
+import {isValidPassword, getRandomInRange} from '../../utils';
 import './error-password.css';
 
 
@@ -12,6 +13,9 @@ function LoginScreen(): JSX.Element {
   const loginRef = useRef<HTMLInputElement | null>(null);
   const passwordRef = useRef<HTMLInputElement | null>(null);
   const [invalidInputData, setInvalidInputData] = useState(false);
+  const randomCity = cityObjects[getRandomInRange(0, cityObjects.length - 1)];
+
+  dispatch(setActiveCity(randomCity.name));
 
   const handleInputChange = ({target}:ChangeEvent<HTMLInputElement>) => {
     const {value} = target;
@@ -90,7 +94,7 @@ function LoginScreen(): JSX.Element {
             <section className="locations locations--login locations--current">
               <div className="locations__item">
                 <Link className="locations__item-link" to={AppRoute.Root}>
-                  <span>Amsterdam</span>
+                  <span>{randomCity.name}</span>
                 </Link>
               </div>
             </section>

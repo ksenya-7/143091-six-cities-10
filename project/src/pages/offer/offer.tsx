@@ -1,11 +1,10 @@
-import {useState, useEffect} from 'react';
+import {useEffect} from 'react';
 import {useParams} from 'react-router-dom';
 import {useAppSelector, useAppDispatch} from '../../hooks';
 import Header from '../../components/header/header';
 import ReviewsList from '../../components/reviews-list/reviews-list';
 import NearOffersList from '../../components/near-offers-list/near-offers-list';
 import Map from '../../components/map/map';
-import {Offer} from '../../types/offer';
 import NotFoundScreen from '../../pages/error/error';
 import {getRatingPercentage} from '../../utils';
 import {cityObjects, OFFERS_NEARBY_COUNT, MAX_IMAGES_COUNT} from '../../const';
@@ -22,7 +21,6 @@ function RoomScreen(): JSX.Element {
   const dispatch = useAppDispatch();
   const authorizationStatus = useAppSelector(getAuthorizationStatus);
   const {id} = useParams();
-  const [, setSelectedOffer] = useState<Offer | undefined>();
   const activeCity = useAppSelector(getActiveCity);
   const activeOffer = useAppSelector(getActiveOffer);
   const offersNearby = useAppSelector(getOffersNearby).slice(0, OFFERS_NEARBY_COUNT);
@@ -35,8 +33,7 @@ function RoomScreen(): JSX.Element {
     }
   }, [dispatch, id]);
 
-  const cities = cityObjects;
-  const checkedCity = cities.find((item) => item.name === activeCity);
+  const checkedCity = cityObjects.find((item) => item.name === activeCity);
 
   if(!checkedCity || !activeOffer || !id) {
     return (<NotFoundScreen />);
@@ -45,18 +42,12 @@ function RoomScreen(): JSX.Element {
   const {images, isPremium, title, isFavorite, rating, goods, price, type, bedrooms, maxAdults, host, description} = activeOffer;
   const slicedImages = images.slice(0, MAX_IMAGES_COUNT);
 
-  const handleMouseEnter = () => {
-    setSelectedOffer(activeOffer);
-  };
-
-  const handleMouseLeave = () => {
-    setSelectedOffer(undefined);
-  };
-
   const handleClickBookmarkButton = () => {
     if(authorizationStatus === AuthorizationStatus.Auth) {
       dispatch(toggleFavoriteStatusOfferAction({hotelId: activeOffer.id, status: activeOffer.isFavorite ? '0' : '1'}));
       dispatch(fetchOffersAction());
+      dispatch(fetchOfferByIdAction(id));
+      dispatch(fetchOffersNearbyAction(id));
       dispatch(fetchFavoriteOffersAction());
     } else {
       dispatch(redirectToRoute(AppRoute.Login));
@@ -170,8 +161,6 @@ function RoomScreen(): JSX.Element {
               <h2 className="near-places__title">Other places in the neighbourhood</h2>
               <NearOffersList
                 offers={offersNearby}
-                onMouseEnter={handleMouseEnter}
-                onMouseLeave={handleMouseLeave}
               />
             </section>
           </div>

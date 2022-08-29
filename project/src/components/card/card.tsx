@@ -1,6 +1,7 @@
+// import {memo} from 'react';
 import {Link} from 'react-router-dom';
 import {useAppDispatch, useAppSelector} from '../../hooks';
-import {toggleFavoriteStatusOfferAction, fetchOffersAction, fetchFavoriteOffersAction} from '../../store/api-actions';
+import {toggleFavoriteStatusOfferAction, fetchOffersAction, fetchFavoriteOffersAction, fetchOfferByIdAction, fetchOffersNearbyAction} from '../../store/api-actions';
 import {redirectToRoute} from '../../store/action';
 import {getAuthorizationStatus} from '../../store/user-process/selectors';
 import {Offer} from '../../types/offer';
@@ -35,6 +36,8 @@ function Card(props: OfferScreenProps): JSX.Element {
     if(authorizationStatus === AuthorizationStatus.Auth) {
       dispatch(toggleFavoriteStatusOfferAction({hotelId: offer.id, status: offer.isFavorite ? '0' : '1'}));
       dispatch(fetchOffersAction());
+      dispatch(fetchOfferByIdAction(id.toString()));
+      dispatch(fetchOffersNearbyAction(id.toString()));
       dispatch(fetchFavoriteOffersAction());
     } else {
       dispatch(redirectToRoute(AppRoute.Login));
@@ -82,3 +85,4 @@ function Card(props: OfferScreenProps): JSX.Element {
 }
 
 export default Card;
+// export default memo(Card, (prevProps: Offer, nextProps: Offer) => prevProps.isFavorite === nextProps.isFavorite);
