@@ -20,7 +20,7 @@ const initialState: DataProcess = {
 
 export const setActiveCity = createAction<string>('data/setActiveCity');
 export const setActiveSorting = createAction<SortingType>('data/setActiveSorting');
-export const getError = createAction<string | null>('data/getError');
+export const setError = createAction<string | null>('data/setError');
 
 export const dataProcess = createSlice({
   name: NameSpace.Data,
@@ -34,7 +34,7 @@ export const dataProcess = createSlice({
       .addCase(setActiveSorting, (state, action) => {
         state.sorting = action.payload;
       })
-      .addCase(getError, (state, action) => {
+      .addCase(setError, (state, action) => {
         state.error = action.payload;
       })
       .addCase(fetchReviewsAction.fulfilled, (state, action) => {
