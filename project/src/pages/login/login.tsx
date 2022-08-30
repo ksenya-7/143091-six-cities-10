@@ -2,8 +2,9 @@ import {useRef, useState, FormEvent, ChangeEvent} from 'react';
 import {Link} from 'react-router-dom';
 import {useAppDispatch} from '../../hooks';
 import {loginAction} from '../../store/api-actions';
-import {AppRoute} from '../../const';
-import {isValidPassword} from '../../utils';
+import {setActiveCity} from '../../store/data-process/data-process';
+import {cityObjects, AppRoute} from '../../const';
+import {isValidPassword, getRandomInRange} from '../../utils';
 import './error-password.css';
 
 
@@ -12,6 +13,7 @@ function LoginScreen(): JSX.Element {
   const loginRef = useRef<HTMLInputElement | null>(null);
   const passwordRef = useRef<HTMLInputElement | null>(null);
   const [invalidInputData, setInvalidInputData] = useState(false);
+  const randomCity = cityObjects[getRandomInRange(0, cityObjects.length - 1)];
 
   const handleInputChange = ({target}:ChangeEvent<HTMLInputElement>) => {
     const {value} = target;
@@ -21,7 +23,8 @@ function LoginScreen(): JSX.Element {
   const handleSubmit = (evt: FormEvent<HTMLFormElement>) => {
     evt.preventDefault();
 
-    if (loginRef.current !== null && passwordRef.current !== null && isValidPassword(passwordRef.current.value)) {
+    if (loginRef.current !== null && passwordRef.current !== null
+    && isValidPassword(passwordRef.current.value)) {
       dispatch(loginAction({
         login: loginRef.current.value,
         password: passwordRef.current.value,
@@ -84,13 +87,23 @@ function LoginScreen(): JSX.Element {
                     placeholder="Password" required
                   />
                 </div>
-                <button className="login__submit form__submit button" type="submit" disabled={invalidInputData}>Sign in</button>
+                <button
+                  className="login__submit form__submit button"
+                  type="submit"
+                  disabled={invalidInputData}
+                >
+                  Sign in
+                </button>
               </form>
             </section>
             <section className="locations locations--login locations--current">
               <div className="locations__item">
-                <Link className="locations__item-link" to={AppRoute.Root}>
-                  <span>Amsterdam</span>
+                <Link
+                  className="locations__item-link"
+                  to={AppRoute.Root}
+                  onClick={() => dispatch(setActiveCity(randomCity.name))}
+                >
+                  <span>{randomCity.name}</span>
                 </Link>
               </div>
             </section>

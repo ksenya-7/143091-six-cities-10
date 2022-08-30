@@ -1,5 +1,5 @@
 import {createAction, createSlice} from '@reduxjs/toolkit';
-import {fetchReviewsAction, postReviewAction, fetchOffersAction, fetchOfferByIdAction, fetchOffersNearbyAction} from '../api-actions';
+import {fetchReviewsAction, postReviewAction, fetchOffersAction, fetchOfferByIdAction, fetchFavoriteOffersAction, fetchOffersNearbyAction, toggleFavoriteStatusOfferAction} from '../api-actions';
 import type {Review} from '../../types/review';
 import {NameSpace, ACTIVE_CITY, SortingType} from '../../const';
 
@@ -53,6 +53,12 @@ export const dataProcess = createSlice({
         state.error = action.error.message;
       })
       .addCase(fetchOfferByIdAction.rejected, (state, action) => {
+        state.error = action.error.message;
+      })
+      .addCase(fetchFavoriteOffersAction.rejected, (state, action) => {
+        state.error = action.error.message;
+      })
+      .addCase(toggleFavoriteStatusOfferAction.rejected, (state, action) => {
         state.error = action.error.message;
       })
       .addCase(fetchOffersNearbyAction.rejected, (state, action) => {

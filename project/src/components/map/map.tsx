@@ -1,5 +1,5 @@
-import {useRef, useEffect} from 'react';
-import {Icon, Marker} from 'leaflet';
+import {useRef, useEffect, useMemo} from 'react';
+import {Icon, Marker, layerGroup} from 'leaflet';
 import useMap from '../../hooks/useMap';
 import {City, Offer} from '../../types/offer';
 import 'leaflet/dist/leaflet.css';
@@ -29,7 +29,10 @@ function Map(props: MapProps): JSX.Element {
   const mapRef = useRef(null);
   const map = useMap(mapRef, city);
 
+  const markersLayerGroup = useMemo(layerGroup, []);
+
   useEffect(() => {
+    markersLayerGroup.clearLayers();
     if (map) {
       offers.forEach((offer) => {
         const marker = new Marker({
@@ -42,11 +45,12 @@ function Map(props: MapProps): JSX.Element {
               ? currentCustomIcon
               : defaultCustomIcon
           )
-          .addTo(map);
+          .addTo(markersLayerGroup);
       });
+      markersLayerGroup.addTo(map);
       map.flyTo([city.location.latitude, city.location.longitude]);
     }
-  }, [map, offers, selectedOffer, city]);
+  }, [map, offers, selectedOffer, city, markersLayerGroup]);
 
   return (
     <div style={{height: '100%'}} ref={mapRef}/>
