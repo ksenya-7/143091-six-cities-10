@@ -1,24 +1,16 @@
 import Card from '../card/card';
-import {Offer} from '../../types/offer';
+import {useAppSelector} from '../../hooks';
+import {getOffersNearby} from '../../store/offer-process/selectors';
 
 
-type NearOffersListProps = {
-  offers: Offer[];
-  onMouseEnter?: (id: number) => void;
-  onMouseLeave?: () => void;
-}
-
-function NearOffersList(props: NearOffersListProps): JSX.Element {
-  const {offers, onMouseEnter, onMouseLeave} = props;
-
+function NearOffersList(): JSX.Element {
+  const offersNearby = useAppSelector(getOffersNearby);
   return (
     <div className="near-places__list places__list">
-      {offers.map((offer) => (
+      {offersNearby.map((offer) => (
         <Card
           offer={offer}
           key={offer.id}
-          onMouseEnter={onMouseEnter}
-          onMouseLeave={onMouseLeave}
           cardClassName={'near-places__card'}
           imageClassName={'near-places__image-wrapper'}
           imageWidth={260}
