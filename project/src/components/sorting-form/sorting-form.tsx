@@ -27,7 +27,9 @@ function Sorting(): JSX.Element {
           <use xlinkHref="#icon-arrow-select" />
         </svg>
       </span>
-      <ul className={`places__options places__options--custom ${sortingOpen ? 'places__options--opened' : ''}`}>
+      <ul className={`places__options places__options--custom ${sortingOpen ?
+        'places__options--opened' : ''}`}
+      >
         {sortingTypes.map((type) => (
           <li className={`places__option ${type === activeSorting ? 'places__option--active' : ''}`} key={type} onClick={() => handleTypesOfSortingClick(type)} >
             {type}

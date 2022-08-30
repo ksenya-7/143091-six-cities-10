@@ -51,6 +51,7 @@ function RoomScreen(): JSX.Element {
     maxAdults,
     host,
     description} = activeOffer;
+
   const slicedImages = images.slice(0, MAX_IMAGES_COUNT);
 
   const handleClickBookmarkButton = () => {
@@ -99,7 +100,8 @@ function RoomScreen(): JSX.Element {
                 <div className="property__name-wrapper">
                   <h1 className="property__name">{title}</h1>
                   <button
-                    className={`property__bookmark-button ${isFavorite ? 'property__bookmark-button--active' : ''} button`}
+                    className={`property__bookmark-button ${isFavorite ?
+                      'property__bookmark-button--active' : ''} button`}
                     type="button"
                     onClick={handleClickBookmarkButton}
                   >
@@ -111,15 +113,24 @@ function RoomScreen(): JSX.Element {
                 </div>
                 <div className="property__rating rating">
                   <div className="property__stars rating__stars">
-                    <span style={{ width: `${getRatingPercentage(rating)}%` }} />
+                    <span style={{width: `${getRatingPercentage(rating)}%`}} />
                     <span className="visually-hidden">Rating</span>
                   </div>
                   <span className="property__rating-value rating__value">{rating}</span>
                 </div>
                 <ul className="property__features">
-                  {type ? <li className="property__feature property__feature--entire">{type}</li> : null}
-                  {bedrooms ? <li className="property__feature property__feature--bedrooms">{bedrooms}</li> : null}
-                  {maxAdults ? <li className="property__feature property__feature--adults">Max {maxAdults} adults</li> : null}
+                  {type ?
+                    <li className="property__feature property__feature--entire">
+                      {type}
+                    </li> : null}
+                  {bedrooms ?
+                    <li className="property__feature property__feature--bedrooms">
+                      {bedrooms}
+                    </li> : null}
+                  {maxAdults ?
+                    <li className="property__feature property__feature--adults">
+                      Max {maxAdults} adults
+                    </li> : null}
                 </ul>
                 <div className="property__price">
                   <b className="property__price-value">&euro;{price}</b>
@@ -141,8 +152,14 @@ function RoomScreen(): JSX.Element {
                 <div className="property__host">
                   <h2 className="property__host-title">Meet the host</h2>
                   <div className="property__host-user user">
-                    <div className={`property__avatar-wrapper ${host.isPro ? 'property__avatar-wrapper--pro' : ''} user__avatar-wrapper`}>
-                      <img className="property__avatar user__avatar" src={host.avatarUrl} width="74" height="74" alt="Host avatar"/>
+                    <div
+                      className={`property__avatar-wrapper ${host.isPro ?
+                        'property__avatar-wrapper--pro' :
+                        ''} user__avatar-wrapper`}
+                    >
+                      <img className="property__avatar user__avatar"
+                        src={host.avatarUrl} width="74" height="74" alt="Host avatar"
+                      />
                     </div>
                     <span className="property__user-name">
                       {host.name}

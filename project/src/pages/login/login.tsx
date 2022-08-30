@@ -23,7 +23,8 @@ function LoginScreen(): JSX.Element {
   const handleSubmit = (evt: FormEvent<HTMLFormElement>) => {
     evt.preventDefault();
 
-    if (loginRef.current !== null && passwordRef.current !== null && isValidPassword(passwordRef.current.value)) {
+    if (loginRef.current !== null && passwordRef.current !== null
+    && isValidPassword(passwordRef.current.value)) {
       dispatch(loginAction({
         login: loginRef.current.value,
         password: passwordRef.current.value,
@@ -86,7 +87,13 @@ function LoginScreen(): JSX.Element {
                     placeholder="Password" required
                   />
                 </div>
-                <button className="login__submit form__submit button" type="submit" disabled={invalidInputData}>Sign in</button>
+                <button
+                  className="login__submit form__submit button"
+                  type="submit"
+                  disabled={invalidInputData}
+                >
+                  Sign in
+                </button>
               </form>
             </section>
             <section className="locations locations--login locations--current">

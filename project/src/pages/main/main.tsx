@@ -78,7 +78,11 @@ function MainScreen(): JSX.Element {
               </section>
               <div className="cities__right-section">
                 <section className="cities__map map">
-                  <Map city={cities[activeCity as keyof typeof cities]} offers={offers} selectedOffer={selectedOffer} />
+                  <Map
+                    city={cities[activeCity as keyof typeof cities]}
+                    offers={offers}
+                    selectedOffer={selectedOffer}
+                  />
                 </section>
               </div>
             </div>

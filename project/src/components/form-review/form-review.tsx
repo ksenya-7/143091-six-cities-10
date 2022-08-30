@@ -19,7 +19,8 @@ function FormReview({id}: FormReviewProps): JSX.Element {
     review: '',
   }));
 
-  const isDisabled = formData.rating === '' || formData.review.length < REVIEW_MIN_LENGTH || formData.review.length > REVIEW_MAX_LENGTH;
+  const isDisabled = formData.rating === '' || formData.review.length < REVIEW_MIN_LENGTH ||
+  formData.review.length > REVIEW_MAX_LENGTH;
 
   const handleInputChange = ({target}:ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const {name, value} = target;
@@ -46,7 +47,13 @@ function FormReview({id}: FormReviewProps): JSX.Element {
   };
 
   return (
-    <form className="reviews__form form" action="" method="post" ref={formRef} onSubmit={handleSubmit}>
+    <form
+      className="reviews__form form"
+      action=""
+      method="post"
+      ref={formRef}
+      onSubmit={handleSubmit}
+    >
       <label className="reviews__label form__label" htmlFor="review">Your review</label>
       <div className="reviews__rating-form form__rating">
         {ratingStars.map((item) => (
@@ -59,7 +66,11 @@ function FormReview({id}: FormReviewProps): JSX.Element {
               type="radio"
               onChange={handleInputChange}
             />
-            <label htmlFor={`${item.number}-stars`} className="reviews__rating-label form__rating-label" title={item.title}>
+            <label
+              htmlFor={`${item.number}-stars`}
+              className="reviews__rating-label form__rating-label"
+              title={item.title}
+            >
               <svg className="form__star-image" width="37" height="33">
                 <use xlinkHref="#icon-star" />
               </svg>
@@ -78,7 +89,10 @@ function FormReview({id}: FormReviewProps): JSX.Element {
       </textarea>
       <div className="reviews__button-wrapper">
         <p className="reviews__help">
-          To submit review please make sure to set <span className="reviews__star">rating</span> and describe your stay with at least <b className="reviews__text-amount">50 characters</b>.
+          To submit review please make sure to set
+          <span className="reviews__star">rating</span>
+          and describe your stay with at least
+          <b className="reviews__text-amount">50 characters</b>.
         </p>
         <button
           className="reviews__submit form__submit button"
