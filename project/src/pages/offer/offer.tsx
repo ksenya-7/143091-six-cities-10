@@ -119,18 +119,14 @@ function RoomScreen(): JSX.Element {
                   <span className="property__rating-value rating__value">{rating}</span>
                 </div>
                 <ul className="property__features">
-                  {type ?
-                    <li className="property__feature property__feature--entire">
-                      {type}
-                    </li> : null}
-                  {bedrooms ?
-                    <li className="property__feature property__feature--bedrooms">
-                      {bedrooms}
-                    </li> : null}
-                  {maxAdults ?
+                  {type &&
+                    <li className="property__feature property__feature--entire">{type}</li>}
+                  {bedrooms &&
+                    <li className="property__feature property__feature--bedrooms">{bedrooms}</li>}
+                  {maxAdults &&
                     <li className="property__feature property__feature--adults">
                       Max {maxAdults} adults
-                    </li> : null}
+                    </li>}
                 </ul>
                 <div className="property__price">
                   <b className="property__price-value">&euro;{price}</b>
