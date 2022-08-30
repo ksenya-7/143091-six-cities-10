@@ -1,11 +1,12 @@
 import {dataProcess, setActiveCity} from './data-process';
 import {makeFakeDataState} from '../../utils/mocks';
 import {ACTIVE_CITY, SortingType} from '../../const';
+import {DataProcess} from './data-process';
 
 
 describe('Reducer: dataProcess', () => {
 
-  let state = makeFakeDataState();
+  let state: DataProcess;
 
   const initialState = {
     city: ACTIVE_CITY,
@@ -23,7 +24,7 @@ describe('Reducer: dataProcess', () => {
       .toEqual(initialState);
   });
   it('should update the active city by change the city', () => {
-    state.city = 'some city';
+    state.city = 'City';
     expect(dataProcess.reducer(state, setActiveCity(state.city)))
       .toEqual(state);
   });
