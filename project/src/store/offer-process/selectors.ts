@@ -13,6 +13,12 @@ export const selectSorting = (state: State) => state[NameSpace.Data].sorting;
 export const selectCity = (state: State) => state[NameSpace.Data].city;
 export const selectAllOffers = (state: State) => state[NameSpace.Offer].offers;
 
+export const selectOffersNearby = createSelector(
+  getActiveOffer,
+  getOffersNearby,
+  (offer, offers) => offer ? [offer, ...offers] : offer
+);
+
 export const selectOffersByCity = createSelector(
   selectCity,
   selectAllOffers,

@@ -15,8 +15,6 @@ function LoginScreen(): JSX.Element {
   const [invalidInputData, setInvalidInputData] = useState(false);
   const randomCity = cityObjects[getRandomInRange(0, cityObjects.length - 1)];
 
-  dispatch(setActiveCity(randomCity.name));
-
   const handleInputChange = ({target}:ChangeEvent<HTMLInputElement>) => {
     const {value} = target;
     setInvalidInputData(value === null || !isValidPassword(value));
@@ -93,7 +91,11 @@ function LoginScreen(): JSX.Element {
             </section>
             <section className="locations locations--login locations--current">
               <div className="locations__item">
-                <Link className="locations__item-link" to={AppRoute.Root}>
+                <Link
+                  className="locations__item-link"
+                  to={AppRoute.Root}
+                  onClick={() => dispatch(setActiveCity(randomCity.name))}
+                >
                   <span>{randomCity.name}</span>
                 </Link>
               </div>

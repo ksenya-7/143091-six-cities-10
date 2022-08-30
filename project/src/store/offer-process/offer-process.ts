@@ -47,14 +47,32 @@ export const offerProcess = createSlice({
         state.favoriteOffers = action.payload;
         state.isDataLoaded = true;
       })
-      .addCase(toggleFavoriteStatusOfferAction.fulfilled, (state, action) => {
-        state.offerById = action.payload;
-      })
       .addCase(fetchOffersNearbyAction.pending, (state) => {
         state.isDataLoaded = false;
       })
       .addCase(fetchOffersNearbyAction.fulfilled, (state, action) => {
         state.offersNearby = action.payload;
+        state.isDataLoaded = true;
+      })
+      .addCase(toggleFavoriteStatusOfferAction.pending, (state) => {
+        state.isDataLoaded = false;
+      })
+      .addCase(toggleFavoriteStatusOfferAction.fulfilled, (state, action) => {
+        const offer = state.offers.find((item) => item.id === action.payload.id);
+        if (offer) {
+          offer.isFavorite = action.payload.isFavorite;
+        }
+        action.payload.isFavorite ?
+          state.favoriteOffers.push(action.payload) :
+          state.favoriteOffers = state.favoriteOffers.filter((item) => item.id !== action.payload.id);
+        if (state.offerById && state.offerById.id === action.payload.id) {
+          state.offerById = action.payload;
+        }
+        const offerNearby = state.offersNearby.find((item) => item.id === action.payload.id);
+        if (offerNearby) {
+          offerNearby.isFavorite = action.payload.isFavorite;
+        }
+        state.isDataLoaded = true;
       });
   }
 });

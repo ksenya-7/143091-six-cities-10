@@ -6,7 +6,6 @@ export const REVIEW_MIN_LENGTH = 50;
 export const REVIEW_MAX_LENGTH = 300;
 export const MAX_REVIEWS_COUNT = 10;
 export const MAX_IMAGES_COUNT = 6;
-export const OFFERS_NEARBY_COUNT = 3;
 
 export enum NameSpace {
   Data = 'DATA',
@@ -35,8 +34,8 @@ export enum AppRoute {
 
 export enum AuthorizationStatus {
   Auth = 'AUTH',
-  NoAuth = 'NO_AUTH',
-  Unknown = 'UNKNOWN',
+  NoAuth = 'No_AUTH',
+  Unknown = 'UNKNoWN',
 }
 
 export enum SortingType {
@@ -44,6 +43,11 @@ export enum SortingType {
   PriceToHigh = 'Price: low to high',
   PriceToLow = 'Price: high to low',
   RatingFirst = 'Top rated first',
+}
+
+export enum FavoriteStatus {
+  Yes = '1',
+  No = '0',
 }
 
 export const sortingTypes = Object.values(SortingType);

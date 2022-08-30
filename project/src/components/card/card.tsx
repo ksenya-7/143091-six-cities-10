@@ -1,12 +1,11 @@
-// import {memo} from 'react';
 import {Link} from 'react-router-dom';
 import {useAppDispatch, useAppSelector} from '../../hooks';
-import {toggleFavoriteStatusOfferAction, fetchOffersAction, fetchFavoriteOffersAction, fetchOfferByIdAction, fetchOffersNearbyAction} from '../../store/api-actions';
+import {toggleFavoriteStatusOfferAction} from '../../store/api-actions';
 import {redirectToRoute} from '../../store/action';
 import {getAuthorizationStatus} from '../../store/user-process/selectors';
 import {Offer} from '../../types/offer';
 import {getRatingPercentage} from '../../utils';
-import {AppRoute, AuthorizationStatus} from '../../const';
+import {AppRoute, AuthorizationStatus, FavoriteStatus} from '../../const';
 
 
 type OfferScreenProps = {
@@ -23,7 +22,14 @@ type OfferScreenProps = {
 function Card(props: OfferScreenProps): JSX.Element {
   const dispatch = useAppDispatch();
   const authorizationStatus = useAppSelector(getAuthorizationStatus);
-  const {offer, cardClassName, imageClassName, infoClassName = '', imageWidth, imageHeight, onMouseEnter, onMouseLeave} = props;
+  const {offer,
+    cardClassName,
+    imageClassName,
+    infoClassName = '',
+    imageWidth,
+    imageHeight,
+    onMouseEnter,
+    onMouseLeave} = props;
   const {id, isPremium, images, rating, title, price, type, isFavorite} = offer;
 
   const handleMouseEnter = () => {
@@ -34,23 +40,30 @@ function Card(props: OfferScreenProps): JSX.Element {
 
   const handleClickBookmarkButton = () => {
     if(authorizationStatus === AuthorizationStatus.Auth) {
-      dispatch(toggleFavoriteStatusOfferAction({hotelId: offer.id, status: offer.isFavorite ? '0' : '1'}));
-      dispatch(fetchOffersAction());
-      dispatch(fetchOfferByIdAction(id.toString()));
-      dispatch(fetchOffersNearbyAction(id.toString()));
-      dispatch(fetchFavoriteOffersAction());
+      dispatch(toggleFavoriteStatusOfferAction({hotelId: offer.id,
+        status: offer.isFavorite ? FavoriteStatus.No : FavoriteStatus.Yes}));
     } else {
       dispatch(redirectToRoute(AppRoute.Login));
     }
   };
 
   return (
-    <article className={`${cardClassName} place-card`} onMouseEnter={handleMouseEnter} onMouseLeave={onMouseLeave}>
+    <article
+      className={`${cardClassName} place-card`}
+      onMouseEnter={handleMouseEnter}
+      onMouseLeave={onMouseLeave}
+    >
       {isPremium ? <div className="place-card__mark"><span>Premium</span></div> : null}
       <div className={`${imageClassName} place-card__image-wrapper`}>
-        <a href={'/'}>
-          <img className="place-card__image" src={images[0]} width={imageWidth} height={imageHeight} alt="Place" />
-        </a>
+        <Link to={`/offer/${id}`}>
+          <img
+            className="place-card__image"
+            src={images[0]}
+            width={imageWidth}
+            height={imageHeight}
+            alt="Place"
+          />
+        </Link>
       </div>
       <div className={`${infoClassName} place-card__info`}>
         <div className="place-card__price-wrapper">
@@ -59,7 +72,9 @@ function Card(props: OfferScreenProps): JSX.Element {
             <span className="place-card__price-text">&#47;&nbsp;night</span>
           </div>
           <button
-            className={`place-card__bookmark-button ${isFavorite ? 'place-card__bookmark-button--active' : ''} button`}
+            className={`place-card__bookmark-button ${isFavorite ?
+              'place-card__bookmark-button--active' :
+              ''} button`}
             type="button"
             onClick={handleClickBookmarkButton}
           >
@@ -85,4 +100,3 @@ function Card(props: OfferScreenProps): JSX.Element {
 }
 
 export default Card;
-// export default memo(Card, (prevProps: Offer, nextProps: Offer) => prevProps.isFavorite === nextProps.isFavorite);

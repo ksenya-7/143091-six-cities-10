@@ -1,15 +1,13 @@
 import Card from '../card/card';
-import {Offer} from '../../types/offer';
+import {useAppSelector} from '../../hooks';
+import {getOffersNearby} from '../../store/offer-process/selectors';
 
 
-type NearOffersListProps = {
-  offers: Offer[];
-}
-
-function NearOffersList({offers}: NearOffersListProps): JSX.Element {
+function NearOffersList(): JSX.Element {
+  const offersNearby = useAppSelector(getOffersNearby);
   return (
     <div className="near-places__list places__list">
-      {offers.map((offer) => (
+      {offersNearby.map((offer) => (
         <Card
           offer={offer}
           key={offer.id}

@@ -7,14 +7,14 @@ import NearOffersList from '../../components/near-offers-list/near-offers-list';
 import Map from '../../components/map/map';
 import NotFoundScreen from '../../pages/error/error';
 import {getRatingPercentage} from '../../utils';
-import {cityObjects, OFFERS_NEARBY_COUNT, MAX_IMAGES_COUNT} from '../../const';
+import {cityObjects, MAX_IMAGES_COUNT} from '../../const';
 import {fetchReviewsAction, fetchOffersNearbyAction, fetchOfferByIdAction} from '../../store/api-actions';
 import {getActiveCity} from '../../store/data-process/selectors';
-import {getActiveOffer, getOffersNearby} from '../../store/offer-process/selectors';
-import {toggleFavoriteStatusOfferAction, fetchOffersAction, fetchFavoriteOffersAction} from '../../store/api-actions';
+import {getActiveOffer, selectOffersNearby} from '../../store/offer-process/selectors';
+import {toggleFavoriteStatusOfferAction} from '../../store/api-actions';
 import {redirectToRoute} from '../../store/action';
 import {getAuthorizationStatus} from '../../store/user-process/selectors';
-import {AppRoute, AuthorizationStatus} from '../../const';
+import {AppRoute, AuthorizationStatus, FavoriteStatus} from '../../const';
 
 
 function RoomScreen(): JSX.Element {
@@ -23,7 +23,7 @@ function RoomScreen(): JSX.Element {
   const {id} = useParams();
   const activeCity = useAppSelector(getActiveCity);
   const activeOffer = useAppSelector(getActiveOffer);
-  const offersNearby = useAppSelector(getOffersNearby).slice(0, OFFERS_NEARBY_COUNT);
+  const offersNearby = useAppSelector(selectOffersNearby);
 
   useEffect(() => {
     if (id) {
@@ -35,20 +35,28 @@ function RoomScreen(): JSX.Element {
 
   const checkedCity = cityObjects.find((item) => item.name === activeCity);
 
-  if(!checkedCity || !activeOffer || !id) {
+  if(!checkedCity || !activeOffer || !id || !offersNearby) {
     return (<NotFoundScreen />);
   }
 
-  const {images, isPremium, title, isFavorite, rating, goods, price, type, bedrooms, maxAdults, host, description} = activeOffer;
+  const {images,
+    isPremium,
+    title,
+    isFavorite,
+    rating,
+    goods,
+    price,
+    type,
+    bedrooms,
+    maxAdults,
+    host,
+    description} = activeOffer;
   const slicedImages = images.slice(0, MAX_IMAGES_COUNT);
 
   const handleClickBookmarkButton = () => {
     if(authorizationStatus === AuthorizationStatus.Auth) {
-      dispatch(toggleFavoriteStatusOfferAction({hotelId: activeOffer.id, status: activeOffer.isFavorite ? '0' : '1'}));
-      dispatch(fetchOffersAction());
-      dispatch(fetchOfferByIdAction(id));
-      dispatch(fetchOffersNearbyAction(id));
-      dispatch(fetchFavoriteOffersAction());
+      dispatch(toggleFavoriteStatusOfferAction({hotelId: activeOffer.id,
+        status: activeOffer.isFavorite ? FavoriteStatus.No : FavoriteStatus.Yes}));
     } else {
       dispatch(redirectToRoute(AppRoute.Login));
     }
@@ -153,15 +161,13 @@ function RoomScreen(): JSX.Element {
               </div>
             </div>
             <section className="property__map map">
-              <Map city={checkedCity} offers={offersNearby} />
+              <Map city={checkedCity} offers={offersNearby} selectedOffer={activeOffer}/>
             </section>
           </section>
           <div className="container">
             <section className="near-places places">
               <h2 className="near-places__title">Other places in the neighbourhood</h2>
-              <NearOffersList
-                offers={offersNearby}
-              />
+              <NearOffersList />
             </section>
           </div>
         </main>
