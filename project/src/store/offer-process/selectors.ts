@@ -20,9 +20,9 @@ export const selectOffersByCity = createSelector(
 );
 
 const sortings = {
-  [SortingType.PriceToHigh]: sortByPriceLowToHigh,
-  [SortingType.PriceToLow]: sortByPriceHighToLow,
-  [SortingType.RatingFirst]: sortByRating,
+  [SortingType.PriceToHigh.toString()]: sortByPriceLowToHigh,
+  [SortingType.PriceToLow.toString()]: sortByPriceHighToLow,
+  [SortingType.RatingFirst.toString()]: sortByRating,
 };
 
 export const selectOffers = createSelector(
