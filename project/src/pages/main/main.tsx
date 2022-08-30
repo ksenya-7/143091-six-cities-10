@@ -5,7 +5,7 @@ import Sorting from '../../components/sorting-form/sorting-form';
 import CitiesList from '../../components/cities-list/cities-list';
 import MainEmpty from '../../components/main-empty/main-empty';
 import Map from '../../components/map/map';
-import LoadingScreen from '../../pages/loading-screen/loading-screen';
+import LoadingScreen from '../../components/loading-screen/loading-screen';
 import {Offer} from '../../types/offer';
 import {useAppSelector} from '../../hooks';
 import {cities} from '../../const';
