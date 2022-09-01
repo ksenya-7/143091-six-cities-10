@@ -1,26 +1,29 @@
-import {useState, useEffect} from 'react';
+import {useEffect} from 'react';
 import {useParams} from 'react-router-dom';
 import {useAppSelector, useAppDispatch} from '../../hooks';
 import Header from '../../components/header/header';
 import ReviewsList from '../../components/reviews-list/reviews-list';
 import NearOffersList from '../../components/near-offers-list/near-offers-list';
 import Map from '../../components/map/map';
-import {Offer} from '../../types/offer';
 import Error from '../../pages/error/error';
 import {getRatingPercentage} from '../../utils';
-import {cityObjects, OFFERS_NEARBY_COUNT, MAX_IMAGES_COUNT} from '../../const';
+import {cityObjects, MAX_IMAGES_COUNT} from '../../const';
 import {fetchReviewsAction, fetchOffersNearbyAction, fetchOfferByIdAction} from '../../store/api-actions';
 import {getActiveCity} from '../../store/data-process/selectors';
-import {getActiveOffer, getOffersNearby} from '../../store/offer-process/selectors';
+import {getActiveOffer, selectOffersNearby} from '../../store/offer-process/selectors';
+import {toggleFavoriteStatusOfferAction} from '../../store/api-actions';
+import {redirectToRoute} from '../../store/action';
+import {getAuthorizationStatus} from '../../store/user-process/selectors';
+import {AppRoute, AuthorizationStatus, FavoriteStatus} from '../../const';
 
 
 function RoomScreen(): JSX.Element {
   const dispatch = useAppDispatch();
+  const authorizationStatus = useAppSelector(getAuthorizationStatus);
   const {id} = useParams();
-  const [, setSelectedOffer] = useState<Offer | undefined>();
   const activeCity = useAppSelector(getActiveCity);
   const activeOffer = useAppSelector(getActiveOffer);
-  const offersNearby = useAppSelector(getOffersNearby).slice(0, OFFERS_NEARBY_COUNT);
+  const offersNearby = useAppSelector(selectOffersNearby);
 
   useEffect(() => {
     if (id) {
@@ -30,22 +33,34 @@ function RoomScreen(): JSX.Element {
     }
   }, [dispatch, id]);
 
-  const cities = cityObjects;
-  const checkedCity = cities.find((item) => item.name === activeCity);
+  const checkedCity = cityObjects.find((item) => item.name === activeCity);
 
-  if(!checkedCity || !activeOffer || !id) {
+  if(!checkedCity || !activeOffer || !id || !offersNearby) {
     return (<Error />);
   }
 
-  const {images, isPremium, title, isFavorite, rating, goods, price, type, bedrooms, maxAdults, host, description} = activeOffer;
+  const {images,
+    isPremium,
+    title,
+    isFavorite,
+    rating,
+    goods,
+    price,
+    type,
+    bedrooms,
+    maxAdults,
+    host,
+    description} = activeOffer;
+
   const slicedImages = images.slice(0, MAX_IMAGES_COUNT);
 
-  const handleMouseEnter = () => {
-    setSelectedOffer(activeOffer);
-  };
-
-  const handleMouseLeave = () => {
-    setSelectedOffer(undefined);
+  const handleClickBookmarkButton = () => {
+    if(authorizationStatus === AuthorizationStatus.Auth) {
+      dispatch(toggleFavoriteStatusOfferAction({hotelId: activeOffer.id,
+        status: activeOffer.isFavorite ? FavoriteStatus.No : FavoriteStatus.Yes}));
+    } else {
+      dispatch(redirectToRoute(AppRoute.Login));
+    }
   };
 
   return (
@@ -84,7 +99,12 @@ function RoomScreen(): JSX.Element {
                 {isPremium ? <div className="property__mark"><span>Premium</span></div> : null}
                 <div className="property__name-wrapper">
                   <h1 className="property__name">{title}</h1>
-                  <button className={`property__bookmark-button ${isFavorite ? 'property__bookmark-button--active' : ''} button`} type="button">
+                  <button
+                    className={`property__bookmark-button ${isFavorite ?
+                      'property__bookmark-button--active' : ''} button`}
+                    type="button"
+                    onClick={handleClickBookmarkButton}
+                  >
                     <svg className="property__bookmark-icon" width="31" height="33">
                       <use xlinkHref="#icon-bookmark" />
                     </svg>
@@ -93,15 +113,20 @@ function RoomScreen(): JSX.Element {
                 </div>
                 <div className="property__rating rating">
                   <div className="property__stars rating__stars">
-                    <span style={{ width: `${getRatingPercentage(rating)}%` }} />
+                    <span style={{width: `${getRatingPercentage(rating)}%`}} />
                     <span className="visually-hidden">Rating</span>
                   </div>
                   <span className="property__rating-value rating__value">{rating}</span>
                 </div>
                 <ul className="property__features">
-                  {type ? <li className="property__feature property__feature--entire">{type}</li> : null}
-                  {bedrooms ? <li className="property__feature property__feature--bedrooms">{bedrooms}</li> : null}
-                  {maxAdults ? <li className="property__feature property__feature--adults">Max {maxAdults} adults</li> : null}
+                  {type &&
+                    <li className="property__feature property__feature--entire">{type}</li>}
+                  {bedrooms &&
+                    <li className="property__feature property__feature--bedrooms">{bedrooms}</li>}
+                  {maxAdults &&
+                    <li className="property__feature property__feature--adults">
+                      Max {maxAdults} adults
+                    </li>}
                 </ul>
                 <div className="property__price">
                   <b className="property__price-value">&euro;{price}</b>
@@ -123,8 +148,14 @@ function RoomScreen(): JSX.Element {
                 <div className="property__host">
                   <h2 className="property__host-title">Meet the host</h2>
                   <div className="property__host-user user">
-                    <div className={`property__avatar-wrapper ${host.isPro ? 'property__avatar-wrapper--pro' : ''} user__avatar-wrapper`}>
-                      <img className="property__avatar user__avatar" src={host.avatarUrl} width="74" height="74" alt="Host avatar"/>
+                    <div
+                      className={`property__avatar-wrapper ${host.isPro ?
+                        'property__avatar-wrapper--pro' :
+                        ''} user__avatar-wrapper`}
+                    >
+                      <img className="property__avatar user__avatar"
+                        src={host.avatarUrl} width="74" height="74" alt="Host avatar"
+                      />
                     </div>
                     <span className="property__user-name">
                       {host.name}
@@ -143,17 +174,13 @@ function RoomScreen(): JSX.Element {
               </div>
             </div>
             <section className="property__map map">
-              <Map city={checkedCity} offers={offersNearby} />
+              <Map city={checkedCity} offers={offersNearby} selectedOffer={activeOffer}/>
             </section>
           </section>
           <div className="container">
             <section className="near-places places">
               <h2 className="near-places__title">Other places in the neighbourhood</h2>
-              <NearOffersList
-                offers={offersNearby}
-                onMouseEnter={handleMouseEnter}
-                onMouseLeave={handleMouseLeave}
-              />
+              <NearOffersList />
             </section>
           </div>
         </main>

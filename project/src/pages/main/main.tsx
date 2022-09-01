@@ -4,9 +4,10 @@ import Header from '../../components/header/header';
 import OffersList from '../../components/offers-list/offers-list';
 import Sorting from '../../components/sorting/sorting';
 import CitiesList from '../../components/cities-list/cities-list';
+import MainEmpty from '../../components/main-empty/main-empty';
 import Map from '../../components/map/map';
 import Error from '../../pages/error/error';
-import LoadingScreen from '../../pages/loading-screen/loading-screen';
+import LoadingScreen from '../../components/loading-screen/loading-screen';
 import {Offer} from '../../types/offer';
 import {cities} from '../../const';
 import {getActiveCity, getErrorMessage} from '../../store/data-process/selectors';
@@ -40,6 +41,12 @@ function MainScreen(): JSX.Element {
   if (!isDataLoaded) {
     return (
       <LoadingScreen />
+    );
+  }
+
+  if (!offers) {
+    return (
+      <MainEmpty />
     );
   }
 
@@ -81,7 +88,11 @@ function MainScreen(): JSX.Element {
               </section>
               <div className="cities__right-section">
                 <section className="cities__map map">
-                  <Map city={cities[activeCity as keyof typeof cities]} offers={offers} selectedOffer={selectedOffer} />
+                  <Map
+                    city={cities[activeCity as keyof typeof cities]}
+                    offers={offers}
+                    selectedOffer={selectedOffer}
+                  />
                 </section>
               </div>
             </div>

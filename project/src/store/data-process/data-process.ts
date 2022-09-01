@@ -1,5 +1,5 @@
 import {createAction, createSlice} from '@reduxjs/toolkit';
-import {fetchReviewsAction, postReviewAction, fetchOffersAction, fetchOfferByIdAction, fetchOffersNearbyAction} from '../api-actions';
+import {fetchReviewsAction, postReviewAction, fetchOffersAction, fetchOfferByIdAction, fetchFavoriteOffersAction, fetchOffersNearbyAction, toggleFavoriteStatusOfferAction} from '../api-actions';
 import type {Review} from '../../types/review';
 import {NameSpace, ACTIVE_CITY, SortingType} from '../../const';
 
@@ -20,7 +20,7 @@ const initialState: DataProcess = {
 
 export const setActiveCity = createAction<string>('data/setActiveCity');
 export const setActiveSorting = createAction<SortingType>('data/setActiveSorting');
-export const getError = createAction<string | null>('data/getError');
+export const setError = createAction<string | null>('data/setError');
 
 export const dataProcess = createSlice({
   name: NameSpace.Data,
@@ -34,7 +34,7 @@ export const dataProcess = createSlice({
       .addCase(setActiveSorting, (state, action) => {
         state.sorting = action.payload;
       })
-      .addCase(getError, (state, action) => {
+      .addCase(setError, (state, action) => {
         state.error = action.payload;
       })
       .addCase(fetchReviewsAction.fulfilled, (state, action) => {
@@ -53,6 +53,12 @@ export const dataProcess = createSlice({
         state.error = action.error.message;
       })
       .addCase(fetchOfferByIdAction.rejected, (state, action) => {
+        state.error = action.error.message;
+      })
+      .addCase(fetchFavoriteOffersAction.rejected, (state, action) => {
+        state.error = action.error.message;
+      })
+      .addCase(toggleFavoriteStatusOfferAction.rejected, (state, action) => {
         state.error = action.error.message;
       })
       .addCase(fetchOffersNearbyAction.rejected, (state, action) => {

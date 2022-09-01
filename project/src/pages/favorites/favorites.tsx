@@ -2,10 +2,10 @@ import {useEffect} from 'react';
 import {Link} from 'react-router-dom';
 import Header from '../../components/header/header';
 import Card from '../../components/card/card';
+import FavoritesEmpty from '../../components/favorites-empty/favorites-empty';
 import {useAppSelector, useAppDispatch} from '../../hooks';
 import {cityNames} from '../../const';
 import {fetchFavoriteOffersAction} from '../../store/api-actions';
-import Error from '../../pages/error/error';
 import {getFavoriteOffers} from '../../store/offer-process/selectors';
 
 
@@ -17,8 +17,8 @@ function FavoritesScreen(): JSX.Element {
     dispatch(fetchFavoriteOffersAction());
   }, [dispatch]);
 
-  if(!offers) {
-    return (<Error />);
+  if(offers.length === 0) {
+    return (<FavoritesEmpty />);
   }
 
   return (
@@ -45,13 +45,14 @@ function FavoritesScreen(): JSX.Element {
               <ul className="favorites__list">
                 {cityNames.map((cityName) => (
                   <li className="favorites__locations-items" key={cityName}>
-                    <div className="favorites__locations locations locations--current">
-                      <div className="locations__item">
-                        <a className="locations__item-link" href={'/'}>
-                          <span>{cityName}</span>
-                        </a>
-                      </div>
-                    </div>
+                    {offers.filter((offer) => offer.city.name === cityName).length > 0 &&
+                      <div className="favorites__locations locations locations--current">
+                        <div className="locations__item">
+                          <a className="locations__item-link" href={'/'}>
+                            <span>{cityName}</span>
+                          </a>
+                        </div>
+                      </div>}
                     <div className="favorites__places">
                       {offers.filter((offer) => offer.city.name === cityName).map((offer) => (
                         <Card

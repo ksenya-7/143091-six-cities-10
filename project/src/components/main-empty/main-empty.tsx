@@ -22,10 +22,8 @@ export function MainEmpty(): JSX.Element {
           </symbol>
         </svg>
       </div>
-
       <div className="page page--gray page--main">
         <Header />
-
         <main className="page__main page__main--index page__main--index-empty">
           <h1 className="visually-hidden">Cities</h1>
           <div className="tabs">
@@ -38,7 +36,9 @@ export function MainEmpty(): JSX.Element {
               <section className="cities__no-places">
                 <div className="cities__status-wrapper tabs__content">
                   <b className="cities__status">No places to stay available</b>
-                  <p className="cities__status-description">We could not find any property available at the moment in {activeCity}</p>
+                  <p className="cities__status-description">
+                    We could not find any property available at the moment in {activeCity}
+                  </p>
                 </div>
               </section>
               <div className="cities__right-section" />
@@ -49,3 +49,5 @@ export function MainEmpty(): JSX.Element {
     </>
   );
 }
+
+export default MainEmpty;

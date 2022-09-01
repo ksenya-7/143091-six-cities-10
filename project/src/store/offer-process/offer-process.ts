@@ -1,6 +1,6 @@
 import {createSlice} from '@reduxjs/toolkit';
 import {NameSpace} from '../../const';
-import {fetchOffersAction, fetchOfferByIdAction, fetchOffersNearbyAction, fetchFavoriteOffersAction} from '../api-actions';
+import {fetchOffersAction, fetchOfferByIdAction, fetchOffersNearbyAction, fetchFavoriteOffersAction, toggleFavoriteStatusOfferAction} from '../api-actions';
 import {Offer} from '../../types/offer';
 
 
@@ -52,6 +52,29 @@ export const offerProcess = createSlice({
       })
       .addCase(fetchOffersNearbyAction.fulfilled, (state, action) => {
         state.offersNearby = action.payload;
+        state.isDataLoaded = true;
+      })
+      .addCase(toggleFavoriteStatusOfferAction.pending, (state) => {
+        state.isDataLoaded = false;
+      })
+      .addCase(toggleFavoriteStatusOfferAction.fulfilled, (state, action) => {
+        const offer = state.offers.find((item) => item.id === action.payload.id);
+        if (offer) {
+          offer.isFavorite = action.payload.isFavorite;
+        }
+        if (action.payload.isFavorite) {
+          state.favoriteOffers.push(action.payload);
+        } else {
+          state.favoriteOffers = state.favoriteOffers.filter((item) => item.id !== action.payload.id);
+        }
+        if (state.offerById && state.offerById.id === action.payload.id) {
+          state.offerById = action.payload;
+        }
+        const offerNearby = state.offersNearby.find((item) => item.id === action.payload.id);
+        if (offerNearby) {
+          offerNearby.isFavorite = action.payload.isFavorite;
+        }
+        state.isDataLoaded = true;
       });
   }
 });
