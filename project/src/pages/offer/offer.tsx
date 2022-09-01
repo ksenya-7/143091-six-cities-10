@@ -5,7 +5,7 @@ import Header from '../../components/header/header';
 import ReviewsList from '../../components/reviews-list/reviews-list';
 import NearOffersList from '../../components/near-offers-list/near-offers-list';
 import Map from '../../components/map/map';
-import NotFoundScreen from '../../pages/error/error';
+import Error from '../../pages/error/error';
 import {getRatingPercentage} from '../../utils';
 import {cityObjects, MAX_IMAGES_COUNT} from '../../const';
 import {fetchReviewsAction, fetchOffersNearbyAction, fetchOfferByIdAction} from '../../store/api-actions';
@@ -36,7 +36,7 @@ function RoomScreen(): JSX.Element {
   const checkedCity = cityObjects.find((item) => item.name === activeCity);
 
   if(!checkedCity || !activeOffer || !id || !offersNearby) {
-    return (<NotFoundScreen />);
+    return (<Error />);
   }
 
   const {images,
