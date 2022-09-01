@@ -6,7 +6,7 @@ import ReviewsList from '../../components/reviews-list/reviews-list';
 import NearOffersList from '../../components/near-offers-list/near-offers-list';
 import Map from '../../components/map/map';
 import Error from '../../pages/error/error';
-import {getRatingPercentage} from '../../utils';
+import {getRatingPercentage} from '../../utils/utils';
 import {cityObjects, MAX_IMAGES_COUNT} from '../../const';
 import {fetchReviewsAction, fetchOffersNearbyAction, fetchOfferByIdAction} from '../../store/api-actions';
 import {getActiveCity} from '../../store/data-process/selectors';

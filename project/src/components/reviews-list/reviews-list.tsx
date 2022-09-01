@@ -1,7 +1,7 @@
 import Comment from '../comment/comment';
 import FormReview from '../../components/form-review/form-review';
 import {useAppSelector} from '../../hooks';
-import {isAuth, sortByDate} from '../../utils';
+import {isAuth, sortByDate} from '../../utils/utils';
 import {MAX_REVIEWS_COUNT} from '../../const';
 import {getAuthorizationStatus} from '../../store/user-process/selectors';
 import {getReviews} from '../../store/data-process/selectors';

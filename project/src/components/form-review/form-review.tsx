@@ -43,7 +43,7 @@ function FormReview({id}: FormReviewProps): JSX.Element {
     }
 
     formRef.current?.reset();
-    setFormData({...formData, rating: '', review: ''});
+    setFormData({...formData, review: ''});
   };
 
   return (

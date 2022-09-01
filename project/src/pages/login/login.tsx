@@ -4,7 +4,7 @@ import {useAppDispatch} from '../../hooks';
 import {loginAction} from '../../store/api-actions';
 import {setActiveCity} from '../../store/data-process/data-process';
 import {cityObjects, AppRoute} from '../../const';
-import {isValidPassword, getRandomInRange} from '../../utils';
+import {isValidPassword, getRandomInRange} from '../../utils/utils';
 import './error-password.css';
 
 

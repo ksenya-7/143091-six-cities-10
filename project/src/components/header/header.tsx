@@ -1,7 +1,7 @@
 import {Link} from 'react-router-dom';
 import {useAppSelector, useAppDispatch} from '../../hooks';
 import {logoutAction} from '../../store/api-actions';
-import {isAuth} from '../../utils';
+import {isAuth} from '../../utils/utils';
 import {AppRoute} from '../../const';
 import {getAuthorizationStatus, getUserData} from '../../store/user-process/selectors';
 import {getFavoriteOffers} from '../../store/offer-process/selectors';

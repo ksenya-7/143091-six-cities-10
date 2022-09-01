@@ -1,6 +1,6 @@
 import {Review} from '../../types/review';
 import {MONTHS} from '../../const';
-import {getRatingPercentage} from '../../utils';
+import {getRatingPercentage} from '../../utils/utils';
 
 
 type CommentProps = {

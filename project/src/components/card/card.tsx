@@ -4,7 +4,7 @@ import {toggleFavoriteStatusOfferAction} from '../../store/api-actions';
 import {redirectToRoute} from '../../store/action';
 import {getAuthorizationStatus} from '../../store/user-process/selectors';
 import {Offer} from '../../types/offer';
-import {getRatingPercentage} from '../../utils';
+import {getRatingPercentage} from '../../utils/utils';
 import {AppRoute, AuthorizationStatus, FavoriteStatus} from '../../const';
 
 

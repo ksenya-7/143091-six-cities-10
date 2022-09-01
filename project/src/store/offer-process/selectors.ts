@@ -1,7 +1,7 @@
 import {createSelector} from '@reduxjs/toolkit';
 import {State} from '../../types/state';
 import {Offer} from '../../types/offer';
-import {sortByRating, sortByPriceLowToHigh, sortByPriceHighToLow} from '../../utils';
+import {sortByRating, sortByPriceLowToHigh, sortByPriceHighToLow} from '../../utils/utils';
 import {NameSpace, SortingType} from '../../const';
 
 
