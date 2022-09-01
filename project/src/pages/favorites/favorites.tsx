@@ -5,7 +5,7 @@ import Card from '../../components/card/card';
 import {useAppSelector, useAppDispatch} from '../../hooks';
 import {cityNames} from '../../const';
 import {fetchFavoriteOffersAction} from '../../store/api-actions';
-import NotFoundScreen from '../../pages/error/error';
+import Error from '../../pages/error/error';
 import {getFavoriteOffers} from '../../store/offer-process/selectors';
 
 
@@ -18,7 +18,7 @@ function FavoritesScreen(): JSX.Element {
   }, [dispatch]);
 
   if(!offers) {
-    return (<NotFoundScreen />);
+    return (<Error />);
   }
 
   return (

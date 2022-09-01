@@ -1,21 +1,23 @@
 import {useState} from 'react';
+import {useAppSelector} from '../../hooks';
 import Header from '../../components/header/header';
 import OffersList from '../../components/offers-list/offers-list';
-import Sorting from '../../components/sorting-form/sorting-form';
+import Sorting from '../../components/sorting/sorting';
 import CitiesList from '../../components/cities-list/cities-list';
 import Map from '../../components/map/map';
-import {Offer} from '../../types/offer';
-import {useAppSelector} from '../../hooks';
-import {cities} from '../../const';
+import Error from '../../pages/error/error';
 import LoadingScreen from '../../pages/loading-screen/loading-screen';
-import {getActiveCity} from '../../store/data-process/selectors';
+import {Offer} from '../../types/offer';
+import {cities} from '../../const';
+import {getActiveCity, getErrorMessage} from '../../store/data-process/selectors';
 import {selectOffers, getDataLoaded} from '../../store/offer-process/selectors';
 
 
 function MainScreen(): JSX.Element {
   const activeCity = useAppSelector(getActiveCity);
   const offers = useAppSelector(selectOffers);
-  const isDataLoaded = useAppSelector(getDataLoaded);
+  let isDataLoaded = useAppSelector(getDataLoaded);
+  const error = useAppSelector(getErrorMessage);
   const [selectedOffer, setSelectedOffer] = useState<Offer | undefined>();
 
   const handleMouseEnter = (id: number) => {
@@ -26,6 +28,14 @@ function MainScreen(): JSX.Element {
   const handleMouseLeave = () => {
     setSelectedOffer(undefined);
   };
+
+  if (error) {
+    isDataLoaded = true;
+
+    return (
+      <Error />
+    );
+  }
 
   if (!isDataLoaded) {
     return (

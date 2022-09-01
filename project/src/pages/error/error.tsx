@@ -2,7 +2,7 @@ import {Link} from 'react-router-dom';
 import Header from '../../components/header/header';
 
 
-function NotFoundScreen(): JSX.Element {
+function Error(): JSX.Element {
   return (
     <>
       <div style={{ display: 'none' }}>
@@ -36,4 +36,4 @@ function NotFoundScreen(): JSX.Element {
   );
 }
 
-export default NotFoundScreen;
+export default Error;

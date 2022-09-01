@@ -1,13 +1,13 @@
 import {Route, Routes} from 'react-router-dom';
 import {AppRoute} from '../../const';
 import browserHistory from '../../browser-history';
-import HistoryRouter from '../history-route/history-route';
+import HistoryRouter from '../history-router/history-router';
 import PrivateRoute from '../private-route/private-route';
 import MainScreen from '../../pages/main/main';
 import FavoritesScreen from '../../pages/favorites/favorites';
 import LoginScreen from '../../pages/login/login';
 import RoomScreen from '../../pages/offer/offer';
-import NotFoundScreen from '../../pages/error/error';
+import Error from '../../pages/error/error';
 
 
 function App(): JSX.Element {
@@ -38,7 +38,7 @@ function App(): JSX.Element {
         />
         <Route
           path="*"
-          element={<NotFoundScreen />}
+          element={<Error />}
         />
       </Routes>
     </HistoryRouter>
